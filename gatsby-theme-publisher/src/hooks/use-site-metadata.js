@@ -9,6 +9,7 @@ export default () => {
           author
           twitter
           siteUrl
+          wordPressUrl
         }
       }
     }

@@ -3,13 +3,12 @@ import React from 'react';
 import { ApolloProvider } from 'react-apollo';
 import ApolloClient from 'apollo-boost';
 
-import config from './config';
+export const wrapRootElement = ({ element }, themeOptions) => {
 
-export const wrapRootElement = ({ element }) => {
-	if (config.dynamicComments) {
+	if (themeOptions.dynamicComments) {
 		const client = new ApolloClient({
 			fetch,
-			uri: config.wordPressUrl + '/graphql',
+			uri: themeOptions.wordPressUrl + '/graphql',
 		});
 
 		return <ApolloProvider client={client}>{element}</ApolloProvider>;

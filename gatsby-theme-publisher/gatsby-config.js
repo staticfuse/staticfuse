@@ -1,14 +1,6 @@
 const path = require(`path`)
-const config = require(`./config`)
 
-module.exports = {
-  siteMetadata: {
-    title: config.title,
-    description: config.description,
-    author: config.author,
-    twitter: config.twitter,
-    siteUrl: config.siteUrl,
-  },
+module.exports = options => ({
   plugins: [
     {
       resolve: `gatsby-plugin-postcss`,
@@ -24,13 +16,13 @@ module.exports = {
         // This is field under which it's accessible
         fieldName: `wpgraphql`,
         // Url to query from
-        url: config.wordPressUrl + `/graphql`,
+        url: options.wordPressUrl + `/graphql`,
       },
     },
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-        trackingId: config.gaTrackingId,
+        trackingId: options.gaTrackingId,
       }
     },
     {
@@ -55,8 +47,8 @@ module.exports = {
     {
       resolve: "gatsby-plugin-mailchimp",
       options: {
-        endpoint: config.mailChimpEndpoint,
+        endpoint: options.mailChimpEndpoint,
       },
     },
   ],
-}
+})

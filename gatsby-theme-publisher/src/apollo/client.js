@@ -1,8 +1,10 @@
 import ApolloClient from 'apollo-boost';
 import fetch from 'isomorphic-fetch';
-import config from '../../config'
+import useSiteMetadata from "../hooks/use-site-metadata";
+
+const { wordPressUrl } = useSiteMetadata()
 
 export const client = new ApolloClient({
-  uri: config.wordPressUrl + '/graphql',
+  uri: wordPressUrl + '/graphql',
   fetch,
 });
