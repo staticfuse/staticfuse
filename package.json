@@ -1,0 +1,15 @@
+{
+  "name": "gatsby-publisher-theme-workspace",
+  "private": true,
+  "scripts": {
+    "start": "yarn workspace demo start",
+    "build": "yarn workspace demo build"
+  },
+  "workspaces": [
+    "gatsby-theme-publisher",
+    "demo"
+  ],
+  "dependencies": {
+    "gatsby-theme-publisher": "*"
+  }
+}
