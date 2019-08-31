@@ -1,8 +1,4 @@
-import useSiteMetadata from "../hooks/use-site-metadata"
-
-export const createLocalLink = url => {
-
-  const { wordPressUrl } = useSiteMetadata()
+export const createLocalLink = ( url, wordPressUrl ) => {
 
   if (`#` === url) {
     return null
