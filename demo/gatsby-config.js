@@ -8,10 +8,10 @@ module.exports = {
     wordPressUrl: `https://designbyscott.wpengine.com` // TODO: don't duplicate this field
   },
   plugins: [
+    `gatsby-plugin-theme-ui`,
     {
       resolve: `gatsby-theme-publisher`,
       options: {
-        postCssPlugins: [require(`autoprefixer`)],
         mailChimpEndpoint: '',
         dynamicComments: true,
         wordPressUrl: `https://designbyscott.wpengine.com`

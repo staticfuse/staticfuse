@@ -1,29 +1,98 @@
-import React from 'react';
-import moment from 'moment/moment';
-import { Link } from 'gatsby';
+/** @jsx jsx */
+import { jsx } from "theme-ui"
+import moment from "moment/moment"
+import { Link } from "gatsby"
 
-const PostEntryMeta = ({ post, location = '' }) => (
-  <section className={ location === 'blog' ? 'entry-meta clearfix xl:flex xl:flex-col' : 'entry-meta clearfix' }>
+const PostEntryMeta = ({ post, location = "" }) => (
+  <section
+    className={
+      location === "blog"
+        ? "entry-meta clearfix xl:flex xl:flex-col"
+        : "entry-meta clearfix"
+    }
+  >
+    {post.categories && location === "blog"
+      ? post.categories.nodes.map(category => (
+          <span
+            key={category.id}
+            className="taxonomy"
+            sx={{
+              backgroundColor: "lightGray",
+              borderRadius: "5px",
+              fontSize: 0,
+              padding: 2,
+              ml: 1,
+              float: "right",
+              color: "muted",
+            }}
+          >
+            {category.name}
+          </span>
+        ))
+      : null}
 
-  {post.categories && location === 'blog' ? post.categories.nodes.map(category => <span key={category.id} className="bg-gray-200 rounded p-2 text-xs float-right xl:order-last xl:text-center">{category.name}</span>) : null }
-
-    <div className="author-avatar mr-2 mt-1 h-8 float-left overflow-hidden">
-      <img src={ post.author.avatar ? post.author.avatar.url : '' } className="rounded-full block h-8 border-gray-500 border" alt="Author avatar" />
+    <div
+      className="author-avatar"
+      sx={{
+        mt: 1,
+        mr: 2,
+        height: "50px",
+        overflow: "hidden",
+        float: "left",
+      }}
+    >
+      <img
+        src={post.author.avatar ? post.author.avatar.url : ""}
+        sx={{
+          borderRadius: "100px",
+          display: "block",
+          height: "50px",
+        }}
+        alt="Author avatar"
+      />
     </div>
 
-    <div className="author-meta mb-6">
-      <p className="mb-0 text-gray-500 text-sm"><Link to={`/author/${post.author.slug}`} className="text-gray-500 font-bold">
-      {`  ${post.author.name}`}
-      </Link></p>
-      <p className="mb-0 mt-0 text-gray-500 text-sm"><Link to={`/${post.uri}`} className="text-gray-500">
-      <time className="entry-date" dateTime={post.date}>
-        {moment(post.date).format(`MMMM D, YYYY`)}
-      </time>
-      </Link>
+    <div
+      className="author-meta"
+      sx={{
+        mb: 4,
+      }}
+    >
+      <p
+        className="author-name"
+        sx={{
+          fontSize: 1,
+          color: "muted",
+          mb: "0",
+          pb: "0",
+        }}
+      >
+        <Link
+          to={`/author/${post.author.slug}`}
+          sx={{ color: "muted", fontWeight: 2 }}
+        >
+          {`  ${post.author.name}`}
+        </Link>
+      </p>
+      <p
+        className="post-date"
+        sx={{
+          fontSize: 1,
+          color: "muted",
+          mb: "0",
+          mt: "0",
+        }}
+      >
+        <Link to={`/${post.uri}`} sx={{
+          color: "muted"
+        }}>
+          <time className="entry-date" dateTime={post.date}>
+            {moment(post.date).format(`MMMM D, YYYY`)}
+          </time>
+        </Link>
       </p>
     </div>
-
   </section>
-);
+)
 
-export default PostEntryMeta;
+export default PostEntryMeta

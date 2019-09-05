@@ -1,8 +1,10 @@
-import React from 'react';
+/** @jsx jsx */
+import { jsx } from 'theme-ui'
 import PostEntryTitle from './PostEntryTitle';
 import PostEntryMeta from './PostEntryMeta';
 import PostEntryMedia from './PostEntryMedia';
 import useSiteMetadata from "../hooks/use-site-metadata"
+import ListItem from '../elements/ListItem';
 
 const PostEntry = ({ post, classes = '' }) => {
 
@@ -17,7 +19,7 @@ const PostEntry = ({ post, classes = '' }) => {
           .join(' ')} ...`;
 
   return (
-    <article className={ classes }>
+    <ListItem className={ classes }>
       <div className="post-wrapper xl:flex">
         <div className="post-inner xl:w-3/4 xl:flex-row xl:order-last xl:pl-6">
           <header className="entry-header">
@@ -39,7 +41,7 @@ const PostEntry = ({ post, classes = '' }) => {
         </div>
         <PostEntryMeta className="xl:w-1/4 xl:order-first xl:pr-4 xl:text-center" post={post} location="blog" />
       </div>
-    </article>
+      </ListItem>
   );
 };
 

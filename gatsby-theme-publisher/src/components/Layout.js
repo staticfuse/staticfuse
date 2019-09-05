@@ -1,21 +1,58 @@
-import React from 'react'
-import Header from './Header';
-import Footer from './Footer';
-import PropTypes from 'prop-types';
-import { Layout as ThemeLayout, Styled } from "theme-ui";
-import "../css/tailwind-customizations.css"
-import "../css/index.scss"
+/** @jsx jsx */
+import { jsx, css, Layout as ThemeLayout, Styled } from 'theme-ui'
+import Header from "./Header"
+import Footer from "./Footer"
+import PropTypes from "prop-types"
+import { Global } from "@emotion/core"
+import Container from "../elements/Container"
 
 const Layout = props => (
-  <ThemeLayout>
+  <Styled.root>
+    <Global
+      styles={css({
+        "*": {
+          boxSizing: `inherit`,
+          "&:before": {
+            boxSizing: `inherit`,
+          },
+          "&:after": {
+            boxSizing: `inherit`,
+          },
+        },
+        html: {
+          fontSize: `16px`,
+        },
+        body: {
+          margin: 0,
+          padding: 0,
+          boxSizing: `border-box`,
+          textRendering: `optimizeLegibility`,
+          WebkitFontSmoothing: `antialiased`,
+          MozOsxFontSmoothing: `grayscale`,
+        },
+        a: {
+          textDecoration: 'none'
+        },
+        "::selection": {
+          backgroundColor: `primary`,
+          color: `white`,
+        },
+      })}
+    />
     <Header />
-    <div className="site-content max-w-6xl m-auto p-8 pt-2">{props.children}</div>
+    <ThemeLayout sx={{
+      padding: '0 15px'
+    }}>
+      <Container className="site-content">
+        {props.children}
+      </Container>
+    </ThemeLayout>
     <Footer />
-  </ThemeLayout>
-);
+  </Styled.root>
+)
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
-};
+}
 
-export default Layout;
+export default Layout

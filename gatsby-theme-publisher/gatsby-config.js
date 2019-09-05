@@ -3,12 +3,6 @@ const path = require(`path`)
 module.exports = options => ({
   plugins: [
     {
-      resolve: `gatsby-plugin-postcss`,
-      options: {
-        postCssPlugins: [require("tailwindcss")],
-      },
-    },
-    {
       resolve: `gatsby-source-graphql`,
       options: {
         // This type will contain remote schema Query type
@@ -34,16 +28,8 @@ module.exports = options => ({
     },
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
-    `gatsby-plugin-sass`,
     `gatsby-plugin-sitemap`,
-    {
-      resolve: "gatsby-plugin-web-font-loader",
-      options: {
-        google: {
-          families: ["Merriweather", "Lato"],
-        },
-      },
-    },
+    'gatsby-plugin-theme-ui',
     {
       resolve: "gatsby-plugin-mailchimp",
       options: {
