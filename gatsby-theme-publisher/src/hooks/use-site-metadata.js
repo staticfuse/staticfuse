@@ -10,6 +10,7 @@ export default () => {
           twitter
           siteUrl
           wordPressUrl
+          menuSlug
         }
       }
     }

@@ -13,6 +13,7 @@
     "clean": "gatsby clean"
   },
   "dependencies": {
+    "@justinwhall/gatsby-theme-post-types": "^1.0.0",
     "classnames": "^2.2.6",
     "gatsby": "^2.13.41",
     "react": "^16.8.6",

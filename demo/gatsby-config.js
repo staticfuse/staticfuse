@@ -5,16 +5,16 @@ module.exports = {
     author: "Scott Bolinger",
     twitter: "@scottbolinger",
     siteUrl: `https://scottbolinger.com`,
-    wordPressUrl: `https://designbyscott.wpengine.com` // TODO: don't duplicate this field
+    wordPressUrl: `http://gatsby-preview.wtf`, // TODO: don't duplicate this field
   },
   plugins: [
     {
       resolve: `gatsby-theme-publisher`,
       options: {
         postCssPlugins: [require(`autoprefixer`)],
-        mailChimpEndpoint: '',
+        mailChimpEndpoint: "",
         dynamicComments: true,
-        wordPressUrl: `https://designbyscott.wpengine.com`
+        wordPressUrl: `http://gatsby-preview.wtf`,
       },
     },
   ],
