@@ -8,7 +8,6 @@ module.exports = {
     wordPressUrl: `https://designbyscott.wpengine.com` // TODO: don't duplicate this field
   },
   plugins: [
-    `gatsby-plugin-theme-ui`,
     {
       resolve: `gatsby-theme-publisher`,
       options: {

@@ -1,12 +1,11 @@
-/** @jsx jsx */
-import { jsx } from "theme-ui"
+import React from 'react';
 import { Link } from 'gatsby';
 import siteLogo from '../images/site-logo.png';
 
 const Logo = ( { data } ) => {
 
   return (
-    <Link to="/" className="h-10 overflow-hidden block" sx={{
+    <Link to="/" className="h-10 overflow-hidden block" style={{
       overflow: 'hidden',
       height: '50px',
       width: '50px'
@@ -16,7 +15,7 @@ const Logo = ( { data } ) => {
         alt="Site Logo"
         className="site-logo"
         itemProp="logo"
-        sx={{
+        style={{
           display: 'block',
           maxWidth: '100%',
           height: 'auto'

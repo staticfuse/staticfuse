@@ -1,6 +1,6 @@
 import React from "react"
 import { Link, graphql, StaticQuery } from "gatsby"
-import { FaLongArrowAltRight } from "react-icons/fa"
+import { Icon } from "@chakra-ui/core";
 
 const POSTS_QUERY = graphql`
   query GET_POSTS {
@@ -58,7 +58,7 @@ const NextPost = ({ post }) => (
                 >
                   <h5><span dangerouslySetInnerHTML={{
             __html: nextPost.title,
-          }} /><FaLongArrowAltRight className="inline-block" /></h5>
+          }} /><Icon name="arrow-forward" /></h5>
                 </Link>
               </>
             )}

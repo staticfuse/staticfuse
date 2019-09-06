@@ -19,8 +19,6 @@ const BlogArchive = props => {
         description="Blog posts"
         keywords={[`wordpress`]}
       />
-      
-      <div className="max-w-2xl m-auto xl:max-w-5xl blog-page">
 
       <HeaderArchive name={'Blog'} />
 
@@ -31,8 +29,6 @@ const BlogArchive = props => {
           allPosts={allPosts}
           itemsPerPage={itemsPerPage}
         />
-
-      </div>
       
     </Layout>
   )

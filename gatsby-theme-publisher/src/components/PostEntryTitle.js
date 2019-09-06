@@ -1,26 +1,29 @@
-import React from 'react'
+import React from "react"
 import { Link } from "gatsby"
+import { Heading } from "@chakra-ui/core"
 
 const PostEntryTitle = ({ post, location, titleClass }) => (
   <>
     {location === "single" ? (
-      <h1
+      <Heading
+        as="h1"  
+        mb={2}
         className={titleClass}
-        dangerouslySetInnerHTML={{
+        dangerouslySetInnerHTML=
+        {{
           __html: post.title,
         }}
-      ></h1>
+        >
+      </Heading>
     ) : (
-      <h2
-        className={titleClass}
-      >
+      <Heading className={titleClass} mb={4} fontWeight="500">
         <Link
           to={`/${post.uri}`}
           dangerouslySetInnerHTML={{
             __html: post.title,
           }}
         ></Link>
-      </h2>
+      </Heading>
     )}
   </>
 )

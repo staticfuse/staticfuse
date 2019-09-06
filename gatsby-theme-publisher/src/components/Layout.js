@@ -1,54 +1,58 @@
-/** @jsx jsx */
-import { jsx, css, Layout as ThemeLayout, Styled } from 'theme-ui'
+import React from "react"
+import { ThemeProvider, CSSReset, Box } from "@chakra-ui/core"
 import Header from "./Header"
 import Footer from "./Footer"
 import PropTypes from "prop-types"
+import publisherTheme from "../theme"
 import { Global } from "@emotion/core"
-import Container from "../elements/Container"
 
 const Layout = props => (
-  <Styled.root>
+  <ThemeProvider theme={publisherTheme}>
+    <CSSReset />
     <Global
-      styles={css({
-        "*": {
-          boxSizing: `inherit`,
-          "&:before": {
-            boxSizing: `inherit`,
-          },
-          "&:after": {
-            boxSizing: `inherit`,
-          },
-        },
-        html: {
-          fontSize: `16px`,
-        },
+      styles={{
         body: {
-          margin: 0,
-          padding: 0,
-          boxSizing: `border-box`,
-          textRendering: `optimizeLegibility`,
-          WebkitFontSmoothing: `antialiased`,
-          MozOsxFontSmoothing: `grayscale`,
+          lineHeight: "1.625",
         },
-        a: {
-          textDecoration: 'none'
+        p: {
+          marginBottom: "1.25rem",
         },
-        "::selection": {
-          backgroundColor: `primary`,
-          color: `white`,
+        "h1, h2, h3, h4, h5": {
+          marginBottom: "1.25rem",
+          fontWeight: "400",
+          lineHeight: "1.25",
         },
-      })}
+        "h1": {
+          fontSize: "3rem"
+        },
+        "h12": {
+          fontSize: "2.25rem"
+        },
+        "h3": {
+          fontSize: "1.875rem"
+        },
+        "h4": {
+          fontSize: "1.5rem"
+        },
+        "h5": {
+          fontSize: "1.25rem"
+        },
+        "ul, ol": {
+          paddingLeft: "1.5rem",
+          marginBottom: ".75rem",
+        },
+        "ul li, ol li": {
+          paddingLeft: ".5rem",
+          marginBottom: ".5rem",
+        },
+      }}
     />
     <Header />
-    <ThemeLayout sx={{
-      padding: '0 15px'
-    }}>
-      <Container className="site-content">
-        {props.children}
-      </Container>
-    </ThemeLayout>
+    <Box maxW="4xl" m="0 auto" p="10px">
+      {props.children}
+    </Box>
     <Footer />
-  </Styled.root>
+  </ThemeProvider>
 )
 
 Layout.propTypes = {

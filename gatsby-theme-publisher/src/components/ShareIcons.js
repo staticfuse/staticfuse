@@ -1,6 +1,4 @@
 import React from 'react';
-import { FaTwitter } from 'react-icons/fa';
-import { FaFacebookSquare } from 'react-icons/fa';
 
 const ShareIcons = ({ post }) => (
   <div>
@@ -17,7 +15,7 @@ const ShareIcons = ({ post }) => (
       target="_blank"
       rel="noopener noreferrer"
     >
-      <FaTwitter />
+      Twitter
     </a>
 
     <a
@@ -29,7 +27,7 @@ const ShareIcons = ({ post }) => (
       target="_blank"
       rel="noopener noreferrer"
     >
-      <FaFacebookSquare />
+      Facebook
     </a>
   </div>
   </div>

@@ -10,6 +10,7 @@ import SEO from '../../components/SEO';
 import BlogOptin from "../../components/BlogOptin";
 import CommentList from '../../components/CommentList';
 import CommentForm from '../../components/CommentForm';
+import { Box } from '@chakra-ui/core';
 
 const renderTermNodes = (nodes, termType) => (
   <span className="taxonomy-links text-xs">
@@ -42,7 +43,12 @@ const Post = ({ pageContext: post }) => {
     <Layout>
       <SEO title={`${post.title}`} />
       <div className="post-wrapper single-post">
-        <header className="entry-header max-w-2xl m-auto mb-6 mt-8">
+        <Box as='header' 
+        maxW='2xl'
+        m='auto'
+        mb={6}
+        mt={8}
+        className="entry-header">
           <PostEntryTitle
             location="single"
             post={post}
@@ -50,11 +56,14 @@ const Post = ({ pageContext: post }) => {
           />
 
           <PostEntryMeta post={post} />
-        </header>
+        </Box>
+        
         {post.featuredImage && <PostEntryMedia post={post} location="single" classes="mb-20" />}
 
-        <div
-          className="entry-content max-w-2xl m-auto"
+        <Box
+          maxW='2xl'
+          m='auto'
+          className="entry-content"
           dangerouslySetInnerHTML={syntaxHighlighter(post.content)}
         />
         <footer className="entry-footer max-w-2xl m-auto">

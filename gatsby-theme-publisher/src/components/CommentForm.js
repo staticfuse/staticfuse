@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
+import { Textarea, Input } from '@chakra-ui/core';
 
 const commentSubmitQuery = gql`
 	mutation($author: String, $commentOn: Int, $content: String, $authorEmail: String) {
@@ -56,7 +57,7 @@ class CommentForm extends Component {
 		return (
             <div className="comment-textarea">
                 <label htmlFor="comment" className="block text-gray-600 mt-2 text-sm mb-2">Comment</label>
-                <textarea
+                <Textarea
                     id="comment"
                     className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     name="comment"
@@ -77,7 +78,7 @@ class CommentForm extends Component {
                 <label htmlFor="author" className="block text-gray-600 mt-2 text-sm mb-2">
                     Name <span className="required">*</span>
                 </label>
-                <input
+                <Input
                     id="author"
                     className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     name="author"
@@ -98,7 +99,7 @@ class CommentForm extends Component {
 				<label htmlFor="email" className="block text-gray-600 mt-2 text-sm mb-2">
 					Email <span className="required">*</span>
 				</label>
-				<input
+				<Input
                     id="email"
                     className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
 					name="email"
@@ -118,7 +119,7 @@ class CommentForm extends Component {
 		return (
 			<div className="comment-form-url">
 				<label htmlFor="url" className="block text-gray-600 mt-2 text-sm mb-2">Website</label>
-				<input
+				<Input
                     id="url"
                     className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
 					name="url"
@@ -135,7 +136,7 @@ class CommentForm extends Component {
 	renderCommentSubmitButton() {
 		return (
 			<p className="form-submit mt-4">
-				<input name="submit" type="submit" id="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold text-base py-2 px-4 rounded focus:outline-none focus:shadow-outline" value="Post Comment" />
+				<Input name="submit" type="submit" id="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold text-base py-2 px-4 rounded focus:outline-none focus:shadow-outline" value="Post Comment" />
 			</p>
 		);
 	}
