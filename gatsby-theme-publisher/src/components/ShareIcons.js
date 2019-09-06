@@ -1,14 +1,16 @@
 import React from 'react';
+import { Box, Flex, Icon } from '@chakra-ui/core';
 
 const ShareIcons = ({ post }) => (
   <div>
-  <p className="mb-1 text-sm text-gray-600">
+  <Box as="p" fontSize='sm' color='muted' mb={1}>
       Share
-    </p>
-  <div className="flex items-center justify-start">
+  </Box>
+  <Flex justify='start'>
     
     <a
       className="share-icon mr-4 text-xl"
+      style={{ marginRight:'8px' }}
       href={`http://twitter.com/share?text=${post.title} —&amp;url=${
         post.link
       }`}
@@ -29,7 +31,7 @@ const ShareIcons = ({ post }) => (
     >
       Facebook
     </a>
-  </div>
+  </Flex>
   </div>
 );
 

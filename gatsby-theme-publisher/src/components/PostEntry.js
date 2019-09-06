@@ -18,7 +18,7 @@ const PostEntry = ({ post, classes = '' }) => {
           .join(' ')} ...`;
 
   return (
-    <Box mb={6} py='20px' overflow='hidden'>
+    <Box my={4} overflow='hidden'>
       <div className="post-wrapper xl:flex">
         <div className="post-inner xl:w-3/4 xl:flex-row xl:order-last xl:pl-6">
           <header className="entry-header">

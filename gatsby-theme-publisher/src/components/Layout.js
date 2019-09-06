@@ -25,7 +25,7 @@ const Layout = props => (
         "h1": {
           fontSize: "3rem"
         },
-        "h12": {
+        "h2": {
           fontSize: "2.25rem"
         },
         "h3": {
@@ -45,10 +45,30 @@ const Layout = props => (
           paddingLeft: ".5rem",
           marginBottom: ".5rem",
         },
+        ".screen-reader-text": {
+          visibility: "hidden",
+          textIndent: "-9999em",
+          opacity: "0"
+        },
+        ".entry-content img.aligncenter, .entry-content .aligncenter img": {
+          display: "block",
+          margin: "0 auto",
+        },
+        ".aligncenter": {
+          textAlign: "center"
+        },
+        ".alignleft": {
+          float: "left",
+          marginRight: "15px"
+        },
+        ".alignright": {
+          float: "right",
+          marginLeft: "15px"
+        }
       }}
     />
     <Header />
-    <Box maxW="4xl" m="0 auto" p="10px">
+    <Box maxW="5xl" m="0 auto" p="10px">
       {props.children}
     </Box>
     <Footer />

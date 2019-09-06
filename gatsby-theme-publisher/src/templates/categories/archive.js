@@ -3,6 +3,7 @@ import Layout from '../../components/Layout';
 import PostEntry from '../../components/PostEntry';
 import HeaderArchive from '../../components/HeaderArchive';
 import SEO from '../../components/SEO';
+import { Box } from '@chakra-ui/core';
 
 const SingleCategory = props => {
   const {
@@ -15,14 +16,14 @@ const SingleCategory = props => {
         title={`Category - ${name}`}
         description={`A collection of posts from the ${name} category.`}
       />
-      <div className="archive-page max-w-2xl xl:max-w-5xl m-auto">
+      <Box maxW="2xl" m="auto">
       <HeaderArchive name={name} />
       
       {posts.nodes &&
         posts.nodes.map(post => {
           return <PostEntry classes="mb-12" key={post.id} post={post} />;
         })}
-      </div>
+      </Box>
     </Layout>
   );
 };

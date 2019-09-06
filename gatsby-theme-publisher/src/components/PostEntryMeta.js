@@ -18,6 +18,8 @@ const PostEntryMeta = ({ post, location = "" }) => (
               className="taxonomy"
               marginLeft="5px"
               float="right"
+              color="muted"
+              fontSize="sm"
             >
               {category.name}
             </Tag>

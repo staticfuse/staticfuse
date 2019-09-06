@@ -1,19 +1,22 @@
 import React from 'react';
 import ShareIcons from './ShareIcons';
 import NextPost from './NextPost';
+import { Box, Flex } from '@chakra-ui/core';
 
 const EngagementBar = ({ post }) => {
 
   return (
-      <div
+      <Box
         id="engagement-bar"
-        className="container mt-8 border-t pt-4"
+        mt={8}
+        borderTop='1px solid #eee'
+        pt={4}
       >
-        <div className="container max-width flex justify-between">
+        <Flex justify='space-between' w='100%'>
           <ShareIcons post={post} />
           <NextPost post={post} />
-        </div>
-      </div>
+        </Flex>
+      </Box>
   );
 };
 

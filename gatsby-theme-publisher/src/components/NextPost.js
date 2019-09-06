@@ -1,6 +1,7 @@
 import React from "react"
 import { Link, graphql, StaticQuery } from "gatsby"
-import { Icon } from "@chakra-ui/core";
+import { Icon, Box, Flex } from "@chakra-ui/core"
+import Img from 'gatsby-image'
 
 const POSTS_QUERY = graphql`
   query GET_POSTS {
@@ -12,6 +13,23 @@ const POSTS_QUERY = graphql`
           uri
           featuredImage {
             sourceUrl
+            imageFile {
+              childImageSharp {
+                fluid(maxWidth: 1024) {
+                  base64
+                  aspectRatio
+                  src
+                  srcSet
+                  srcWebp
+                  srcSetWebp
+                  sizes
+                  originalImg
+                  originalName
+                  presentationWidth
+                  presentationHeight
+                }
+              }
+            }
           }
         }
       }
@@ -32,14 +50,13 @@ const NextPost = ({ post }) => (
       const nextPost = findNextPost(post, data)
 
       return (
-        <div className="flex items-center justify-end relative w-3/4">
+        <Flex alignItems='center' justifyContent='flex-end' position='relative' width='75%'>
           {nextPost && nextPost.featuredImage && (
-            <div className="thumbnail mr-2" style={{maxWidth:'100px', overflow: 'hidden'}}>
-              <img
-                src={nextPost.featuredImage.sourceUrl}
+            <div className="next-postthumbnail" style={{maxWidth:'100px', overflow: 'hidden', marginRight:'10px'}}>
+              <Img
+                fluid={post.featuredImage.imageFile.childImageSharp.fluid}
                 alt={nextPost.title}
-                className="next-post-featured-image block w-12 mr-2"
-                style={{display:'block', height: 'auto', maxWidth: '100%'}}
+                className="next-post-featured-image"
               />
             </div>
           )}
@@ -47,9 +64,9 @@ const NextPost = ({ post }) => (
           <div className="site-minibar__right-content justify-end">
             {nextPost && (
               <>
-                <p className="mb-1 text-sm text-gray-600">
+                <Box as="p" fontSize='sm' color='muted' mb={1}>
                   Up Next
-                </p>
+                </Box>
 
                 <Link
                   to={`/${nextPost.uri}`}
@@ -63,7 +80,7 @@ const NextPost = ({ post }) => (
               </>
             )}
           </div>
-        </div>
+        </Flex>
       )
     }}
   />
