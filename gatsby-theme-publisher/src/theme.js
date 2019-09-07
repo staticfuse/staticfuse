@@ -1,4 +1,3 @@
-import React from 'react'
 import { theme } from "@chakra-ui/core"
 
 // const customIcons = {
@@ -21,7 +20,7 @@ const publisherTheme = {
   colors: {
     ...theme.colors,
     primary: theme.colors.blue,
-    muted: '#999',
+    muted: "#999",
     brand: {
       900: "#1a365d",
       800: "#153e75",
@@ -30,7 +29,7 @@ const publisherTheme = {
     icons: {
       ...theme.icons,
       // ...customIcons,
-    }
+    },
   },
 }
 

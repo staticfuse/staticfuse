@@ -1,16 +1,19 @@
-import React, { useRef, useState } from "react"
+import React from "react"
 import { Link, StaticQuery, graphql } from "gatsby"
 import { createLocalLink } from "../utils"
-import { navigate } from "@reach/router"
 import useSiteMetadata from "../hooks/use-site-metadata"
 import {
   Menu as CHMenu,
   MenuButton,
   MenuList,
   MenuItem,
-  Icon
+  Icon,
 } from "@chakra-ui/core"
 
+/**
+ * Get all menues with children.
+ * We'll use this query to try and pull out the menu from the theme settings.
+ */
 const MENU_QUERY = graphql`
   fragment MenuFields on WPGraphQL_MenuItem {
     id
@@ -23,12 +26,23 @@ const MENU_QUERY = graphql`
 
   query GET_MENU_ITEMS {
     wpgraphql {
-      menuItems(where: { location: PRIMARY }) {
-        nodes {
-          ...MenuFields
-          childItems {
-            nodes {
-              ...MenuFields
+      menus {
+        edges {
+          node {
+            id
+            menuId
+            name
+            slug
+            count
+            menuItems {
+              nodes {
+                ...MenuFields
+                childItems {
+                  nodes {
+                    ...MenuFields
+                  }
+                }
+              }
             }
           }
         }
@@ -38,7 +52,7 @@ const MENU_QUERY = graphql`
 `
 
 const Menu = ({ location }) => {
-  const { wordPressUrl } = useSiteMetadata()
+  const { menuId, wordPressUrl } = useSiteMetadata()
 
   const renderLink = (menuItem, wordPressUrl) =>
     menuItem.connectedObject.__typename === "WPGraphQL_MenuItem" ? (
@@ -67,7 +81,11 @@ const Menu = ({ location }) => {
       return renderSubMenu(menuItem, wordPressUrl)
     } else {
       return (
-        <div className="menu-item" key={menuItem.id} style={{marginLeft:'10px'}}>
+        <div
+          className="menu-item"
+          key={menuItem.id}
+          style={{ marginLeft: "10px" }}
+        >
           {renderLink(menuItem, wordPressUrl)}
         </div>
       )
@@ -76,17 +94,19 @@ const Menu = ({ location }) => {
 
   const renderSubMenu = (menuItem, wordPressUrl) => {
     return (
-      <>
-      {renderLink(menuItem, wordPressUrl)}
-      <MenuButton rightIcon="chevron-down">
-        <Icon name="chevron-down" color="#fff" />
-      </MenuButton>
-      <MenuList bg='gray.800'>
-          {menuItem.childItems.nodes.map(item =>
-            ( <MenuItem>{renderMenuItem(item, wordPressUrl)}</MenuItem> )
-          )}
-       </MenuList>
-      </>
+      <div key={menuItem.id}>
+        {renderLink(menuItem, wordPressUrl)}
+        <MenuButton rightIcon="chevron-down">
+          <Icon name="chevron-down" color="#fff" />
+        </MenuButton>
+        <MenuList bg="gray.800">
+          {menuItem.childItems.nodes.map(item => (
+            <MenuItem key={item.id}>
+              {renderMenuItem(item, wordPressUrl)}
+            </MenuItem>
+          ))}
+        </MenuList>
+      </div>
     )
   }
 
@@ -94,18 +114,30 @@ const Menu = ({ location }) => {
     <StaticQuery
       query={MENU_QUERY}
       render={data => {
-        if (data.wpgraphql.menuItems) {
+        if (data.wpgraphql.menus) {
+          const { edges } = data.wpgraphql.menus
+          // Check to see if the menuId theme setting matches an menu.
+          const [menu] = edges.filter(menu => menuId === menu.node.menuId)
+
+          /**
+           * If no match, the theme doesn't have a setting or the id is incorrect.
+           * Regardless, return early.
+           */
+          if (!menu) {
+            return null
+          }
+
           return (
             <CHMenu>
-              <div style={{display:'flex', justifyContent:'space-between'}}>
-                {data.wpgraphql.menuItems.nodes.map(menuItem => {
-                  if (menuItem.childItems.nodes.length) {
-                    return renderSubMenu(menuItem, wordPressUrl)
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                {menu.node.menuItems.nodes.map(item => {
+                  if (item.childItems.nodes.length) {
+                    return renderSubMenu(item, wordPressUrl)
                   } else {
-                    return renderMenuItem(menuItem, wordPressUrl)
+                    return renderMenuItem(item, wordPressUrl)
                   }
                 })}
-                </div>
+              </div>
             </CHMenu>
           )
         } else {
