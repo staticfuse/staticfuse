@@ -11,7 +11,7 @@ module.exports = {
     {
       resolve: `gatsby-theme-publisher`,
       options: {
-        postCssPlugins: [require(`autoprefixer`)],
+        menuId: 5,
         mailChimpEndpoint: "",
         dynamicComments: true,
         wordPressUrl: `http://gatsby-preview.wtf`,

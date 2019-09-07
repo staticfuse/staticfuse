@@ -8,27 +8,39 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  Icon
+  Icon,
 } from "@chakra-ui/core"
 
 const MENU_QUERY = graphql`
-  fragment MenuFields on WPGraphQL_MenuItem {
-    id
-    label
-    url
-    connectedObject {
-      __typename
-    }
-  }
-
   query GET_MENU_ITEMS {
     wpgraphql {
-      menuItems(where: { location: PRIMARY }) {
-        nodes {
-          ...MenuFields
-          childItems {
-            nodes {
-              ...MenuFields
+      menus {
+        edges {
+          node {
+            id
+            menuId
+            name
+            slug
+            count
+            menuItems {
+              nodes {
+                url
+                label
+                id
+                connectedObject {
+                  __typename
+                }
+                childItems {
+                  nodes {
+                    url
+                    label
+                    id
+                    connectedObject {
+                      __typename
+                    }
+                  }
+                }
+              }
             }
           }
         }
@@ -38,7 +50,7 @@ const MENU_QUERY = graphql`
 `
 
 const Menu = ({ location }) => {
-  const { wordPressUrl } = useSiteMetadata()
+  const { menuId, wordPressUrl } = useSiteMetadata()
 
   const renderLink = (menuItem, wordPressUrl) =>
     menuItem.connectedObject.__typename === "WPGraphQL_MenuItem" ? (
@@ -67,7 +79,11 @@ const Menu = ({ location }) => {
       return renderSubMenu(menuItem, wordPressUrl)
     } else {
       return (
-        <div className="menu-item" key={menuItem.id} style={{marginLeft:'10px'}}>
+        <div
+          className="menu-item"
+          key={menuItem.id}
+          style={{ marginLeft: "10px" }}
+        >
           {renderLink(menuItem, wordPressUrl)}
         </div>
       )
@@ -77,15 +93,15 @@ const Menu = ({ location }) => {
   const renderSubMenu = (menuItem, wordPressUrl) => {
     return (
       <>
-      {renderLink(menuItem, wordPressUrl)}
-      <MenuButton rightIcon="chevron-down">
-        <Icon name="chevron-down" color="#fff" />
-      </MenuButton>
-      <MenuList bg='gray.800'>
-          {menuItem.childItems.nodes.map(item =>
-            ( <MenuItem>{renderMenuItem(item, wordPressUrl)}</MenuItem> )
-          )}
-       </MenuList>
+        {renderLink(menuItem, wordPressUrl)}
+        <MenuButton rightIcon="chevron-down">
+          <Icon name="chevron-down" color="#fff" />
+        </MenuButton>
+        <MenuList bg="gray.800">
+          {menuItem.childItems.nodes.map(item => (
+            <MenuItem>{renderMenuItem(item, wordPressUrl)}</MenuItem>
+          ))}
+        </MenuList>
       </>
     )
   }
@@ -94,19 +110,26 @@ const Menu = ({ location }) => {
     <StaticQuery
       query={MENU_QUERY}
       render={data => {
-        if (data.wpgraphql.menuItems) {
+        if (data.wpgraphql.menus) {
+          const { edges } = data.wpgraphql.menus
+          const [menu] = edges.filter(menu => menuId === menu.node.menuId)
+
+          if (!menu) {
+            return null
+          }
+
           return (
-            <CHMenu>
-              <div style={{display:'flex', justifyContent:'space-between'}}>
-                {data.wpgraphql.menuItems.nodes.map(menuItem => {
-                  if (menuItem.childItems.nodes.length) {
-                    return renderSubMenu(menuItem, wordPressUrl)
+            <div>
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                {menu.node.menuItems.nodes.map(item => {
+                  if (item.childItems.nodes.length) {
+                    return renderSubMenu(item, wordPressUrl)
                   } else {
-                    return renderMenuItem(menuItem, wordPressUrl)
+                    return renderMenuItem(item, wordPressUrl)
                   }
                 })}
-                </div>
-            </CHMenu>
+              </div>
+            </div>
           )
         } else {
           return null
