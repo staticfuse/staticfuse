@@ -1,7 +1,6 @@
-import React, { useRef, useState } from "react"
+import React from "react"
 import { Link, StaticQuery, graphql } from "gatsby"
 import { createLocalLink } from "../utils"
-import { navigate } from "@reach/router"
 import useSiteMetadata from "../hooks/use-site-metadata"
 import {
   Menu as CHMenu,
