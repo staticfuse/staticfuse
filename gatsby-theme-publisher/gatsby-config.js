@@ -7,7 +7,7 @@ module.exports = options => {
     ...options,
   }
 
-  return {
+  const config = {
     siteMetadata: {
       ...mergedOptions,
     },
@@ -20,15 +20,9 @@ module.exports = options => {
           // This is field under which it's accessible
           fieldName: `wpgraphql`,
           // Url to query from
-          url: options.wordPressUrl + `/graphql`,
+          url: mergedOptions.wordPressUrl + `/graphql`,
         },
       },
-      // {
-      //   resolve: `gatsby-plugin-google-analytics`,
-      //   options: {
-      //     trackingId: options.gaTrackingId,
-      //   },
-      // },
       {
         resolve: `gatsby-source-filesystem`,
         options: {
@@ -39,12 +33,30 @@ module.exports = options => {
       `gatsby-plugin-sharp`,
       `gatsby-transformer-sharp`,
       `gatsby-plugin-sitemap`,
-      // {
-      //   resolve: "gatsby-plugin-mailchimp",
-      //   options: {
-      //     endpoint: options.mailChimpEndpoint,
-      //   },
-      // },
     ],
   }
+
+  /**
+   * Conditionally add plugins based on theme config
+   * to avoid errors while Gatsby boots.
+   */
+  if (mergedOptions.mailChimpEndpoint) {
+    config.plugins.push({
+      resolve: "gatsby-plugin-mailchimp",
+      options: {
+        endpoint: mergedOptions.mailChimpEndpoint,
+      },
+    })
+  }
+
+  if (mergedOptions.gaTrackingId) {
+    config.plugins.push({
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: mergedOptions.gaTrackingId,
+      },
+    })
+  }
+
+  return config
 }
