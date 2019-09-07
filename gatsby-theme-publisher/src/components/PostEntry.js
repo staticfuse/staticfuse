@@ -3,6 +3,7 @@ import PostEntryTitle from './PostEntryTitle';
 import PostEntryMeta from './PostEntryMeta';
 import PostEntryMedia from './PostEntryMedia';
 import useSiteMetadata from "../hooks/use-site-metadata"
+import { Box } from '@chakra-ui/core';
 
 const PostEntry = ({ post, classes = '' }) => {
 
@@ -17,7 +18,7 @@ const PostEntry = ({ post, classes = '' }) => {
           .join(' ')} ...`;
 
   return (
-    <article className={ classes }>
+    <Box my={4} overflow='hidden'>
       <div className="post-wrapper xl:flex">
         <div className="post-inner xl:w-3/4 xl:flex-row xl:order-last xl:pl-6">
           <header className="entry-header">
@@ -39,7 +40,7 @@ const PostEntry = ({ post, classes = '' }) => {
         </div>
         <PostEntryMeta className="xl:w-1/4 xl:order-first xl:pr-4 xl:text-center" post={post} location="blog" />
       </div>
-    </article>
+      </Box>
   );
 };
 

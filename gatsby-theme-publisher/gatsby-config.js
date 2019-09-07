@@ -30,6 +30,17 @@ module.exports = options => {
         },
       },
       {
+        resolve: `gatsby-source-graphql`,
+        options: {
+          // This type will contain remote schema Query type
+          typeName: `WPGraphQL`,
+          // This is field under which it's accessible
+          fieldName: `wpgraphql`,
+          // Url to query from
+          url: options.wordPressUrl + `/graphql`,
+        },
+      },
+      {
         resolve: `gatsby-plugin-google-analytics`,
         options: {
           trackingId: options.gaTrackingId,
@@ -44,8 +55,13 @@ module.exports = options => {
       },
       `gatsby-plugin-sharp`,
       `gatsby-transformer-sharp`,
-      `gatsby-plugin-sass`,
       `gatsby-plugin-sitemap`,
+      {
+        resolve: "gatsby-plugin-mailchimp",
+        options: {
+          endpoint: options.mailChimpEndpoint,
+        },
+      }`gatsby-plugin-sass`,
       {
         resolve: "gatsby-plugin-web-font-loader",
         options: {
@@ -54,12 +70,6 @@ module.exports = options => {
           },
         },
       },
-      // {
-      //   resolve: "gatsby-plugin-mailchimp",
-      //   options: {
-      //     endpoint: options.mailChimpEndpoint,
-      //   },
-      // },
     ],
   }
 }

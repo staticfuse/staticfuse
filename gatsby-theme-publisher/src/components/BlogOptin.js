@@ -1,5 +1,6 @@
 import React from "react";
 import addToMailchimp from 'gatsby-plugin-mailchimp'
+import { Box, Input, Button, Heading } from '@chakra-ui/core'
 
 export default class IndexPage extends React.Component {
     state = {
@@ -38,18 +39,29 @@ export default class IndexPage extends React.Component {
 
     render() {
         return (
-            <div className="w-full mb-8 bg-gray-100 p-10 rounded">
-                <div className="max-w-2xl m-auto text-center">
+            <Box className="optin-box"
+            mb={8}
+            mt={8}
+            bg='#f7fafc'
+            borderRadius='5px'
+            p={10}>
+                <Box
+                maxW='2xl'
+                m='auto'
+                textAlign='center'>
 
-                    <h3>Get More Great Stuff Like This</h3>
+                    <Heading as="h3" mb={1}>Get More Great Stuff Like This</Heading>
 
-                    <p className="text-md text-gray-600 mb-1">Enter your email below. You know the drill.</p>
+                    <p style={{color:'#777'}}>Enter your email below. You know the drill.</p>
 
-                    <form className="sm:flex sm:flex-row" onSubmit={this._handleSubmit}>
+                    <form style={{display:'flex'}} onSubmit={this._handleSubmit}>
 
-                        <div className="p-2 sm:w-3/4 pr-2 w-full">
-                            <label htmlFor="email" className="block text-gray-500 text-sm font-bold hidden">Email</label>
-                            <input
+                        <Box className="p-2 sm:w-3/4 pr-2 w-full"
+                        p={2}
+                        w='75%'
+                        >
+                            <label htmlFor="email" style={{display:'none'}}>Email</label>
+                            <Input
                                 type="email"
                                 onChange={this._handleChange}
                                 name="email"
@@ -57,17 +69,19 @@ export default class IndexPage extends React.Component {
                                 className="border rounded appearance-none  w-full h-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             />
 
-                        </div>
+                        </Box>
 
-                        <div className="p-2 sm:w-1/4 w-full pl-2">
+                        <Box className="p-2 sm:w-1/4 w-full pl-2"
+                        w="25%"
+                        p={2}>
                             
-                            <input className="w-full block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-3 rounded focus:outline-none focus:shadow-outline" type="submit" value="Subscribe" />
+                            <Button display='block' width='100%' variantColor="primary" className="w-full block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-3 rounded focus:outline-none focus:shadow-outline" type="submit" value="Subscribe">Submit</Button>
 
-                        </div>
+                        </Box>
                         
                     </form>
-                </div>
-            </div>
+                </Box>
+            </Box>
         );
     }
 }

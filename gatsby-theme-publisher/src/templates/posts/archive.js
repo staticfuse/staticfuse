@@ -4,6 +4,7 @@ import PostEntry from "../../components/PostEntry"
 import Pagination from "../../components/Pagination"
 import HeaderArchive from '../../components/HeaderArchive';
 import SEO from '../../components/SEO';
+import { Box } from '@chakra-ui/core';
 
 const BlogArchive = props => {
   const {
@@ -19,8 +20,8 @@ const BlogArchive = props => {
         description="Blog posts"
         keywords={[`wordpress`]}
       />
-      
-      <div className="max-w-2xl m-auto xl:max-w-5xl blog-page">
+
+      <Box maxW='2xl' m='auto'>
 
       <HeaderArchive name={'Blog'} />
 
@@ -32,7 +33,7 @@ const BlogArchive = props => {
           itemsPerPage={itemsPerPage}
         />
 
-      </div>
+        </Box>
       
     </Layout>
   )

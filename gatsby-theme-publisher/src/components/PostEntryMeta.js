@@ -1,29 +1,65 @@
-import React from 'react';
-import moment from 'moment/moment';
-import { Link } from 'gatsby';
+import React from "react"
+import moment from "moment/moment"
+import { Link } from "gatsby"
+import { Avatar, Tag, Box } from "@chakra-ui/core"
 
-const PostEntryMeta = ({ post, location = '' }) => (
-  <section className={ location === 'blog' ? 'entry-meta clearfix xl:flex xl:flex-col' : 'entry-meta clearfix' }>
-
-  {post.categories && location === 'blog' ? post.categories.nodes.map(category => <span key={category.id} className="bg-gray-200 rounded p-2 text-xs float-right xl:order-last xl:text-center">{category.name}</span>) : null }
-
-    <div className="author-avatar mr-2 mt-1 h-8 float-left overflow-hidden">
-      <img src={ post.author.avatar ? post.author.avatar.url : '' } className="rounded-full block h-8 border-gray-500 border" alt="Author avatar" />
+const PostEntryMeta = ({ post, location = "" }) => (
+  <Box
+    className="entry-meta"
+    overflow="hidden"
+    marginBottom="25px"
+    marginTop="25px"
+  >
+    <div className="tags" style={{ float:'right' }}>
+      {post.categories && location === "blog"
+        ? post.categories.nodes.map(category => (
+            <Tag
+              key={category.id}
+              className="taxonomy"
+              marginLeft="5px"
+              float="right"
+              color="muted"
+              fontSize="sm"
+            >
+              {category.name}
+            </Tag>
+          ))
+        : null}
     </div>
 
-    <div className="author-meta mb-6">
-      <p className="mb-0 text-gray-500 text-sm"><Link to={`/author/${post.author.slug}`} className="text-gray-500 font-bold">
-      {`  ${post.author.name}`}
-      </Link></p>
-      <p className="mb-0 mt-0 text-gray-500 text-sm"><Link to={`/${post.uri}`} className="text-gray-500">
-      <time className="entry-date" dateTime={post.date}>
-        {moment(post.date).format(`MMMM D, YYYY`)}
-      </time>
-      </Link>
+    <Box as="div" color="gray.600" fontSize="sm" pt={1} className="author-meta">
+      <Avatar
+        src={post.author.avatar ? post.author.avatar.url : ""}
+        alt="Author avatar"
+        style={{
+          float: 'left',
+          marginRight: '10px'
+        }}
+      />
+      <p className="author-name" style={{marginBottom:"0"}}>
+        <Link
+          to={`/author/${post.author.slug}`}
+          style={{
+            color: "#999",
+          }}
+        >
+          {`  ${post.author.name}`}
+        </Link>
       </p>
-    </div>
+      <p className="post-date">
+        <Link
+          to={`/${post.uri}`}
+          style={{
+            color: "#999",
+          }}
+        >
+          <time className="entry-date" dateTime={post.date}>
+            {moment(post.date).format(`MMMM D, YYYY`)}
+          </time>
+        </Link>
+      </p>
+    </Box>
+  </Box>
+)
 
-  </section>
-);
-
-export default PostEntryMeta;
+export default PostEntryMeta

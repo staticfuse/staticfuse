@@ -1,48 +1,64 @@
-import React from 'react';
-import { Link } from 'gatsby';
+import React from "react"
+import { Link } from "gatsby"
 
-import Layout from '../../components/Layout';
-import PostEntryMeta from '../../components/PostEntryMeta';
-import PostEntryTitle from '../../components/PostEntryTitle';
-import PostEntryMedia from '../../components/PostEntryMedia';
-import EngagementBar from '../../components/EngagementBar';
-import SEO from '../../components/SEO';
-import BlogOptin from "../../components/BlogOptin";
-import CommentList from '../../components/CommentList';
-import CommentForm from '../../components/CommentForm';
+import Layout from "../../components/Layout"
+import PostEntryMeta from "../../components/PostEntryMeta"
+import PostEntryTitle from "../../components/PostEntryTitle"
+import PostEntryMedia from "../../components/PostEntryMedia"
+import EngagementBar from "../../components/EngagementBar"
+import SEO from "../../components/SEO"
+import BlogOptin from "../../components/BlogOptin"
+import CommentList from "../../components/CommentList"
+import CommentForm from "../../components/CommentForm"
+import { Box, Tag } from "@chakra-ui/core"
 
 const renderTermNodes = (nodes, termType) => (
-  <span className="taxonomy-links text-xs">
+  <div className="taxonomy-links">
     {nodes.map(term => (
-      <Link key={term.id} className="mr-2 p-2 mr-2 rounded bg-gray-100" to={`/${termType}/${term.slug}`}>
-        {term.name}
-      </Link>
+      <Tag mr={2} color="gray.500" key={term.id}>
+        <Link key={term.id} to={`/${termType}/${term.slug}`}>
+          {term.name}
+        </Link>
+      </Tag>
     ))}
-  </span>
-);
+  </div>
+)
 
 const syntaxHighlighter = content => {
+  var regex = /\[javascript\]|\[php\]|\[html\]|\[css\]/g
 
-  var regex = /\[javascript\]|\[php\]|\[html\]|\[css\]/g;
+  var regex2 = /\[\/javascript\]|\[\/php\]|\[\/html\]|\[\/css\]/gi
 
-  var regex2 = /\[\/javascript\]|\[\/php\]|\[\/html\]|\[\/css\]/gi;
-
-  return {__html: content.replace(regex, '<pre class="bg-gray-900 text-gray-100 text-wrap overflow-scroll rounded p-4 font-mono">').replace(regex2, '</pre>') }
+  return {
+    __html: content
+      .replace(
+        regex,
+        '<pre class="bg-gray-900 text-gray-100 text-wrap overflow-scroll rounded p-4 font-mono">'
+      )
+      .replace(regex2, "</pre>"),
+  }
 }
 
 const renderTerms = (categoryNodes = [], tagNodes = []) => (
   <>
-    {categoryNodes ? renderTermNodes(categoryNodes, 'category') : null}
-    {tagNodes && tagNodes.length ? renderTermNodes(tagNodes, 'tag') : null}
+    {categoryNodes ? renderTermNodes(categoryNodes, "category") : null}
+    {tagNodes && tagNodes.length ? renderTermNodes(tagNodes, "tag") : null}
   </>
-);
+)
 
 const Post = ({ pageContext: post }) => {
   return (
     <Layout>
       <SEO title={`${post.title}`} />
       <div className="post-wrapper single-post">
-        <header className="entry-header max-w-2xl m-auto mb-6 mt-8">
+        <Box
+          as="header"
+          maxW="2xl"
+          m="auto"
+          mb={6}
+          mt={8}
+          className="entry-header"
+        >
           <PostEntryTitle
             location="single"
             post={post}
@@ -50,14 +66,19 @@ const Post = ({ pageContext: post }) => {
           />
 
           <PostEntryMeta post={post} />
-        </header>
-        {post.featuredImage && <PostEntryMedia post={post} location="single" classes="mb-20" />}
+        </Box>
 
-        <div
-          className="entry-content max-w-2xl m-auto"
+        {post.featuredImage && (
+          <PostEntryMedia post={post} location="single" classes="mb-20" />
+        )}
+
+        <Box
+          maxW="2xl"
+          m="auto"
+          className="entry-content"
           dangerouslySetInnerHTML={syntaxHighlighter(post.content)}
         />
-        <footer className="entry-footer max-w-2xl m-auto">
+        <Box as="footer" className="entry-footer" maxW="2xl" m="auto">
           <BlogOptin />
           <div className="entry-footer__taxonomy justify-end self-center items-center">
             {post.categories.nodes.length || post.tags.nodes.length
@@ -70,12 +91,10 @@ const Post = ({ pageContext: post }) => {
           <CommentList postId={post.postId} />
 
           <CommentForm postID={post.postId} />
-        </footer>
-
+        </Box>
       </div>
-      
     </Layout>
-  );
-};
+  )
+}
 
-export default Post;
+export default Post

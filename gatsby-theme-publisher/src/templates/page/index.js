@@ -1,6 +1,7 @@
 import React from 'react';
 import Layout from '../../components/Layout';
 import SEO from '../../components/SEO';
+import { Box } from '@chakra-ui/core';
 
 const SinglePage = props => {
   const {
@@ -14,6 +15,7 @@ const SinglePage = props => {
   return (
     <Layout>
       <SEO title={title} description={excerpt} />
+      <Box maxW='2xl' m='auto'>
       <article
         data-id={id}
         id={`post-${postId}`}
@@ -33,6 +35,7 @@ const SinglePage = props => {
 
         <footer className="entry-footer" />
       </article>
+      </Box>
       {/* #post-${ID} */}
     </Layout>
   );

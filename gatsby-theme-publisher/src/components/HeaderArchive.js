@@ -1,11 +1,22 @@
-import React from 'react';
+import React from "react"
+import {Heading} from "@chakra-ui/core"
 
 const HeaderArchive = ({ name }) => (
-  <header className="page-header page-header__archive container bottom-spacer">
-    <h2 className="archive-title text-sm uppercase font-light border-b mb-4 pb-2 text-gray-500 leading-tight">
+  <header className="page-header">
+    <Heading
+      className="archive-title"
+      size='xs'
+      textTransform="uppercase"
+      color="gray.400"
+      borderBottom="1px solid #eee"
+      pb={2}
+      mb={2}
+      mt={2}
+      fontWeight={1}
+    >
       {name}
-    </h2>
+    </Heading>
   </header>
-);
+)
 
-export default HeaderArchive;
+export default HeaderArchive

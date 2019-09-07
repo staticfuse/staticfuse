@@ -1,7 +1,6 @@
 import React from "react"
 import { Link } from "gatsby"
-import { FaChevronRight } from "react-icons/fa"
-import { FaChevronLeft } from "react-icons/fa"
+import { Icon } from '@chakra-ui/core'
 
 const Pagination = ({ pageNumber, hasNextPage, allPosts, itemsPerPage }) => (
   <nav className="pagination text-left" role="navigation">
@@ -13,7 +12,7 @@ const Pagination = ({ pageNumber, hasNextPage, allPosts, itemsPerPage }) => (
           to={pageNumber > 2 ? `/page/${pageNumber - 1}` : `/`}
         >
           <span className="screen-reader-text">Previous page</span>
-          <FaChevronLeft />
+          <Icon name="arrow-left" />
         </Link>
       )}
       <span aria-current="page" className="page-numbers current p-3">
@@ -24,7 +23,7 @@ const Pagination = ({ pageNumber, hasNextPage, allPosts, itemsPerPage }) => (
       {hasNextPage && (
         <Link className="next page-numbers p-3  bg-gray-100 rounded hover:bg-gray-200" to={`page/${pageNumber + 1}`}>
           <span className="screen-reader-text">Next page</span>
-          <FaChevronRight />
+          <Icon name="arrow-right" />
         </Link>
       )}
     </div>

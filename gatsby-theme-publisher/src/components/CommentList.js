@@ -2,6 +2,7 @@ import React from "react"
 import gql from "graphql-tag"
 import { Query } from "react-apollo"
 import Comment from "./Comment"
+import { Box } from "@chakra-ui/core"
 
 const commentQuery = gql`
   query($postId: ID!) {
@@ -36,7 +37,7 @@ const CommentList = ({ postId, comments }) => (
         if (error) return `Error loading comments...`
 
         return (
-          <ol className="comment-list list-none p-0 m-0">
+          <Box as="ol" className="comment-list" listStyleType="none" m="0" p="0">
             {data.comments.nodes.map(comment => (
               <Comment
                 key={comment.id}
@@ -48,7 +49,7 @@ const CommentList = ({ postId, comments }) => (
                 {comment.content}
               </Comment>
             ))}
-          </ol>
+          </Box>
         )
       }}
     </Query>
