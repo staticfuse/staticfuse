@@ -11,6 +11,10 @@ import {
   Icon,
 } from "@chakra-ui/core"
 
+/**
+ * Get all menues with children.
+ * We'll use this query to try and pull out the menu from the theme settings.
+ */
 const MENU_QUERY = graphql`
   fragment MenuFields on WPGraphQL_MenuItem {
     id
@@ -91,17 +95,19 @@ const Menu = ({ location }) => {
 
   const renderSubMenu = (menuItem, wordPressUrl) => {
     return (
-      <>
+      <div key={menuItem.id}>
         {renderLink(menuItem, wordPressUrl)}
         <MenuButton rightIcon="chevron-down">
           <Icon name="chevron-down" color="#fff" />
         </MenuButton>
         <MenuList bg="gray.800">
           {menuItem.childItems.nodes.map(item => (
-            <MenuItem>{renderMenuItem(item, wordPressUrl)}</MenuItem>
+            <MenuItem key={item.id}>
+              {renderMenuItem(item, wordPressUrl)}
+            </MenuItem>
           ))}
         </MenuList>
-      </>
+      </div>
     )
   }
 
@@ -111,14 +117,19 @@ const Menu = ({ location }) => {
       render={data => {
         if (data.wpgraphql.menus) {
           const { edges } = data.wpgraphql.menus
+          // Check to see if the menuId theme setting matches an menu.
           const [menu] = edges.filter(menu => menuId === menu.node.menuId)
 
+          /**
+           * If no match, the theme doesn't have a setting or the id is incorrect.
+           * Regardless, return early.
+           */
           if (!menu) {
             return null
           }
 
           return (
-            <div>
+            <CHMenu>
               <div style={{ display: "flex", justifyContent: "space-between" }}>
                 {menu.node.menuItems.nodes.map(item => {
                   if (item.childItems.nodes.length) {
@@ -128,7 +139,7 @@ const Menu = ({ location }) => {
                   }
                 })}
               </div>
-            </div>
+            </CHMenu>
           )
         } else {
           return null
