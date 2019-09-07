@@ -1,4 +1,3 @@
-import React from 'react'
 import { theme } from "@chakra-ui/core"
 
 // const customIcons = {
@@ -36,7 +35,7 @@ const publisherTheme = {
     icons: {
       ...theme.icons,
       // ...customIcons,
-    }
+    },
   },
 }
 

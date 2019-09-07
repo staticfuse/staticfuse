@@ -1,10 +1,27 @@
+<<<<<<< HEAD
 import React, { useState } from "react"
+=======
+import React from "react"
+>>>>>>> 6030266090bacceeda2bf529d564216644ecc195
 import { Link, StaticQuery, graphql } from "gatsby"
 import { createLocalLink } from "../utils"
-import { navigate } from "@reach/router"
 import useSiteMetadata from "../hooks/use-site-metadata"
+<<<<<<< HEAD
 import { PseudoBox, Icon, Box } from "@chakra-ui/core"
+=======
+import {
+  Menu as CHMenu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  Icon,
+} from "@chakra-ui/core"
+>>>>>>> 6030266090bacceeda2bf529d564216644ecc195
 
+/**
+ * Get all menues with children.
+ * We'll use this query to try and pull out the menu from the theme settings.
+ */
 const MENU_QUERY = graphql`
   fragment MenuFields on WPGraphQL_MenuItem {
     id
@@ -17,12 +34,23 @@ const MENU_QUERY = graphql`
 
   query GET_MENU_ITEMS {
     wpgraphql {
-      menuItems(where: { location: PRIMARY }) {
-        nodes {
-          ...MenuFields
-          childItems {
-            nodes {
-              ...MenuFields
+      menus {
+        edges {
+          node {
+            id
+            menuId
+            name
+            slug
+            count
+            menuItems {
+              nodes {
+                ...MenuFields
+                childItems {
+                  nodes {
+                    ...MenuFields
+                  }
+                }
+              }
             }
           }
         }
@@ -32,8 +60,12 @@ const MENU_QUERY = graphql`
 `
 
 const Menu = ({ location }) => {
+<<<<<<< HEAD
   const { wordPressUrl } = useSiteMetadata()
   const [showSubmenu, setShowSubmenu] = useState(false)
+=======
+  const { menuId, wordPressUrl } = useSiteMetadata()
+>>>>>>> 6030266090bacceeda2bf529d564216644ecc195
 
   const renderLink = (menuItem, wordPressUrl, colorKey) =>
     menuItem.connectedObject.__typename === "WPGraphQL_MenuItem" ? (
@@ -60,19 +92,29 @@ const Menu = ({ location }) => {
       return renderSubMenu(menuItem, wordPressUrl)
     } else {
       return (
+<<<<<<< HEAD
         <Box as="li" fontSize="sm"
+=======
+        <div
+>>>>>>> 6030266090bacceeda2bf529d564216644ecc195
           className="menu-item"
           key={menuItem.id}
           style={{ marginLeft: "10px" }}
         >
+<<<<<<< HEAD
           {renderLink(menuItem, wordPressUrl, "navLink")}
         </Box>
+=======
+          {renderLink(menuItem, wordPressUrl)}
+        </div>
+>>>>>>> 6030266090bacceeda2bf529d564216644ecc195
       )
     }
   }
 
   const renderSubMenu = (menuItem, wordPressUrl) => {
     return (
+<<<<<<< HEAD
       <Box onMouseLeave={() => setShowSubmenu(false)} position="relative">
         <Box as="li" fontSize="sm" onMouseEnter={() => setShowSubmenu(true)}>
           {renderLink(menuItem, wordPressUrl, "navLink")}
@@ -126,6 +168,21 @@ const Menu = ({ location }) => {
             ))}
           </PseudoBox>
       </Box>
+=======
+      <div key={menuItem.id}>
+        {renderLink(menuItem, wordPressUrl)}
+        <MenuButton rightIcon="chevron-down">
+          <Icon name="chevron-down" color="#fff" />
+        </MenuButton>
+        <MenuList bg="gray.800">
+          {menuItem.childItems.nodes.map(item => (
+            <MenuItem key={item.id}>
+              {renderMenuItem(item, wordPressUrl)}
+            </MenuItem>
+          ))}
+        </MenuList>
+      </div>
+>>>>>>> 6030266090bacceeda2bf529d564216644ecc195
     )
   }
 
@@ -133,8 +190,21 @@ const Menu = ({ location }) => {
     <StaticQuery
       query={MENU_QUERY}
       render={data => {
-        if (data.wpgraphql.menuItems) {
+        if (data.wpgraphql.menus) {
+          const { edges } = data.wpgraphql.menus
+          // Check to see if the menuId theme setting matches an menu.
+          const [menu] = edges.filter(menu => menuId === menu.node.menuId)
+
+          /**
+           * If no match, the theme doesn't have a setting or the id is incorrect.
+           * Regardless, return early.
+           */
+          if (!menu) {
+            return null
+          }
+
           return (
+<<<<<<< HEAD
             <Box
               as="ul"
               display="flex"
@@ -152,6 +222,19 @@ const Menu = ({ location }) => {
                 }
               })}
             </Box>
+=======
+            <CHMenu>
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                {menu.node.menuItems.nodes.map(item => {
+                  if (item.childItems.nodes.length) {
+                    return renderSubMenu(item, wordPressUrl)
+                  } else {
+                    return renderMenuItem(item, wordPressUrl)
+                  }
+                })}
+              </div>
+            </CHMenu>
+>>>>>>> 6030266090bacceeda2bf529d564216644ecc195
           )
         } else {
           return null
