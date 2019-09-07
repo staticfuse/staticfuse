@@ -56,7 +56,7 @@ const Post = ({ pageContext: post }) => {
           maxW="2xl"
           m="auto"
           mb={6}
-          mt={8}
+          mt={10}
           className="entry-header"
         >
           <PostEntryTitle

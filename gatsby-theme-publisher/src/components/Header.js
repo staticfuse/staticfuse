@@ -10,7 +10,7 @@ const Header = () => {
   return (
     <Box bg='gray.800' p={2}>
       <Box maxW='6xl' m='auto'>
-      <Flex align='center' justify='space-between'>
+      <Flex alignItems='center' justify='space-between' className='nav-wrapper'>
       <Logo data={title} />
       <Menu />
       </Flex>

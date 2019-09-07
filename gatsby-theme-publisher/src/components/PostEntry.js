@@ -3,7 +3,7 @@ import PostEntryTitle from './PostEntryTitle';
 import PostEntryMeta from './PostEntryMeta';
 import PostEntryMedia from './PostEntryMedia';
 import useSiteMetadata from "../hooks/use-site-metadata"
-import { Box } from '@chakra-ui/core';
+import { Box, Text } from '@chakra-ui/core';
 
 const PostEntry = ({ post, classes = '' }) => {
 
@@ -31,7 +31,7 @@ const PostEntry = ({ post, classes = '' }) => {
 
           {post.featuredImage && <PostEntryMedia post={post} location="blog" />}
 
-          <div
+          <Text
             className="entry-content"
             dangerouslySetInnerHTML={{
               __html: excerpt,

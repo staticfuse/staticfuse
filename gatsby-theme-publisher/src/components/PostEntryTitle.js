@@ -8,6 +8,7 @@ const PostEntryTitle = ({ post, location, titleClass }) => (
       <Heading
         as="h1"  
         mb={2}
+        fontWeight="500"
         className={titleClass}
         dangerouslySetInnerHTML=
         {{

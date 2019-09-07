@@ -3,7 +3,7 @@ import { ThemeProvider, CSSReset, Box } from "@chakra-ui/core"
 import Header from "./Header"
 import Footer from "./Footer"
 import PropTypes from "prop-types"
-import publisherTheme from "../theme"
+import publisherTheme from "../theme/theme"
 import { Global } from "@emotion/core"
 
 const Layout = props => (
@@ -13,14 +13,21 @@ const Layout = props => (
       styles={{
         body: {
           lineHeight: "1.625",
+          color: publisherTheme.colors.text
         },
         p: {
           marginBottom: "1.25rem",
+        },
+        ".entry-content a": {
+          borderBottom: "1px dotted #eee",
+          color: publisherTheme.colors.links,
+          textDecoration: "none"
         },
         "h1, h2, h3, h4, h5": {
           marginBottom: "1.25rem",
           fontWeight: "400",
           lineHeight: "1.25",
+          color: publisherTheme.colors.headings
         },
         "h1": {
           fontSize: "3rem"
@@ -68,7 +75,7 @@ const Layout = props => (
       }}
     />
     <Header />
-    <Box maxW="5xl" m="0 auto" p="10px">
+    <Box maxW="5xl" m="0 auto" p="10px" className="site-content">
       {props.children}
     </Box>
     <Footer />
