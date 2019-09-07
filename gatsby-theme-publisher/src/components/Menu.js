@@ -12,6 +12,15 @@ import {
 } from "@chakra-ui/core"
 
 const MENU_QUERY = graphql`
+  fragment MenuFields on WPGraphQL_MenuItem {
+    id
+    label
+    url
+    connectedObject {
+      __typename
+    }
+  }
+
   query GET_MENU_ITEMS {
     wpgraphql {
       menus {
@@ -24,20 +33,10 @@ const MENU_QUERY = graphql`
             count
             menuItems {
               nodes {
-                url
-                label
-                id
-                connectedObject {
-                  __typename
-                }
+                ...MenuFields
                 childItems {
                   nodes {
-                    url
-                    label
-                    id
-                    connectedObject {
-                      __typename
-                    }
+                    ...MenuFields
                   }
                 }
               }
