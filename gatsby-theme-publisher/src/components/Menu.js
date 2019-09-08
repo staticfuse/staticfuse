@@ -50,7 +50,8 @@ const Menu = ({ location }) => {
   const [showSubmenu, setShowSubmenu] = useState(false)
 
   const renderLink = (menuItem, wordPressUrl, colorKey) =>
-    menuItem.connectedObject.__typename === "WPGraphQL_MenuItem" ? (
+    menuItem.connectedObject.__typename === "WPGraphQL_MenuItem" && menuItem.url !== "/" ? (
+      
       <a
         href={menuItem.url}
         style={{ textDecoration: "none", mr: 2 }}
@@ -114,12 +115,12 @@ const Menu = ({ location }) => {
           position="absolute"
           m="0"
           rounded="3px"
-          top="35px"
-          left="-40px"
+          top="30px"
+          left="-50px"
           minW="150px"
           textTransform="uppercase"
           fontWeight="300"
-          fontSize="sm"
+          fontSize="xs"
           p={2}
           color="subMenuBg"
           bg="gray.50"

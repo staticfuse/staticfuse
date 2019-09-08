@@ -13,7 +13,7 @@ const Layout = props => (
       styles={{
         body: {
           lineHeight: "1.625",
-          color: publisherTheme.colors.text
+          color: publisherTheme.colors.text,
         },
         p: {
           marginBottom: "1.25rem",
@@ -21,28 +21,28 @@ const Layout = props => (
         ".entry-content a": {
           borderBottom: "1px dotted #eee",
           color: publisherTheme.colors.links,
-          textDecoration: "none"
+          textDecoration: "none",
         },
         "h1, h2, h3, h4, h5": {
           marginBottom: "1.25rem",
           fontWeight: "400",
           lineHeight: "1.25",
-          color: publisherTheme.colors.headings
+          color: publisherTheme.colors.headings,
         },
-        "h1": {
-          fontSize: "3rem"
+        h1: {
+          fontSize: "3rem",
         },
-        "h2": {
-          fontSize: "2.25rem"
+        h2: {
+          fontSize: "2.25rem",
         },
-        "h3": {
-          fontSize: "1.875rem"
+        h3: {
+          fontSize: "1.875rem",
         },
-        "h4": {
-          fontSize: "1.5rem"
+        h4: {
+          fontSize: "1.5rem",
         },
-        "h5": {
-          fontSize: "1.25rem"
+        h5: {
+          fontSize: "1.25rem",
         },
         "ul, ol": {
           paddingLeft: "1.5rem",
@@ -53,25 +53,28 @@ const Layout = props => (
           marginBottom: ".5rem",
         },
         ".screen-reader-text": {
-          visibility: "hidden",
-          textIndent: "-9999em",
-          opacity: "0"
+          position: "absolute",
+          left: "-10000px",
+          top: "auto",
+          width: "1px",
+          height: "1px",
+          overflow: "hidden",
         },
         ".entry-content img.aligncenter, .entry-content .aligncenter img": {
           display: "block",
           margin: "0 auto",
         },
         ".aligncenter": {
-          textAlign: "center"
+          textAlign: "center",
         },
         ".alignleft": {
           float: "left",
-          marginRight: "15px"
+          marginRight: "15px",
         },
         ".alignright": {
           float: "right",
-          marginLeft: "15px"
-        }
+          marginLeft: "15px",
+        },
       }}
     />
     <Header />
