@@ -1,6 +1,7 @@
 import React from "react"
 import { Link } from "gatsby"
 
+import useSiteMetadata from "../../hooks/use-site-metadata"
 import Layout from "../../components/Layout"
 import PostEntryMeta from "../../components/PostEntryMeta"
 import PostEntryTitle from "../../components/PostEntryTitle"
@@ -47,6 +48,9 @@ const renderTerms = (categoryNodes = [], tagNodes = []) => (
 )
 
 const Post = ({ pageContext: post }) => {
+  const { mailChimpEndpoint } = useSiteMetadata()
+  console.log(typeof mailChimpEndpoint)
+
   return (
     <Layout>
       <SEO title={`${post.title}`} />
@@ -79,7 +83,8 @@ const Post = ({ pageContext: post }) => {
           dangerouslySetInnerHTML={syntaxHighlighter(post.content)}
         />
         <Box as="footer" className="entry-footer" maxW="2xl" m="auto">
-          <BlogOptin />
+          {!!mailChimpEndpoint && <BlogOptin />}
+
           <div className="entry-footer__taxonomy justify-end self-center items-center">
             {post.categories.nodes.length || post.tags.nodes.length
               ? renderTerms(post.categories.nodes, post.tags.nodes)

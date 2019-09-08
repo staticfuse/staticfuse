@@ -11,6 +11,7 @@ export default () => {
           siteUrl
           wordPressUrl
           menuId
+          mailChimpEndpoint
         }
       }
     }
