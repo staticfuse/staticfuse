@@ -1,22 +1,8 @@
-<<<<<<< HEAD
 import React, { useState } from "react"
-=======
-import React from "react"
->>>>>>> 6030266090bacceeda2bf529d564216644ecc195
 import { Link, StaticQuery, graphql } from "gatsby"
 import { createLocalLink } from "../utils"
 import useSiteMetadata from "../hooks/use-site-metadata"
-<<<<<<< HEAD
-import { PseudoBox, Icon, Box } from "@chakra-ui/core"
-=======
-import {
-  Menu as CHMenu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  Icon,
-} from "@chakra-ui/core"
->>>>>>> 6030266090bacceeda2bf529d564216644ecc195
+import { PseudoBox, Box } from "@chakra-ui/core"
 
 /**
  * Get all menues with children.
@@ -60,12 +46,8 @@ const MENU_QUERY = graphql`
 `
 
 const Menu = ({ location }) => {
-<<<<<<< HEAD
-  const { wordPressUrl } = useSiteMetadata()
-  const [showSubmenu, setShowSubmenu] = useState(false)
-=======
   const { menuId, wordPressUrl } = useSiteMetadata()
->>>>>>> 6030266090bacceeda2bf529d564216644ecc195
+  const [showSubmenu, setShowSubmenu] = useState(false)
 
   const renderLink = (menuItem, wordPressUrl, colorKey) =>
     menuItem.connectedObject.__typename === "WPGraphQL_MenuItem" ? (
@@ -74,14 +56,24 @@ const Menu = ({ location }) => {
         style={{ textDecoration: "none", mr: 2 }}
         rel="noopener noreferrer"
       >
-        <Box as="span" color={colorKey == "navLink" ? "navLink" : 'subMenuLink'}>{menuItem.label}</Box>
+        <Box
+          as="span"
+          color={colorKey === "navLink" ? "navLink" : "subMenuLink"}
+        >
+          {menuItem.label}
+        </Box>
       </a>
     ) : createLocalLink(menuItem.url, wordPressUrl) ? (
       <Link
         style={{ textDecoration: "none" }}
         to={createLocalLink(menuItem.url, wordPressUrl)}
       >
-        <Box as="span" color={colorKey == "navLink" ? "navLink" : 'subMenuLink'}>{menuItem.label}</Box>
+        <Box
+          as="span"
+          color={colorKey === "navLink" ? "navLink" : "subMenuLink"}
+        >
+          {menuItem.label}
+        </Box>
       </Link>
     ) : (
       menuItem.label
@@ -92,97 +84,77 @@ const Menu = ({ location }) => {
       return renderSubMenu(menuItem, wordPressUrl)
     } else {
       return (
-<<<<<<< HEAD
-        <Box as="li" fontSize="sm"
-=======
-        <div
->>>>>>> 6030266090bacceeda2bf529d564216644ecc195
+        <Box
+          as="li"
+          fontSize="sm"
           className="menu-item"
           key={menuItem.id}
           style={{ marginLeft: "10px" }}
         >
-<<<<<<< HEAD
           {renderLink(menuItem, wordPressUrl, "navLink")}
         </Box>
-=======
-          {renderLink(menuItem, wordPressUrl)}
-        </div>
->>>>>>> 6030266090bacceeda2bf529d564216644ecc195
       )
     }
   }
 
   const renderSubMenu = (menuItem, wordPressUrl) => {
     return (
-<<<<<<< HEAD
-      <Box onMouseLeave={() => setShowSubmenu(false)} position="relative">
+      <Box
+        key={menuItem.id}
+        onMouseLeave={() => setShowSubmenu(false)}
+        position="relative"
+      >
         <Box as="li" fontSize="sm" onMouseEnter={() => setShowSubmenu(true)}>
           {renderLink(menuItem, wordPressUrl, "navLink")}
         </Box>
 
-          <PseudoBox
-            as="ul"
-            listStyleType="none"
-            position="absolute"
-            m="0"
-            rounded="3px"
-            top="35px"
-            left="-40px"
-            minW="150px"
-            textTransform="uppercase"
-            fontWeight="300"
-            fontSize="sm"
-            p={2}
-            color="subMenuBg"
-            bg="gray.50"
-            border="1px solid"
-            borderColor="gray.100"
-            zIndex={ showSubmenu ? "999" : "-1" }
-            opacity={ showSubmenu ? "1" : "0" }
-            className="submenu"
-            transform={ showSubmenu ? "translateZ(0)" : "translate3d(0,10px,0)" }
-            transition="all .3s"
-            _before={{
-              borderColor: "hsla(0,0%,93.3%,0) hsla(0,0%,93.3%,0) #fafafa",
-              borderWidth: "6px",
-              marginLeft: "-6px",
-              bottom: "100%",
-              left: "50%",
-              borderStyle: "solid",
-              content: `""`,
-              height: "0",
-              width: "0",
-              position: "absolute",
-              pointerEvents: "none",
-            }}
-            
-          >
-            {menuItem.childItems.nodes.map(item => (
-              <li
-                className="menu-item"
-                key={item.id}
-                style={{padding: ".5rem"}}
-              >
-                {renderLink(item, wordPressUrl, "subMenuLink")}
-              </li>
-            ))}
-          </PseudoBox>
-      </Box>
-=======
-      <div key={menuItem.id}>
-        {renderLink(menuItem, wordPressUrl)}
-        <MenuButton rightIcon="chevron-down">
-          <Icon name="chevron-down" color="#fff" />
-        </MenuButton>
-        <MenuList bg="gray.800">
+        <PseudoBox
+          as="ul"
+          listStyleType="none"
+          position="absolute"
+          m="0"
+          rounded="3px"
+          top="35px"
+          left="-40px"
+          minW="150px"
+          textTransform="uppercase"
+          fontWeight="300"
+          fontSize="sm"
+          p={2}
+          color="subMenuBg"
+          bg="gray.50"
+          border="1px solid"
+          borderColor="gray.100"
+          zIndex={showSubmenu ? "999" : "-1"}
+          opacity={showSubmenu ? "1" : "0"}
+          className="submenu"
+          transform={showSubmenu ? "translateZ(0)" : "translate3d(0,10px,0)"}
+          transition="all .3s"
+          _before={{
+            borderColor: "hsla(0,0%,93.3%,0) hsla(0,0%,93.3%,0) #fafafa",
+            borderWidth: "6px",
+            marginLeft: "-6px",
+            bottom: "100%",
+            left: "50%",
+            borderStyle: "solid",
+            content: `""`,
+            height: "0",
+            width: "0",
+            position: "absolute",
+            pointerEvents: "none",
+          }}
+        >
           {menuItem.childItems.nodes.map(item => (
-            <MenuItem key={item.id}>
-              {renderMenuItem(item, wordPressUrl)}
-            </MenuItem>
+            <li
+              className="menu-item"
+              key={item.id}
+              style={{ padding: ".5rem" }}
+            >
+              {renderLink(item, wordPressUrl, "subMenuLink")}
+            </li>
           ))}
-        </MenuList>
-      </div>
->>>>>>> 6030266090bacceeda2bf529d564216644ecc195
+        </PseudoBox>
+      </Box>
     )
   }
 
@@ -192,7 +164,7 @@ const Menu = ({ location }) => {
       render={data => {
         if (data.wpgraphql.menus) {
           const { edges } = data.wpgraphql.menus
-          // Check to see if the menuId theme setting matches an menu.
+          // Check to see if the menuId theme setting matches a menu.
           const [menu] = edges.filter(menu => menuId === menu.node.menuId)
 
           /**
@@ -204,7 +176,6 @@ const Menu = ({ location }) => {
           }
 
           return (
-<<<<<<< HEAD
             <Box
               as="ul"
               display="flex"
@@ -214,7 +185,7 @@ const Menu = ({ location }) => {
               m="0"
               p="0"
             >
-              {data.wpgraphql.menuItems.nodes.map(menuItem => {
+              {menu.node.menuItems.nodes.map(menuItem => {
                 if (menuItem.childItems.nodes.length) {
                   return renderSubMenu(menuItem, wordPressUrl)
                 } else {
@@ -222,19 +193,6 @@ const Menu = ({ location }) => {
                 }
               })}
             </Box>
-=======
-            <CHMenu>
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                {menu.node.menuItems.nodes.map(item => {
-                  if (item.childItems.nodes.length) {
-                    return renderSubMenu(item, wordPressUrl)
-                  } else {
-                    return renderMenuItem(item, wordPressUrl)
-                  }
-                })}
-              </div>
-            </CHMenu>
->>>>>>> 6030266090bacceeda2bf529d564216644ecc195
           )
         } else {
           return null
