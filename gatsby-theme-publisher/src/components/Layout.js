@@ -52,6 +52,9 @@ const Layout = props => (
           paddingLeft: ".5rem",
           marginBottom: ".5rem",
         },
+        iframe: {
+          width: "100%"
+        },
         ".screen-reader-text": {
           position: "absolute",
           left: "-10000px",

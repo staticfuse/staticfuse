@@ -11,16 +11,7 @@ const publisherTheme = {
     links: theme.colors.blue,
     navLink: "#ffffff",
     subMenuBg: "#fafafa",
-    subMenuLink: "#2D3748",
-    brand: {
-      900: "#1a365d",
-      800: "#153e75",
-      700: "#2a69ac",
-    },
-    icons: {
-      ...theme.icons,
-      // ...customIcons,
-    },
+    subMenuLink: "#2D3748"
   },
 }
 

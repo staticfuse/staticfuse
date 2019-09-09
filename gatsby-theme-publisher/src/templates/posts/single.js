@@ -11,7 +11,7 @@ import SEO from "../../components/SEO"
 import BlogOptin from "../../components/BlogOptin"
 import CommentList from "../../components/CommentList"
 import CommentForm from "../../components/CommentForm"
-import { Box, Tag } from "@chakra-ui/core"
+import { Box, Tag, Flex } from "@chakra-ui/core"
 
 const renderTermNodes = (nodes, termType) => (
   <div className="taxonomy-links">
@@ -85,11 +85,11 @@ const Post = ({ pageContext: post }) => {
         <Box as="footer" className="entry-footer" maxW="2xl" m="auto">
           {!!mailChimpEndpoint && <BlogOptin />}
 
-          <div className="entry-footer__taxonomy justify-end self-center items-center">
+          <Flex className="entry-footer__taxonomy" justify="end" align="center">
             {post.categories.nodes.length || post.tags.nodes.length
               ? renderTerms(post.categories.nodes, post.tags.nodes)
               : null}
-          </div>
+          </Flex>
 
           <EngagementBar post={post} />
 
