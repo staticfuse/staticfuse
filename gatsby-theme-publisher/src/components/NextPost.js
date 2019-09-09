@@ -50,9 +50,9 @@ const NextPost = ({ post }) => (
       const nextPost = findNextPost(post, data)
 
       return (
-        <Flex alignItems='center' justifyContent='flex-end' position='relative' width='75%'>
+        <Flex align='center' justifyContent='flex-end' position='relative' width='73%' ml='2%'>
           {nextPost && nextPost.featuredImage && (
-            <div className="next-postthumbnail" style={{maxWidth:'100px', overflow: 'hidden', marginRight:'10px'}}>
+            <div className="next-postthumbnail" style={{maxWidth:'100%', overflow: 'hidden', marginRight:'10px', height: 'auto', width: "100px"}}>
               <Img
                 fluid={post.featuredImage.imageFile.childImageSharp.fluid}
                 alt={nextPost.title}

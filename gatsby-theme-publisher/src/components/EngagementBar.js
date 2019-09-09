@@ -10,7 +10,7 @@ const EngagementBar = ({ post }) => {
         id="engagement-bar"
         mt={8}
         borderTop='1px solid #eee'
-        pt={4}
+        py={4}
       >
         <Flex justify='space-between' w='100%'>
           <ShareIcons post={post} />

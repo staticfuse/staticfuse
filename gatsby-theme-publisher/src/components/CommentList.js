@@ -76,7 +76,7 @@ const CommentList = ({ postId, comments }) => (
                       >
                         {reply.content}
                       </Comment>
-                      {/* TODO: could handle this threading better */}
+                      {/* TODO: could handle this threading better git pu*/}
                       {reply.children && reply.children.nodes &&
                         reply.children.nodes.map(replyReply => (
                           <Box ml={6} key={replyReply.id}>
