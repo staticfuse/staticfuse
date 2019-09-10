@@ -89,6 +89,7 @@ const Menu = ({ location }) => {
           as="li"
           fontSize="sm"
           className="menu-item"
+          mb="0"
           key={menuItem.id}
           style={{ marginLeft: "10px" }}
         >
@@ -98,18 +99,27 @@ const Menu = ({ location }) => {
     }
   }
 
+  const showSubMenu = () => {
+    setShowSubmenu(true)
+  }
+
+  const hideSubMenu = () => {
+    setShowSubmenu(false)
+  }
+
   const renderSubMenu = (menuItem, wordPressUrl) => {
     return (
       <Box
         key={menuItem.id}
-        onMouseLeave={() => setShowSubmenu(false)}
         position="relative"
       >
-        <Box as="li" fontSize="sm" onMouseEnter={() => setShowSubmenu(true)}>
+        <Box as="li" fontSize="sm" onMouseEnter={showSubMenu} m="0">
           {renderLink(menuItem, wordPressUrl, "navLink")}
         </Box>
 
         <PseudoBox
+          onMouseLeave={hideSubMenu}
+          onMouseEnter={showSubMenu}
           as="ul"
           listStyleType="none"
           position="absolute"
