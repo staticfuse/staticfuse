@@ -5,19 +5,12 @@ This repo includes the code for the theme and a demo site which is using the the
 ## Getting Started
 
 1.  Clone the repo
-2.  Install dependencies
-    ```sh
-    yarn
-    ```
+2.  Install dependencies `yarn`
 3.  Install [WPGraphQL plugin](https://github.com/wp-graphql/wp-graphql)
 4.  Add your `wordPressUrl` in the [Publisher theme config](https://github.com/windsorstatic/gatsby-theme-publisher/blob/master/demo/gatsby-config.js#L18)
 5.  Set your WordPress `menuId` in the [Publisher theme config](https://github.com/windsorstatic/gatsby-theme-publisher/blob/master/demo/gatsby-config.js#L14)
 6.  Optionally configure [other options](https://github.com/windsorstatic/gatsby-theme-publisher#publisher-theme-options)
-7.  Start the demo site
-
-    ```sh
-    yarn workspaces demo
-    ```
+7.  Start the demo site `yarn workspaces demo`
 
 ## Publisher Theme Options
 
