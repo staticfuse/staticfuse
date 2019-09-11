@@ -10,8 +10,9 @@ export default () => {
           twitter
           siteUrl
           wordPressUrl
-          menuId
+          menuName
           mailChimpEndpoint
+          blogURI
         }
       }
     }

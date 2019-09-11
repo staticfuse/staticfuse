@@ -3,9 +3,18 @@ const createPages = require(`./create/createPages`)
 const createCategories = require(`./create/createCategories`)
 const createTags = require(`./create/createTags`)
 const createUsers = require(`./create/createUsers`)
+const themeOptions = require(`./src/utils/ThemeOptions`)
 
-exports.createPages = async ({ actions, graphql }) => {
-  await createPosts({ actions, graphql })
+exports.createPages = async ({ actions, graphql }, options) => {
+  /**
+   * Merged default theme settings and user settings.
+   */
+  const mergedOptions = {
+    ...themeOptions,
+    ...options,
+  }
+
+  await createPosts({ actions, graphql }, mergedOptions)
   await createPages({ actions, graphql })
   await createCategories({ actions, graphql })
   await createTags({ actions, graphql })

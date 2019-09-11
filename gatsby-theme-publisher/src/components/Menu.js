@@ -183,7 +183,7 @@ const Menu = ({ location }) => {
         if (data.wpgraphql.menus) {
           const { edges } = data.wpgraphql.menus
           // Check to see if the menuId theme setting matches a menu.
-          const [menu] = edges.filter(menu => menuId === menu.node.menuId)
+          const [menu] = edges.filter(menu => menuName === menu.node.name)
 
           /**
            * If no match, the theme doesn't have a setting or the id is incorrect.

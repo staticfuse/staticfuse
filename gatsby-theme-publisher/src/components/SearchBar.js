@@ -1,15 +1,20 @@
-import React, { useState } from "react"
+import React, { useState } from 'react'
 import {
   Input,
   InputGroup,
   Icon,
   InputLeftElement,
   InputRightElement,
-} from "@chakra-ui/core"
-import SearchResults from "./SearchResults"
+} from '@chakra-ui/core'
+import SearchResults from './SearchResults'
 
+<<<<<<< HEAD
 const SearchBar = ({menuOpen}) => {
   const [searchValue, setSearchValue] = useState("")
+=======
+const SearchBar = () => {
+  const [searchValue, setSearchValue] = useState('')
+>>>>>>> 77f669bb625b74df6b0f90846801690802434f0d
   const [isSearchOpen, setSearchOpen] = useState(false)
 
   const handleSearch = event => {
@@ -47,12 +52,11 @@ const SearchBar = ({menuOpen}) => {
           placeholder="Search..."
           bg="transparent"
           color="gray.200"
-          w="110px"
           fontSize="sm"
           transition="all .3s"
           border="none"
           outline="none"
-          w={isSearchOpen ? "210px" : "110px"}
+          w={isSearchOpen ? '210px' : '110px'}
         />
         <SearchResults searchTerm={searchValue} showResults={isSearchOpen} />
         <InputRightElement

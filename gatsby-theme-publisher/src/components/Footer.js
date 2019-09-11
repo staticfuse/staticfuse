@@ -10,7 +10,7 @@ const Footer = () => {
         <p style={{ float: "left" }}>© 2019 {author} | Built with <a href="https://www.gatsbyjs.org" target="_blank" rel="noopener noreferrer">Gatsby</a></p>
         <p style={{ float: "right", display: "flex" }}>
           <Button
-            onClick={() => window.open(twitter)}
+            onClick={() => window.open(`https://twitter.com/${twitter}`)}
             leftIcon="at-sign"
             variant="outline"
             outline="none"
