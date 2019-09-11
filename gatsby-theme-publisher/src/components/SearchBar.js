@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/core"
 import SearchResults from "./SearchResults"
 
-const SearchBar = () => {
+const SearchBar = ({menuOpen}) => {
   const [searchValue, setSearchValue] = useState("")
   const [isSearchOpen, setSearchOpen] = useState(false)
 
@@ -30,6 +30,14 @@ const SearchBar = () => {
         position="relative"
         bg="rgba(255,255,255,.1)"
         rounded="full"
+        display="block"
+        m={2}
+        transition="transform 0.5s cubic-bezier(0.4, 0.01, 0.165, 0.99), opacity 0.6s cubic-bezier(0.4, 0.01, 0.165, 0.99), -webkit-transform 0.5s cubic-bezier(0.4, 0.01, 0.165, 0.99)"
+        transform={ [menuOpen ? "scale(1) translateY(0px)" : "scale(.95) translateY(-10px)", "scale(1) translateY(0px)" ]}
+        zIndex="1"
+        style={{
+          transitionDelay:".1s"
+        }}
       >
         <InputLeftElement children={<Icon name="search" color="gray.300" />} />
         <Input

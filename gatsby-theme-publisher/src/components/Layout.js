@@ -81,7 +81,7 @@ const Layout = props => (
       }}
     />
     <Header />
-    <Box maxW="5xl" m="0 auto" p="10px" className="site-content">
+    <Box maxW="5xl" m="40px auto 0 auto" p="10px" className="site-content">
       {props.children}
     </Box>
     <Footer />

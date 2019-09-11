@@ -2,7 +2,10 @@ import React, { useState } from "react"
 import { Link, StaticQuery, graphql } from "gatsby"
 import { createLocalLink } from "../utils"
 import useSiteMetadata from "../hooks/use-site-metadata"
-import { PseudoBox, Box } from "@chakra-ui/core"
+import { IconButton, Box, Flex } from "@chakra-ui/core"
+import Logo from "./Logo"
+import SearchBar from "./SearchBar"
+import HamburgerMenu from "./HamburgerMenu"
 
 /**
  * Get all menues with children.
@@ -47,32 +50,46 @@ const MENU_QUERY = graphql`
 
 const Menu = ({ location }) => {
   const { menuId, wordPressUrl } = useSiteMetadata()
-  const [showSubmenu, setShowSubmenu] = useState(false)
+  const [subMenuOpen, openSubMenu] = useState(false)
+  const [menuOpened, openMenu] = useState(false)
 
-  const renderLink = (menuItem, wordPressUrl, colorKey) =>
-    menuItem.connectedObject.__typename === "WPGraphQL_MenuItem" && menuItem.url !== "/" ? (
-      
-      <a
+  const isMobile = () => {
+    let mql = window.matchMedia("(max-width: 750px)")
+    if (
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      ) &&
+      mql.matches
+    ) {
+      return true
+    }
+    return false
+  }
+
+  const renderLink = (menuItem, wordPressUrl) =>
+    menuItem.connectedObject.__typename === "WPGraphQL_MenuItem" &&
+    menuItem.url !== "/" ? (
+      <Box
+        as="a"
         href={menuItem.url}
-        style={{ textDecoration: "none", mr: 2 }}
+        textDecoration="none"
+        marginBottom={["10px", "0"]}
+        display="block"
         rel="noopener noreferrer"
       >
-        <Box
-          as="span"
-          color={colorKey === "navLink" ? "navLink" : "subMenuLink"}
-        >
+        <Box as="span" color="navLink">
           {menuItem.label}
         </Box>
-      </a>
+      </Box>
     ) : createLocalLink(menuItem.url, wordPressUrl) ? (
       <Link
-        style={{ textDecoration: "none" }}
+        style={{
+          textDecoration: "none",
+          display: "block",
+        }}
         to={createLocalLink(menuItem.url, wordPressUrl)}
       >
-        <Box
-          as="span"
-          color={colorKey === "navLink" ? "navLink" : "subMenuLink"}
-        >
+        <Box as="span" color="navLink">
           {menuItem.label}
         </Box>
       </Link>
@@ -80,91 +97,81 @@ const Menu = ({ location }) => {
       menuItem.label
     )
 
+  const renderSubMenu = (items, wordPressUrl) => (
+    <>
+      <IconButton
+        aria-label="open sub menu"
+        icon="triangle-down"
+        size="xs"
+        color="navLink"
+        variant="ghost"
+        opacity=".7"
+        position={["absolute", "static"]}
+        right="0"
+        ml={["0", 1]}
+        top="0"
+        z-index="9"
+        onClick={() => (subMenuOpen ? openSubMenu(false) : openSubMenu(true))}
+      />
+      <Box
+        as="ul"
+        bg="headerBg"
+        m="0"
+        ml={1}
+        p={["0", 2]}
+        pr={["0", 3]}
+        rounded={3}
+        position={["static", "absolute"]}
+        top="40px"
+        right="0"
+        listStyleType="none"
+        height="auto"
+        maxH={subMenuOpen ? "1000px" : "0"}
+        transform={[
+          subMenuOpen ? "scale(1)" : "scale(.95)",
+          "scale(1) translateY(0px)",
+        ]}
+        transition={
+          subMenuOpen
+            ? "all 0.5s cubic-bezier(0.4, 0.01, 0.165, 0.99)"
+            : "all 0.5s cubic-bezier(0.4, 0.01, 0.165, 0.99)"
+        }
+        opacity={subMenuOpen ? "1" : "0"}
+      >
+        {items.map(subItem => {
+          return renderMenuItem(subItem, wordPressUrl)
+        })}
+      </Box>
+    </>
+  )
+
   const renderMenuItem = (menuItem, wordPressUrl) => {
-    if (menuItem.childItems && menuItem.childItems.nodes.length) {
-      return renderSubMenu(menuItem, wordPressUrl)
-    } else {
-      return (
-        <Box
-          as="li"
-          fontSize="sm"
-          className="menu-item"
-          mb="0"
-          key={menuItem.id}
-          style={{ marginLeft: "10px" }}
-        >
-          {renderLink(menuItem, wordPressUrl, "navLink")}
-        </Box>
-      )
-    }
-  }
-
-  const showSubMenu = () => {
-    setShowSubmenu(true)
-  }
-
-  const hideSubMenu = () => {
-    setShowSubmenu(false)
-  }
-
-  const renderSubMenu = (menuItem, wordPressUrl) => {
     return (
       <Box
+        as="li"
+        fontSize={["lg", "md"]}
+        className="menu-item"
+        mb={[2, "0"]}
+        ml={["0", 2]}
         key={menuItem.id}
         position="relative"
+        display={["block", "flex"]}
+        pl={1}
+        transform={[
+          menuOpened
+            ? "scale(1.05) translateY(0px)"
+            : "scale(1) translateY(-10px)",
+          "scale(1) translateY(0)",
+        ]}
+        transition="transform 0.5s cubic-bezier(0.4, 0.01, 0.165, 0.99), opacity 0.6s cubic-bezier(0.4, 0.01, 0.165, 0.99), -webkit-transform 0.5s cubic-bezier(0.4, 0.01, 0.165, 0.99)"
+        style={{
+          transitionDelay: ".1s",
+        }}
       >
-        <Box as="li" fontSize="sm" onMouseEnter={showSubMenu} m="0">
-          {renderLink(menuItem, wordPressUrl, "navLink")}
-        </Box>
-
-        <PseudoBox
-          onMouseLeave={hideSubMenu}
-          onMouseEnter={showSubMenu}
-          as="ul"
-          listStyleType="none"
-          position="absolute"
-          m="0"
-          rounded="3px"
-          top="30px"
-          left="-50px"
-          minW="150px"
-          textTransform="uppercase"
-          fontWeight="300"
-          fontSize="xs"
-          p={2}
-          color="subMenuBg"
-          bg="gray.50"
-          border="1px solid"
-          borderColor="gray.100"
-          zIndex={showSubmenu ? "999" : "-1"}
-          opacity={showSubmenu ? "1" : "0"}
-          className="submenu"
-          transform={showSubmenu ? "translateZ(0)" : "translate3d(0,10px,0)"}
-          transition="all .3s"
-          _before={{
-            borderColor: "hsla(0,0%,93.3%,0) hsla(0,0%,93.3%,0) #fafafa",
-            borderWidth: "6px",
-            marginLeft: "-6px",
-            bottom: "100%",
-            left: "50%",
-            borderStyle: "solid",
-            content: `""`,
-            height: "0",
-            width: "0",
-            position: "absolute",
-            pointerEvents: "none",
-          }}
-        >
-          {menuItem.childItems.nodes.map(item => (
-            <li
-              className="menu-item"
-              key={item.id}
-              style={{ padding: ".5rem" }}
-            >
-              {renderLink(item, wordPressUrl, "subMenuLink")}
-            </li>
-          ))}
-        </PseudoBox>
+        {renderLink(menuItem, wordPressUrl)}
+        {menuItem.childItems && menuItem.childItems.nodes.length
+          ? renderSubMenu(menuItem.childItems.nodes, wordPressUrl)
+          : null}
       </Box>
     )
   }
@@ -188,21 +195,53 @@ const Menu = ({ location }) => {
 
           return (
             <Box
-              as="ul"
-              display="flex"
-              listStyleType="none"
-              justify="space-between"
-              align="center"
-              m="0"
-              p="0"
+              className="menu-wrapper"
+              position={["absolute", "static"]}
+              display={["block", "flex"]}
+              top="0"
+              left="0"
+              height="50px"
+              width="100%"
+              alignItems="center"
+              justifyContent="space-between"
+              zIndex="99"
+              overflow={["hidden", "visible"]}
+              transition={
+                menuOpened
+                  ? "all 0.3s ease-in, background 0.5s ease-in"
+                  : "all 0.5s ease-out, background 1s ease-out"
+              }
+              style={{
+                transitionDelay: ".1s",
+              }}
+              height={menuOpened ? "100%" : "50px"}
+              bg="headerBg"
             >
-              {menu.node.menuItems.nodes.map(menuItem => {
-                if (menuItem.childItems.nodes.length) {
-                  return renderSubMenu(menuItem, wordPressUrl)
-                } else {
-                  return renderMenuItem(menuItem, wordPressUrl)
-                }
-              })}
+              <Logo />
+
+              <div
+                onClick={() => (menuOpened ? openMenu(false) : openMenu(true))}
+              >
+                <HamburgerMenu menuOpen={menuOpened} />
+              </div>
+
+              <Box display={["block", "flex"]} alignItems="center">
+                <SearchBar menuOpen={menuOpened} />
+
+                <Box
+                  as="ul"
+                  listStyleType="none"
+                  display={["block", "flex"]}
+                  align="center"
+                  position="relative"
+                  m="0"
+                  p={[4, "0"]}
+                >
+                  {menu.node.menuItems.nodes.map(menuItem => {
+                    return renderMenuItem(menuItem, wordPressUrl)
+                  })}
+                </Box>
+              </Box>
             </Box>
           )
         } else {

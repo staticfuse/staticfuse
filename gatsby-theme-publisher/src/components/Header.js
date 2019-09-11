@@ -9,19 +9,16 @@ const Header = () => {
   const { title } = useSiteMetadata()
 
   return (
-    <Box bg="gray.800" p={2}>
+    <Box bg="headerBg" p={2}>
       <Box maxW="6xl" m="auto">
-        <Flex
+        <Box
+          display={["block", "flex"]}
           alignItems="center"
-          justify="space-between"
+          justify={["inherit", "space-between"]}
           className="nav-wrapper"
         >
-          <Logo data={title} />
-          <Flex alignItems="center">
-            <Menu />
-            <Box ml={6}><SearchBar /></Box>
-          </Flex>
-        </Flex>
+          <Menu />
+        </Box>
       </Box>
     </Box>
   )

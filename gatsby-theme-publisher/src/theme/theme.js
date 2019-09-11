@@ -10,8 +10,7 @@ const publisherTheme = {
     headings: "#2D3748",
     links: theme.colors.blue,
     navLink: "#ffffff",
-    subMenuBg: "#fafafa",
-    subMenuLink: "#2D3748"
+    headerBg: "#2D3748"
   },
 }
 
