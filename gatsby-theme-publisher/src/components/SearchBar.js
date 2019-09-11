@@ -8,13 +8,8 @@ import {
 } from '@chakra-ui/core'
 import SearchResults from './SearchResults'
 
-<<<<<<< HEAD
 const SearchBar = ({menuOpen}) => {
   const [searchValue, setSearchValue] = useState("")
-=======
-const SearchBar = () => {
-  const [searchValue, setSearchValue] = useState('')
->>>>>>> 77f669bb625b74df6b0f90846801690802434f0d
   const [isSearchOpen, setSearchOpen] = useState(false)
 
   const handleSearch = event => {
