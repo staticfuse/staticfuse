@@ -11,7 +11,7 @@ module.exports = {
     {
       resolve: `gatsby-theme-publisher`,
       options: {
-        menuId: 5, // Int - The ID of your main menu
+        menuName: "PRIMARY", // Int - The ID of your main menu
         mailChimpEndpoint: 0, // String - "https://example.us10.list-manage.com/subscribe/post?u=b9ef2fdd3edofhec04ba9b930&id=3l948gkt1d"
         dynamicComments: 1, // Boolean - 1 or 2
         gaTrackingId: 0, // String - GA tracking ID

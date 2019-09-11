@@ -46,12 +46,12 @@ const MENU_QUERY = graphql`
 `
 
 const Menu = ({ location }) => {
-  const { menuId, wordPressUrl } = useSiteMetadata()
+  const { menuName, wordPressUrl } = useSiteMetadata()
   const [showSubmenu, setShowSubmenu] = useState(false)
 
   const renderLink = (menuItem, wordPressUrl, colorKey) =>
-    menuItem.connectedObject.__typename === "WPGraphQL_MenuItem" && menuItem.url !== "/" ? (
-      
+    menuItem.connectedObject.__typename === "WPGraphQL_MenuItem" &&
+    menuItem.url !== "/" ? (
       <a
         href={menuItem.url}
         style={{ textDecoration: "none", mr: 2 }}
@@ -109,10 +109,7 @@ const Menu = ({ location }) => {
 
   const renderSubMenu = (menuItem, wordPressUrl) => {
     return (
-      <Box
-        key={menuItem.id}
-        position="relative"
-      >
+      <Box key={menuItem.id} position="relative">
         <Box as="li" fontSize="sm" onMouseEnter={showSubMenu} m="0">
           {renderLink(menuItem, wordPressUrl, "navLink")}
         </Box>
@@ -176,7 +173,7 @@ const Menu = ({ location }) => {
         if (data.wpgraphql.menus) {
           const { edges } = data.wpgraphql.menus
           // Check to see if the menuId theme setting matches a menu.
-          const [menu] = edges.filter(menu => menuId === menu.node.menuId)
+          const [menu] = edges.filter(menu => menuName === menu.node.name)
 
           /**
            * If no match, the theme doesn't have a setting or the id is incorrect.
