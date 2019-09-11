@@ -15,7 +15,6 @@ module.exports = {
         dynamicComments: 1,
         gaTrackingId: 0,
         wordPressUrl: `http://gatsby-preview.wtf`,
-        blogURI: `blog`,
       },
     },
   ],
