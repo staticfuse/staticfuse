@@ -1,9 +1,9 @@
 module.exports = {
   siteMetadata: {
-    title: "Scott Bolinger",
-    description: "Headless WordPress with Gatsby FTW.",
-    author: "Scott Bolinger",
-    twitter: "@scottbolinger",
+    title: 'Scott Bolinger',
+    description: 'Headless WordPress with Gatsby FTW.',
+    author: 'Scott Bolinger',
+    twitter: '@scottbolinger',
     siteUrl: `https://scottbolinger.com`,
   },
   plugins: [
@@ -15,6 +15,7 @@ module.exports = {
         dynamicComments: 1,
         gaTrackingId: 0,
         wordPressUrl: `http://gatsby-preview.wtf`,
+        blogURI: `blog`,
       },
     },
   ],

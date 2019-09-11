@@ -1,10 +1,11 @@
 const {
   PostTemplateFragment,
   BlogPreviewFragment,
-} = require("../src/templates/posts/data.js")
+} = require('../src/templates/posts/data.js')
 
 const postTemplate = require.resolve(`../src/templates/posts/single.js`)
 const blogTemplate = require.resolve(`../src/templates/posts/archive.js`)
+const homeTemplate = require.resolve(`../src/templates/home/index.js`)
 
 const GET_POSTS = `
 # Define our query variables
@@ -44,6 +45,22 @@ query GET_POSTS($first:Int $after:String) {
 # Here we make use of the imported fragments which are referenced above
 ${PostTemplateFragment}
 ${BlogPreviewFragment}
+`
+
+const SITE_META = `
+  site {
+    siteMetadata {
+      title
+      description
+      author
+      twitter
+      siteUrl
+      wordPressUrl
+      menuName
+      mailChimpEndpoint
+      blogURI
+    }
+  }
 `
 
 /**
@@ -86,7 +103,7 @@ const itemsPerPage = 10
  * @returns {Promise<void>}
  */
 
-module.exports = async ({ actions, graphql }) => {
+module.exports = async ({ actions, graphql }, options) => {
   /**
    * This is the method from Gatsby that we're going
    * to use to create pages in our static site.
@@ -97,7 +114,6 @@ module.exports = async ({ actions, graphql }) => {
     /**
      * Fetch posts using the GET_POSTS query and the variables passed in.
      */
-
     return await graphql(GET_POSTS, variables).then(({ data }) => {
       /**
        * Extract the data from the GraphQL query results
@@ -116,7 +132,9 @@ module.exports = async ({ actions, graphql }) => {
        * This is the url the page will live at
        * @type {string}
        */
-      const blogPagePath = !variables.after ? `/` : `/page/${pageNumber + 1}`
+      const blogPagePath = !variables.after
+        ? `${options.blogURI}/`
+        : `${options.blogURI}/page/${pageNumber + 1}`
 
       /**
        * The IDs of the posts which were got from GraphQL.
@@ -179,9 +197,15 @@ module.exports = async ({ actions, graphql }) => {
      */
     allPosts &&
       allPosts.map(post => {
-        console.log(`create post: ${post.uri}`)
+        /**
+         * Build post path based of theme blogURI setting.
+         */
+        const path = options.blogURI.length
+          ? `/${options.blogURI}/${post.uri}/`
+          : `/${post.uri}/`
+        console.log(`create post: ${path}`)
         createPage({
-          path: `/${post.uri}/`,
+          path,
           component: postTemplate,
           context: post,
         })
@@ -197,4 +221,15 @@ module.exports = async ({ actions, graphql }) => {
         createPage(archivePage)
       })
   })
+
+  /**
+   * If the blog isn't on the home page,
+   * create a basic homepage.
+   */
+  if (options.blogURI.length) {
+    createPage({
+      path: '/',
+      component: homeTemplate,
+    })
+  }
 }

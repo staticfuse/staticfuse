@@ -12,6 +12,7 @@ export default () => {
           wordPressUrl
           menuName
           mailChimpEndpoint
+          blogURI
         }
       }
     }

@@ -6,6 +6,7 @@ const THEME_OPTIONS = {
   mailChimpEndpoint: 0,
   dynamicComments: 1,
   gaTrackingId: 0,
+  blogURI: "",
 }
 
 module.exports = THEME_OPTIONS
