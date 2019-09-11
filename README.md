@@ -29,7 +29,7 @@ The following options can be configured in [your sites gatsby-config.js](https:/
 ```
 
 | Option | Type | Default | Description |
-| -------- | -------------- | ------- | ------------------------------------------------------------------------------------------ |
+| -------| ---- | ------- | ----------- |
 | menuName | string/boolean | 0 | The name of the _WordPress_ menu you'd like to use or `0` if you don't want render a menu. |
 | mailChimpEndpoint | string/boolean | 0 | Your mailchimp endpoint. Example: `"https://example.us10.list-manage.com/subscribe/post?u=b9ef2fdd3edofhec04ba9b930&id=3l948gkt1d"`. Set to `0` to disable.
 | dynamicComments | boolean | 1 | Enable or disable dynamic comments |
