@@ -110,6 +110,13 @@ module.exports = async ({ actions, graphql }, options) => {
    */
   const { createPage } = actions
 
+  /**
+   * Make sure the blogURI setting doesn't have
+   * a leading slash. GatsbyLink needs the leading slash
+   * on the client, but createPages expects *no* leading slash.
+   */
+  const blogURI = options.blogURI.replace(/^\//, '');
+
   const fetchPosts = async variables => {
     /**
      * Fetch posts using the GET_POSTS query and the variables passed in.
@@ -133,8 +140,8 @@ module.exports = async ({ actions, graphql }, options) => {
        * @type {string}
        */
       const blogPagePath = !variables.after
-        ? `${options.blogURI}/`
-        : `${options.blogURI}/page/${pageNumber + 1}`
+        ? `${blogURI}/`
+        : `${blogURI}/page/${pageNumber + 1}`
 
       /**
        * The IDs of the posts which were got from GraphQL.
@@ -201,7 +208,7 @@ module.exports = async ({ actions, graphql }, options) => {
          * Build post path based of theme blogURI setting.
          */
         const path = options.blogURI.length
-          ? `/${options.blogURI}/${post.uri}/`
+          ? `${blogURI}/${post.uri}/`
           : `/${post.uri}/`
         console.log(`create post: ${path}`)
         createPage({

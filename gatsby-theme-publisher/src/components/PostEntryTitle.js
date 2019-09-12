@@ -20,7 +20,7 @@ const PostEntryTitle = ({ post, location, titleClass }) => {
       ) : (
         <Heading className={titleClass} mb={4} fontWeight="500">
           <Link
-            to={`/${blogURI}/${post.uri}/`}
+            to={`${blogURI}/${post.uri}/`}
             dangerouslySetInnerHTML={{
               __html: post.title,
             }}

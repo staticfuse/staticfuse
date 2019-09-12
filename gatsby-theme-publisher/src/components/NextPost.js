@@ -87,7 +87,7 @@ const NextPost = ({ post }) => {
                   </Box>
 
                   <Link
-                    to={`/${blogURI}/${nextPost.uri}`}
+                    to={`${blogURI}/${nextPost.uri}`}
                     rel="bookmark"
                     title={nextPost.title}
                   >
