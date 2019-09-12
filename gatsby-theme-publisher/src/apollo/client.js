@@ -5,7 +5,6 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import fetch from 'isomorphic-fetch';
 
 export const createClient = (uri) => {
-  console.log(uri);
 
   const httpLink = createHttpLink({
     uri: uri + '/graphql',
@@ -14,7 +13,6 @@ export const createClient = (uri) => {
   const authLink = setContext((_, { headers }) => {
     // get the authentication token from local storage if it exists
     const token = false; // will use with preview later.
-
 
     // return the headers to the context so httpLink can read them
     return {
