@@ -1,16 +1,10 @@
-import fetch from 'isomorphic-fetch';
 import React from 'react';
 import { ApolloProvider } from 'react-apollo';
-import ApolloClient from 'apollo-boost';
+import { createClient } from './src/apollo/client'
 
 export const wrapRootElement = ({ element }, themeOptions) => {
-
+	const client = createClient(themeOptions.wordPressUrl)
 	if (themeOptions.dynamicComments) {
-		const client = new ApolloClient({
-			fetch,
-			uri: themeOptions.wordPressUrl + '/graphql',
-		});
-
 		return <ApolloProvider client={client}>{element}</ApolloProvider>;
 	} else {
 		return <>{element}</>;

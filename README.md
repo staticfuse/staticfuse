@@ -35,4 +35,4 @@ The following options can be configured in [your sites gatsby-config.js](https:/
 | dynamicComments | boolean | 1 | Enable or disable dynamic comments |
 | gaTrackingId | string/boolean | 0 | Your google annalytics UA code. Set to `0` to disable Google Analytics. |
 | wordPressUrl | string | `"https://scottbolinger.com"` | The URL of your WordPress site |
-| blogURI | string | '' | The path prefix on the blog and blog posts. No leading _or_ trailing slashe(s). `'blog'` would result in `https://my-domain.com/blog/`
+| blogURI | string | '' | The path prefix on the blog and blog posts. No leading slashe. `'/blog'` would result in `https://my-domain.com/blog/`
