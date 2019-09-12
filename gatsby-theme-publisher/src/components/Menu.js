@@ -49,7 +49,7 @@ const MENU_QUERY = graphql`
 `
 
 const Menu = ({ location }) => {
-  const { menuId, wordPressUrl } = useSiteMetadata()
+  const { menuName, wordPressUrl } = useSiteMetadata()
   const [subMenuOpen, openSubMenu] = useState(false)
   const [menuOpened, openMenu] = useState(false)
 
