@@ -5,7 +5,7 @@ import { Box } from "@chakra-ui/core"
 
 const Logo = ({ data }) => {
   return (
-    <Box position={["absolute", "static"]} left="0" right="0" m={["auto","0"]} w="50px">
+    <Box position={["absolute", "absolute", "static"]} left="0" right="0" m={["auto", "auto","0"]} w="50px">
       <Link
         to="/"
         className="h-10 overflow-hidden block"

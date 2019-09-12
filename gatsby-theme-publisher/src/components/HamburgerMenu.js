@@ -8,7 +8,7 @@ const HamburgerMenu = ({ menuOpen }) => {
       as="button"
       className="burger-container"
       position="relative"
-      display={["inline-block", "none"]}
+      display={["inline-block", "inline-block", "none"]}
       height="50px"
       width="50px"
       cursor="pointer"

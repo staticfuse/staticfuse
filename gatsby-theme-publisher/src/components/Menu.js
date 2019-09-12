@@ -49,7 +49,7 @@ const MENU_QUERY = graphql`
 `
 
 const Menu = ({ location }) => {
-  const { menuId, wordPressUrl } = useSiteMetadata()
+  const { menuName, wordPressUrl } = useSiteMetadata()
   const [subMenuOpen, openSubMenu] = useState(false)
   const [menuOpened, openMenu] = useState(false)
 
@@ -73,7 +73,7 @@ const Menu = ({ location }) => {
         as="a"
         href={menuItem.url}
         textDecoration="none"
-        marginBottom={["10px", "0"]}
+        marginBottom={["10px", "10px", "0"]}
         display="block"
         rel="noopener noreferrer"
       >
@@ -106,9 +106,9 @@ const Menu = ({ location }) => {
         color="navLink"
         variant="ghost"
         opacity=".7"
-        position={["absolute", "static"]}
+        position={["absolute", "absolute", "static"]}
         right="0"
-        ml={["0", 1]}
+        ml={["0", "0", 1]}
         top="0"
         z-index="9"
         onClick={() => (subMenuOpen ? openSubMenu(false) : openSubMenu(true))}
@@ -118,16 +118,17 @@ const Menu = ({ location }) => {
         bg="headerBg"
         m="0"
         ml={1}
-        p={["0", 2]}
-        pr={["0", 3]}
+        p={[1,1, 2]}
+        pr={[1, 1, 3]}
         rounded={3}
-        position={["static", "absolute"]}
+        position={["static", "static", "absolute"]}
         top="40px"
         right="0"
         listStyleType="none"
         height="auto"
         maxH={subMenuOpen ? "1000px" : "0"}
         transform={[
+          subMenuOpen ? "scale(1)" : "scale(.95)",
           subMenuOpen ? "scale(1)" : "scale(.95)",
           "scale(1) translateY(0px)",
         ]}
@@ -149,16 +150,19 @@ const Menu = ({ location }) => {
     return (
       <Box
         as="li"
-        fontSize={["lg", "md"]}
+        fontSize={["lg", "lg", "md"]}
         className="menu-item"
-        mb={[2, "0"]}
-        ml={["0", 2]}
+        mb={[2, 2, "0"]}
+        ml={["0", "0", 2]}
         key={menuItem.id}
         position="relative"
-        display={["block", "flex"]}
+        display={["block", "block", "flex"]}
         pl={1}
         transform={[
           menuOpened
+            ? "scale(1.05) translateY(0px)"
+            : "scale(1) translateY(-10px)",
+            menuOpened
             ? "scale(1.05) translateY(0px)"
             : "scale(1) translateY(-10px)",
           "scale(1) translateY(0)",
@@ -182,7 +186,7 @@ const Menu = ({ location }) => {
       render={data => {
         if (data.wpgraphql.menus) {
           const { edges } = data.wpgraphql.menus
-          // Check to see if the menuId theme setting matches a menu.
+          // Check to see if the menuName theme setting matches a menu.
           const [menu] = edges.filter(menu => menuName === menu.node.name)
 
           /**
@@ -196,8 +200,8 @@ const Menu = ({ location }) => {
           return (
             <Box
               className="menu-wrapper"
-              position={["absolute", "static"]}
-              display={["block", "flex"]}
+              position={["absolute", "absolute", "static"]}
+              display={["block", "block", "flex"]}
               top="0"
               left="0"
               height="50px"
@@ -205,7 +209,7 @@ const Menu = ({ location }) => {
               alignItems="center"
               justifyContent="space-between"
               zIndex="99"
-              overflow={["hidden", "visible"]}
+              overflow={["hidden", "hidden", "visible"]}
               transition={
                 menuOpened
                   ? "all 0.3s ease-in, background 0.5s ease-in"
@@ -225,17 +229,17 @@ const Menu = ({ location }) => {
                 <HamburgerMenu menuOpen={menuOpened} />
               </div>
 
-              <Box display={["block", "flex"]} alignItems="center">
+              <Box display={["block", "block", "flex"]} alignItems="center">
                 <SearchBar menuOpen={menuOpened} />
 
                 <Box
                   as="ul"
                   listStyleType="none"
-                  display={["block", "flex"]}
+                  display={["block", "block", "flex"]}
                   align="center"
                   position="relative"
                   m="0"
-                  p={[4, "0"]}
+                  p={[4, 4, "0"]}
                 >
                   {menu.node.menuItems.nodes.map(menuItem => {
                     return renderMenuItem(menuItem, wordPressUrl)
