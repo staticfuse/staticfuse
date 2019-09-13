@@ -9,7 +9,7 @@ const Header = () => {
   const { title } = useSiteMetadata()
 
   return (
-    <Box bg="headerBg" p={2}>
+    <Box bg="headerBg" p=".5rem 2rem">
       <Box maxW="6xl" m="auto">
         <Box
           display={["block", "flex"]}

@@ -2,10 +2,12 @@ import React from 'react'
 
 import Layout from '../../components/Layout'
 import SEO from '../../components/SEO'
+import { Box } from '@chakra-ui/core'
 
 const Home = ({ location }) => (
   <Layout location={{ location }}>
     <SEO title="Home" />
+    <Box maxW='2xl' m='auto'>
     <h1>Home</h1>
     <p>
       <span role="img" aria-label="wave hello">
@@ -24,6 +26,7 @@ const Home = ({ location }) => (
       </a>
       .
     </p>
+    </Box>
   </Layout>
 )
 

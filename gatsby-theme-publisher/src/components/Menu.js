@@ -73,7 +73,7 @@ const Menu = ({ location }) => {
         as="a"
         href={menuItem.url}
         textDecoration="none"
-        marginBottom={["10px", "10px", "0"]}
+        m="0"
         display="block"
         rel="noopener noreferrer"
       >
@@ -85,7 +85,7 @@ const Menu = ({ location }) => {
       <Link
         style={{
           textDecoration: "none",
-          display: "block",
+          display: "block"
         }}
         to={createLocalLink(menuItem.url, wordPressUrl)}
       >
@@ -118,19 +118,19 @@ const Menu = ({ location }) => {
         bg="headerBg"
         m="0"
         ml={1}
-        p={[1,1, 2]}
+        p={["0", "0", 2]}
         pr={[1, 1, 3]}
         rounded={3}
         position={["static", "static", "absolute"]}
         top="40px"
-        right="0"
+        left="-20px"
         listStyleType="none"
         height="auto"
         maxH={subMenuOpen ? "1000px" : "0"}
         transform={[
           subMenuOpen ? "scale(1)" : "scale(.95)",
           subMenuOpen ? "scale(1)" : "scale(.95)",
-          "scale(1) translateY(0px)",
+          "scale(1)",
         ]}
         transition={
           subMenuOpen
@@ -150,21 +150,23 @@ const Menu = ({ location }) => {
     return (
       <Box
         as="li"
-        fontSize={["lg", "lg", "md"]}
+        fontSize={["xl", "xl", "md"]}
         className="menu-item"
-        mb={[2, 2, "0"]}
-        ml={["0", "0", 2]}
+        mb={"0"}
+        mx={["0", "0", 2]}
         key={menuItem.id}
         position="relative"
         display={["block", "block", "flex"]}
-        pl={1}
+        p="0"
+        py={1}
+        _last={{ paddingBottom: "0" }}
         transform={[
           menuOpened
-            ? "scale(1.05) translateY(0px)"
-            : "scale(1) translateY(-10px)",
+            ? "scale(1) translateY(0px)"
+            : "scale(.95) translateY(-10px)",
             menuOpened
-            ? "scale(1.05) translateY(0px)"
-            : "scale(1) translateY(-10px)",
+            ? "scale(1) translateY(0px)"
+            : "scale(.95) translateY(-10px)",
           "scale(1) translateY(0)",
         ]}
         transition="transform 0.5s cubic-bezier(0.4, 0.01, 0.165, 0.99), opacity 0.6s cubic-bezier(0.4, 0.01, 0.165, 0.99), -webkit-transform 0.5s cubic-bezier(0.4, 0.01, 0.165, 0.99)"
@@ -230,7 +232,7 @@ const Menu = ({ location }) => {
               </div>
 
               <Box display={["block", "block", "flex"]} alignItems="center">
-                <SearchBar menuOpen={menuOpened} />
+                <Box order="2"><SearchBar menuOpen={menuOpened} /></Box>
 
                 <Box
                   as="ul"

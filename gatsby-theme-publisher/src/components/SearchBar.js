@@ -51,7 +51,7 @@ const SearchBar = ({menuOpen}) => {
           transition="all .3s"
           border="none"
           outline="none"
-          w={isSearchOpen ? '210px' : '110px'}
+          w={["100%","100%",isSearchOpen ? '210px' : '110px']}
         />
         <SearchResults searchTerm={searchValue} showResults={isSearchOpen} />
         <InputRightElement
