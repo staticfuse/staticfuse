@@ -76,7 +76,7 @@ For more options, please see [here](https://chakra-ui.com/theme)
 
 ### Customize Templates
 
-To change a page template layout, you can copy the file to the demo folder. For example, to edit the header, you would copy gatsby-theme-publisher/src/components/Headers.js into demo/src/components/Headers.js and edit the file there. Gatsby will automatically use your header file instead of the default.
+To change a page template layout, you can copy the file to the demo folder. For example, to edit the header, you would copy gatsby-theme-publisher/src/components/Header.js into demo/src/components/Header.js and edit the file there. Gatsby will automatically use your header file instead of the default.
 
 This theme uses [Chakra UI](https://chakra-ui.com), which gives you a lot of easy to use components. You can use any of these components in your theme templates.
 
