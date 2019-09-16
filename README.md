@@ -2,12 +2,19 @@
 
 The Gatsby Publisher Theme allows you to create a headless (or decoupled) WordPress site. This theme will display all of your pages and posts in a static front-end built on React and Gatsby. 
 
-This repo includes the code for the theme and a demo site which is using the theme in a very basic configuration.
-
 ## Getting Started
 
+This repo includes the code for the theme and a demo site which is using the theme in a very basic configuration.
+
+### Prequisites 
+
+- [Node and NPM](https://www.gatsbyjs.org/tutorial/part-zero/#-install-nodejs-and-npm)
+- [Yarn](https://yarnpkg.com/lang/en/docs/install/)
+
+### Overview
+
 1.  Clone the repo
-2.  Install dependencies `yarn` [Install yarn if necessary](https://yarnpkg.com/lang/en/docs/install/)
+2.  Install dependencies `yarn`
 3.  Install [WPGraphQL plugin on your WordPress site](https://github.com/wp-graphql/wp-graphql)
 4.  Configure your site options in [demo/gatsby-config.js](https://github.com/staticfuse/gatsby-theme-publisher/blob/master/demo/gatsby-config.js#L18) Explanation of the options is [below](https://github.com/staticfuse/gatsby-theme-publisher#publisher-theme-options)
 5.  Start the demo site `yarn workspaces demo`
@@ -82,7 +89,7 @@ Next, add your theme project files to a Github repository.
 Login to Netlify and you will see a `New site from git` button at the top right corner of the screen. Click on it and authorize Netlify to use your account. Choose your website repository and it will take you to deploy settings with the below options.
 
 - Branch to deploy: You can specify a branch to monitor. When you push to that particular branch, only then will Netlify build and deploy the site. The default is master.
-- Build Command: You can specify the command you want Netlify to run when you push to the above branch. The default is `npm run build`.
+- Build Command: You can specify the command you want Netlify to run when you push to the above branch. The default is `yarn build`.
 - Publish directory: You can specify which folder Netlify should use to host the website. eg. public, dist, build. The default is `public`.
 - Advanced build settings: If the site needs environment variables to build, you can specify them by clicking on Show advanced and then the New Variable button.
 
