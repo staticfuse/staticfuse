@@ -4,7 +4,13 @@ const publisherTheme = {
   ...theme,
   colors: {
     ...theme.colors,
-    // text: "blue",
+    // text: "#2D3748",
+    // primary: theme.colors.blue,
+    // muted: "#999",
+    // headings: "#2D3748",
+    // links: theme.colors.blue,
+    // navLink: "#ffffff",
+    // headerBg: "#2D3748"
   },
 }
 
