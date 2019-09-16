@@ -20,8 +20,6 @@ export default class IndexPage extends React.Component {
     _handleSubmit = (e) => {
         e.preventDefault();
 
-        console.log('submit', this.state);
-
         addToMailchimp(this.state.email, this.state)
             .then(({ msg, result }) => {
                 console.log('msg', `${result}: ${msg}`);
@@ -54,32 +52,26 @@ export default class IndexPage extends React.Component {
 
                     <p style={{color:'#777'}}>Enter your email below. You know the drill.</p>
 
-                    <form style={{display:'flex'}} onSubmit={this._handleSubmit}>
+                    <Box as="form" display={["block","flex"]} onSubmit={this._handleSubmit}>
 
-                        <Box className="p-2 sm:w-3/4 pr-2 w-full"
-                        p={2}
-                        w='75%'
-                        >
+                        <Box p={2} w={["100%", "75%"]}>
                             <label htmlFor="email" style={{display:'none'}}>Email</label>
                             <Input
                                 type="email"
                                 onChange={this._handleChange}
                                 name="email"
                                 placeholder="Enter your email"
-                                className="border rounded appearance-none  w-full h-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             />
 
                         </Box>
 
-                        <Box className="p-2 sm:w-1/4 w-full pl-2"
-                        w="25%"
-                        p={2}>
+                        <Box w={["100%", "25%"]} p={2}>
                             
-                            <Button display='block' width='100%' variantColor="primary" className="w-full block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-3 rounded focus:outline-none focus:shadow-outline" type="submit" value="Subscribe">Submit</Button>
+                            <Button display='block' width='100%' variantColor="primary" type="submit" value="Subscribe">Submit</Button>
 
                         </Box>
                         
-                    </form>
+                    </Box>
                 </Box>
             </Box>
         );
