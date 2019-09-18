@@ -2,7 +2,7 @@ import React from "react"
 import { Box } from "@chakra-ui/core"
 
 const HamburgerMenu = ({ menuOpen }) => {
-  console.log(menuOpen)
+
   return (
     <Box
       as="button"
