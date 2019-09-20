@@ -1,12 +1,8 @@
 import React from "react"
 import Menu from "./Menu"
-import Logo from "./Logo"
-import useSiteMetadata from "../hooks/use-site-metadata"
-import { Flex, Box } from "@chakra-ui/core"
-import SearchBar from "./SearchBar"
+import { Box } from "@chakra-ui/core"
 
 const Header = () => {
-  const { title } = useSiteMetadata()
 
   return (
     <Box bg="headerBg" p=".5rem 2rem">
