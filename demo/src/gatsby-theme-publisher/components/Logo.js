@@ -6,7 +6,7 @@ import { Box } from "@chakra-ui/core"
 const Logo = ({ data }) => {
   const imageData = useStaticQuery(graphql`
     {
-      file(relativePath: {eq: "site-logo.png"}) {
+      file(absolutePath: {regex: "/demo/"}, name: {eq: "site-logo"}) {
         childImageSharp {
           fixed(width: 150, height: 150) {
             base64

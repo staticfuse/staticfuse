@@ -242,7 +242,6 @@ const Menu = ({ location }) => {
               display={['block', 'block', 'flex']}
               top="0"
               left="0"
-              height="50px"
               width="100%"
               alignItems="center"
               justifyContent="space-between"
