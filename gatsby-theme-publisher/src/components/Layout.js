@@ -6,7 +6,8 @@ import PropTypes from "prop-types"
 import publisherTheme from "../theme/theme"
 import { Global } from "@emotion/core"
 
-const Layout = props => (
+const Layout = props => {
+  return (
   <ThemeProvider theme={publisherTheme}>
     <CSSReset />
     <Global
@@ -81,12 +82,12 @@ const Layout = props => (
       }}
     />
     <Header />
-    <Box maxW="5xl" m="40px auto 0 auto" p="10px" className="site-content">
+    <Box maxW={ props.fullWidth ? "100%" : "5xl" } m={ props.fullWidth ? "0" : "40px auto 0 auto" } p={ props.fullWidth ? "0" : "10px" } className="site-content">
       {props.children}
     </Box>
     <Footer />
   </ThemeProvider>
-)
+)}
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,

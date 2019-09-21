@@ -39,6 +39,7 @@ const Logo = ({ data }) => {
         rel="home"
         itemProp="url"
       >
+      { imageData && imageData.file ? 
         <Img
           fixed={imageData.file.childImageSharp.fixed}
           alt="Site Logo"
@@ -50,6 +51,7 @@ const Logo = ({ data }) => {
             height: "100%",
           }}
         />
+        : null }
       </Link>
     </Box>
   )
