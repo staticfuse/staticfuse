@@ -127,10 +127,12 @@ const Menu = ({ location }) => {
         pr={[1, 1, 3]}
         rounded={3}
         position={['static', 'static', 'absolute']}
+        maxHeight={ subMenuOpen ? "1000px" : "0" }
+        height="auto"
+        overflow="hidden"
         top="40px"
         left="-20px"
         listStyleType="none"
-        height="auto"
         border={["none","none","1px solid rgba(255,255,255,.3)"]}
         maxH={subMenuOpen ? '1000px' : '0'}
         minW="150px"
@@ -179,7 +181,7 @@ const Menu = ({ location }) => {
     return (
       <Box
         as="li"
-        fontSize={['xl', 'xl', 'md']}
+        fontSize={['xl', 'xl', 'sm']}
         className="menu-item"
         mb={'0'}
         mx={['0', '0', 2]}
