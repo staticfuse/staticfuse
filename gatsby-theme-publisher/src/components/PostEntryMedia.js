@@ -2,17 +2,20 @@ import React from "react"
 import { Link } from "gatsby"
 import Img from "gatsby-image"
 import { Box } from "@chakra-ui/core"
+import useSiteMetadata from "../hooks/use-site-metadata"
 
-const WithLink = ({ post, location, children }) =>
+const WithLink = ({ post, location, uri, children }) =>
   location === "single" ? (
     children
   ) : (
-    <Link className="post-thumbnail" to={`/${post.uri}`} aria-hidden="true">
+    <Link className="post-thumbnail" to={uri} aria-hidden="true">
       {children}
     </Link>
   )
 
-const PostEntryMedia = ({ post, location, classes = "" }) => (
+const PostEntryMedia = ({ post, location, classes = "" }) => {
+  const { blogURI } = useSiteMetadata()
+  return (
   <Box
     className={"entry-media " + classes}
     m="auto"
@@ -20,7 +23,7 @@ const PostEntryMedia = ({ post, location, classes = "" }) => (
     width="100%"
     maxW="5xl"
   >
-    <WithLink location={location} post={post}>
+    <WithLink location={location} post={post} uri={`${blogURI}/${post.uri}/`}>
       <div
         className="entry-media__figure-wrapper mt-6 mb-10"
         style={{ maxWidth: 1736 }}
@@ -34,6 +37,6 @@ const PostEntryMedia = ({ post, location, classes = "" }) => (
       </div>
     </WithLink>
   </Box>
-)
+)}
 
 export default PostEntryMedia
