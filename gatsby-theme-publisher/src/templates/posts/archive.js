@@ -25,7 +25,7 @@ const BlogArchive = props => {
 
       <HeaderArchive name={'Blog'} />
 
-        {nodes && nodes.map(post => <PostEntry classes="mb-12" key={post.postId} post={post} />)}
+        {nodes && nodes.map(post => <PostEntry key={post.postId} post={post} />)}
         <Pagination
           pageNumber={pageNumber}
           hasNextPage={hasNextPage}

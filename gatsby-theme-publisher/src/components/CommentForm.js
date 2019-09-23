@@ -74,7 +74,6 @@ class CommentForm extends Component {
         </Box>
         <Textarea
           id="comment"
-          className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           name="comment"
           cols="45"
           rows="5"
@@ -227,7 +226,7 @@ class CommentForm extends Component {
               >
                 {addComment => (
                   <div>
-                    <h4 className="mb-2">Leave a comment</h4>
+                    <h4>Leave a comment</h4>
                     <form
                       onSubmit={event => {
                         event.preventDefault()
@@ -242,7 +241,7 @@ class CommentForm extends Component {
                         })
                       }}
                       id="commentform"
-                      className="comment-form mb-4"
+                      className="comment-form"
                       noValidate
                     >
                       {this.renderCommentNotes()}

@@ -21,7 +21,7 @@ const SingleCategory = props => {
       
       {posts.nodes &&
         posts.nodes.map(post => {
-          return <PostEntry classes="mb-12" key={post.id} post={post} />;
+          return <PostEntry key={post.id} post={post} />;
         })}
       </Box>
     </Layout>

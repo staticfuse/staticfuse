@@ -19,13 +19,13 @@ const PostEntry = ({ post, classes = '' }) => {
 
   return (
     <Box my={4} overflow='hidden'>
-      <div className="post-wrapper xl:flex">
-        <div className="post-inner xl:w-3/4 xl:flex-row xl:order-last xl:pl-6">
+      <div className="post-wrapper">
+        <div className="post-inner">
           <header className="entry-header">
             <PostEntryTitle
               post={post}
               location="blog"
-              titleClass="entry-title h1"
+              titleClass="entry-title"
             />
           </header>
 
@@ -38,7 +38,7 @@ const PostEntry = ({ post, classes = '' }) => {
             }}
           />
         </div>
-        <PostEntryMeta className="xl:w-1/4 xl:order-first xl:pr-4 xl:text-center" post={post} location="blog" />
+        <PostEntryMeta post={post} location="blog" />
       </div>
       </Box>
   );

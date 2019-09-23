@@ -66,14 +66,14 @@ const Post = ({ pageContext: post }) => {
           <PostEntryTitle
             location="single"
             post={post}
-            titleClass="entry-title h1 mb-6"
+            titleClass="entry-title"
           />
 
           <PostEntryMeta post={post} />
         </Box>
 
         {post.featuredImage && (
-          <PostEntryMedia post={post} location="single" classes="mb-20" />
+          <PostEntryMedia post={post} location="single" />
         )}
 
         <Box
