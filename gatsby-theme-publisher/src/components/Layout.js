@@ -5,6 +5,7 @@ import Footer from "./Footer"
 import PropTypes from "prop-types"
 import publisherTheme from "../theme/theme"
 import { Global } from "@emotion/core"
+import styles from "../theme/style.css"
 
 const Layout = props => {
   return (
@@ -79,8 +80,17 @@ const Layout = props => {
           float: "right",
           marginLeft: "15px",
         },
+        "blockquote": {
+          paddingLeft: "15px",
+          borderLeft: "4px solid #ccc",
+          fontFamily: "Georgia, Times, serif",
+          fontSize: "18px",
+          fontStyle: "italic",
+          opacity: ".8"
+        }
       }}
     />
+    <style src={styles} type="text/css"></style>
     <Header />
     <Box maxW={ props.fullWidth ? "100%" : "5xl" } m={ props.fullWidth ? "0" : "40px auto 0 auto" } p={ props.fullWidth ? "0" : "10px" } className="site-content">
       {props.children}
