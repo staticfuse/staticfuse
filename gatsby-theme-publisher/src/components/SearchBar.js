@@ -47,7 +47,7 @@ const SearchBar = ({menuOpen}) => {
           placeholder="Search..."
           bg="transparent"
           color="gray.200"
-          fontSize="sm"
+          fontSize={["16px","16px","sm"]}
           transition="all .3s"
           border="none"
           outline="none"

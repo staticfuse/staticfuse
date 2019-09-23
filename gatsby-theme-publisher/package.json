@@ -30,6 +30,7 @@
     "apollo-boost": "^0.4.4",
     "apollo-link-context": "^1.0.19",
     "emotion-theming": "^10.0.17",
+    "gatsby-background-image": "^0.8.12",
     "gatsby-image": "^2.2.20",
     "gatsby-plugin-google-analytics": "^2.1.7",
     "gatsby-plugin-mailchimp": "^5.1.2",
