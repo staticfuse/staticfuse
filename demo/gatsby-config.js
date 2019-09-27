@@ -14,7 +14,7 @@ module.exports = {
         mailChimpEndpoint: 0,
         dynamicComments: 1,
         gaTrackingId: 0,
-        wordPressUrl: `http://gatsby-preview.wtf`,
+        wordPressUrl: `http://data.gatsby.develop`,
         blogURI: '/blog'
       },
     },

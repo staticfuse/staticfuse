@@ -61,7 +61,7 @@ let pageNumber = 0
  * @param { actions, graphql }
  * @returns {Promise<void>}
  */
-module.exports = async ({ actions, graphql }) => {
+module.exports = async ({ actions, graphql, reporter }, options) => {
   /**
    * This is the method from Gatsby that we're going
    * to use to create pages in our static site.
@@ -72,7 +72,7 @@ module.exports = async ({ actions, graphql }) => {
   //   createPage({
   //     path: '/search',
   //     component: searchTemplate,
-  
+
   //     // Send additional data to page component
   //     context: {
   //       term: '',
@@ -120,7 +120,7 @@ module.exports = async ({ actions, graphql }) => {
        */
       if (hasNextPage) {
         pageNumber++
-        console.log(`fetch page ${pageNumber} of pages...`)
+        reporter.info(`fetch page ${pageNumber} of pages...`)
         return fetchPages({ first: 10, after: endCursor })
       }
 
@@ -144,7 +144,16 @@ module.exports = async ({ actions, graphql }) => {
      */
     allPages &&
       allPages.map(page => {
-        console.log(`create pages: ${page.uri}`)
+        /**
+         * If WordPress has a page that matches the blogURI setting,
+         * The blogURI should override the pages.
+         */
+        if (page.uri === options.blogURI.replace('/', '')) {
+          reporter.warn(`Page slug matches your blogURI setting. Page with the slug "${page.uri}" will not be created.`);
+          return;
+        }
+
+        reporter.success(`created page: ${page.uri}`)
         createPage({
           path: `/${page.uri}/`,
           component: pageTemplate,

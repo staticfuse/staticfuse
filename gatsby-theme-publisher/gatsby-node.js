@@ -5,7 +5,7 @@ const createTags = require(`./create/createTags`)
 const createUsers = require(`./create/createUsers`)
 const themeOptions = require(`./src/utils/ThemeOptions`)
 
-exports.createPages = async ({ actions, graphql }, options) => {
+exports.createPages = async ({ actions, graphql, reporter }, options) => {
   /**
    * Merged default theme settings and user settings.
    */
@@ -15,7 +15,7 @@ exports.createPages = async ({ actions, graphql }, options) => {
   }
 
   await createPosts({ actions, graphql }, mergedOptions)
-  await createPages({ actions, graphql })
+  await createPages({ actions, graphql, reporter }, mergedOptions)
   await createCategories({ actions, graphql })
   await createTags({ actions, graphql })
   await createUsers({ actions, graphql })
