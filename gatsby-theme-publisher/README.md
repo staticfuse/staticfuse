@@ -13,7 +13,7 @@ This repo includes the code for the theme and a demo site which is using the the
 
 ### Overview
 
-1.  We recommend starting by cloning [create](https://github.com/staticfuse/create-gatsby-theme-publisher) which has the publisher theme installed and preconfigured
+1.  We recommend starting by cloning [Create Gatsby Theme Publisher](https://github.com/staticfuse/create-gatsby-theme-publisher) which has the publisher theme installed and preconfigured
 2.  cd into the folder `cd my-new-site`
 3.  Install dependencies `yarn`
 4.  Install [WPGraphQL plugin on your WordPress site](https://github.com/wp-graphql/wp-graphql)
