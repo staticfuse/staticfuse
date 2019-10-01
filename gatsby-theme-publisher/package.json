@@ -1,12 +1,12 @@
 {
-  "name": "gatsby-theme-publisher",
-  "version": "1.0.0",
+  "name": "@staticfuse/gatsby-theme-publisher",
+  "version": "0.9.3",
   "main": "index.js",
   "license": "MIT",
-  "author": "Scott Bolinger",
+  "author": "StaticFuse",
   "repository": {
     "type": "git",
-    "url": "https://github.com/scottopolis"
+    "url": "https://github.com/staticfuse/gatsby-theme-publisher"
   },
   "keywords": [
     "gatsby",

@@ -8,7 +8,7 @@ module.exports = {
   },
   plugins: [
     {
-      resolve: `gatsby-theme-publisher`,
+      resolve: `@staticfuse/gatsby-theme-publisher`,
       options: {
         menuName: `PRIMARY`,
         mailChimpEndpoint: 0,
