@@ -1,3 +1,4 @@
+const fs = require('fs')
 const createPosts = require(`./create/createPosts`)
 const createPages = require(`./create/createPages`)
 const createCategories = require(`./create/createCategories`)
@@ -50,4 +51,13 @@ exports.createResolvers = ({
       },
     },
   })
+}
+
+
+exports.onPreBootstrap = async ({ reporter }, options) => {
+  if (fs.existsSync('src/images')) return
+
+  fs.mkdir('src/images', { recursive: true }, err => {
+    if (err) reporter.warn('Directory creation failed. Please create "./src/images" and restart Gatsby.')
+  });
 }
