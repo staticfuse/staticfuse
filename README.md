@@ -13,7 +13,7 @@ This repo includes the code for the theme and a demo site which is using the the
 
 ### Overview
 
-1.  Clone the repo and change the folder name (for example call it my-new-site)
+1.  We recommend starting by cloning [create](https://github.com/staticfuse/create-gatsby-theme-publisher) which has the publisher theme installed and preconfigured
 2.  cd into the folder `cd my-new-site`
 3.  Install dependencies `yarn`
 4.  Install [WPGraphQL plugin on your WordPress site](https://github.com/wp-graphql/wp-graphql)
@@ -21,6 +21,26 @@ This repo includes the code for the theme and a demo site which is using the the
 6.  Start the demo site `yarn start`
 7.  Add your logo and [customize the theme](https://github.com/staticfuse/gatsby-theme-publisher#theme-customization)
 8.  Publish to Netlify
+
+## Adding Gatsby WordPress Theme Publisher to an existing Gatsby site
+
+1. `yarn install @staticfuse/gatsby-theme-publisher`
+2. In your `gatsby-config.js` :
+```js
+  plugins: [
+    {
+      resolve: `@staticfuse/gatsby-theme-publisher`,
+      options: {
+        menuName: `PRIMARY`,
+        mailChimpEndpoint: 0,
+        dynamicComments: 1,
+        gaTrackingId: 0,
+        wordPressUrl: `http://data.gatsby.develop`, // The url of your WordPress install
+        blogURI: '/blog' // Or whatever you'd prefer
+      },
+    },
+  ],
+```
 
 ## Publisher Theme Options
 
@@ -37,7 +57,7 @@ Note: `siteUrl` refers to your final website address. `wordPressUrl` in the plug
 ```javascript
   plugins: [
     {
-      resolve: `gatsby-theme-publisher`,
+      resolve: `@staticfuse/gatsby-theme-publisher`,
       options: {
         menuName: `Primary`,
         // ...etc

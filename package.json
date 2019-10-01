@@ -12,6 +12,6 @@
     "demo"
   ],
   "dependencies": {
-    "gatsby-theme-publisher": "*"
+    "@staticfuse/gatsby-theme-publisher": "*"
   }
 }
