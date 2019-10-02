@@ -16,10 +16,13 @@ exports.createPages = async ({ actions, graphql, reporter }, options) => {
   }
 
   await createPosts({ actions, graphql }, mergedOptions)
-  await createPages({ actions, graphql, reporter }, mergedOptions)
   await createCategories({ actions, graphql })
   await createTags({ actions, graphql })
   await createUsers({ actions, graphql })
+
+  // we don't want to get WordPress pages unless explicitly told
+  if( mergedOptions.wpPages )
+    await createPages({ actions, graphql, reporter }, mergedOptions)
 }
 
 // Pull featured images into the project statically to serve them with gatsby-image

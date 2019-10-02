@@ -229,14 +229,6 @@ const Menu = ({ location }) => {
           // Check to see if the menuName theme setting matches a menu.
           const [menu] = edges.filter(menu => menuName === menu.node.name)
 
-          /**
-           * If no match, the theme doesn't have a setting or the id is incorrect.
-           * Regardless, return early.
-           */
-          if (!menu) {
-            return null
-          }
-
           return (
             <Box
               className="menu-wrapper"
@@ -282,9 +274,9 @@ const Menu = ({ location }) => {
                   m="0"
                   p={[4, 4, '0']}
                 >
-                  {menu.node.menuItems.nodes.map(menuItem => {
+                  { menu ? menu.node.menuItems.nodes.map(menuItem => {
                     return renderMenuItem(menuItem, wordPressUrl, true)
-                  })}
+                  }) : <Link to="/blog" style={{color: "#fff"}}>Blog</Link> }
                 </Box>
               </Box>
             </Box>

@@ -10,12 +10,14 @@ module.exports = {
     {
       resolve: `@staticfuse/gatsby-theme-publisher`,
       options: {
-        menuName: `PRIMARY`,
+        starterPages: true,
         mailChimpEndpoint: 0,
         dynamicComments: 1,
         gaTrackingId: 0,
-        wordPressUrl: `http://data.gatsby.develop`,
-        blogURI: '/blog'
+        wordPressUrl: `https://designbyscott.wpengine.com`,
+        blogURI: '/blog',
+        menuName: ``,
+        wpPages: false
       },
     },
   ],
