@@ -2,14 +2,16 @@
   "name": "gatsby-publisher-theme-workspace",
   "private": true,
   "scripts": {
+    "dev": "yarn workspace demo develop",
     "start": "yarn workspace demo start",
-    "build": "yarn workspace demo build"
+    "build": "yarn workspace demo build",
+    "clean": "rm -rf demo/.cache && rm -rf && find . -name \"node_modules\" -exec rm -rf '{}' +"
   },
   "workspaces": [
     "gatsby-theme-publisher",
     "demo"
   ],
   "dependencies": {
-    "gatsby-theme-publisher": "*"
+    "@staticfuse/gatsby-theme-publisher": "*"
   }
 }
