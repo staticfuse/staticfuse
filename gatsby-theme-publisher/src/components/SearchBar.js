@@ -39,14 +39,14 @@ const SearchBar = ({menuOpen}) => {
           transitionDelay:".1s"
         }}
       >
-        <InputLeftElement children={<Icon name="search" color="gray.300" />} />
+        <InputLeftElement children={<Icon name="search" color="navLink" />} />
         <Input
           type="text"
           onFocus={() => searchToggle(true)}
           onKeyUp={handleSearch}
           placeholder="Search..."
           bg="transparent"
-          color="gray.200"
+          color="navLink"
           fontSize={["16px","16px","sm"]}
           transition="all .3s"
           border="none"

@@ -19,10 +19,7 @@ const Contact = ({ location }) => {
           Contact Us
         </Heading>
         <Text fontSize="md" fontWeight="500" color="gray.400">
-          Chuck Norris originally appeared in the "Street Fighter II" video
-          game, but was removed by Beta Testers because every button caused him
-          to do a roundhouse kick. When asked bout this "glitch," Norris
-          replied, "That's no glitch.".
+        It's easy to sit there and say you'd like to have more money. And I guess that's what I like about it. It's easy. Just sitting there, rocking back and forth, wanting that money. - Jack Handey
         </Text>
 
         <Stack spacing={3}>

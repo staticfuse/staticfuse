@@ -61,7 +61,7 @@ const Home = ({ location }) => {
               </Text>
               <Button
                 onClick={doSomething}
-                variantColor="orange"
+                variantColor="blue"
                 rightIcon="arrow-forward"
                 w={['100%', 'auto']}
                 mb={[2, '0']}
@@ -117,7 +117,7 @@ const Home = ({ location }) => {
         </Box>
       </Box>
 
-      <Box className="row-wrapper" bg="gray.100" py={8} px={2}>
+      <Box className="row-wrapper" bg="#e4f5fe" py={8} px={2}>
         <Box maxW="3xl" m="auto">
           <Box
             display={['block', 'grid']}

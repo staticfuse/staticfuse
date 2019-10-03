@@ -1,9 +1,9 @@
 module.exports = {
   siteMetadata: {
-    title: 'Scott Bolinger',
+    title: 'Static Fuse',
     description: 'Headless WordPress with Gatsby FTW.',
-    author: 'Scott Bolinger',
-    twitter: '@scottbolinger',
+    author: 'Scott and Justin',
+    twitter: '@staticfuse',
     siteUrl: `https://scottbolinger.com`,
   },
   plugins: [

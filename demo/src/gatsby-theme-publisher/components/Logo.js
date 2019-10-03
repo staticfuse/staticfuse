@@ -34,7 +34,7 @@ const Logo = ({ data }) => {
           height: "50px",
           width: "50px",
           display: "block",
-          padding: "5px"
+          padding: "1px"
         }}
         rel="home"
         itemProp="url"
