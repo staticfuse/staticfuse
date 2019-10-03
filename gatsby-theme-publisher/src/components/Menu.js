@@ -67,6 +67,7 @@ const Menu = ({ location }) => {
   }
 
   const renderLink = (menuItem, wordPressUrl) =>
+    menuItem.connectedObject &&
     menuItem.connectedObject.__typename === 'WPGraphQL_MenuItem' &&
     menuItem.url !== '/' ? (
       <Box
@@ -127,13 +128,13 @@ const Menu = ({ location }) => {
         pr={[1, 1, 3]}
         rounded={3}
         position={['static', 'static', 'absolute']}
-        maxHeight={ subMenuOpen ? "1000px" : "0" }
+        maxHeight={subMenuOpen ? '1000px' : '0'}
         height="auto"
         overflow="hidden"
         top="40px"
         left="-20px"
         listStyleType="none"
-        border={["none","none","1px solid rgba(255,255,255,.3)"]}
+        border={['none', 'none', '1px solid rgba(255,255,255,.3)']}
         maxH={subMenuOpen ? '1000px' : '0'}
         minW="150px"
         transform={[
@@ -209,8 +210,8 @@ const Menu = ({ location }) => {
         style={{
           transitionDelay: '.1s',
         }}
-        onMouseEnter={ () => handleMouseEnter(menuItem) }
-        onMouseLeave={ () => handleMouseLeave(menuItem) }
+        onMouseEnter={() => handleMouseEnter(menuItem)}
+        onMouseLeave={() => handleMouseLeave(menuItem)}
       >
         {renderLink(menuItem, wordPressUrl)}
         {menuItem.childItems && menuItem.childItems.nodes.length
@@ -220,7 +221,58 @@ const Menu = ({ location }) => {
     )
   }
 
-  return (
+  // a reusable menu wrapper for both menus with styling
+  const MenuWrapper = props => (
+    <Box
+      className="menu-wrapper"
+      position={['absolute', 'absolute', 'static']}
+      display={['block', 'block', 'flex']}
+      top="0"
+      left="0"
+      width="100%"
+      alignItems="center"
+      justifyContent="space-between"
+      zIndex="99"
+      overflow={['hidden', 'hidden', 'visible']}
+      transition={
+        menuOpened
+          ? 'all 0.3s ease-in, background 0.5s ease-in'
+          : 'all 0.5s ease-out, background 1s ease-out'
+      }
+      style={{
+        transitionDelay: '.1s',
+      }}
+      height={menuOpened ? '100%' : '50px'}
+      bg="headerBg"
+    >
+      <Logo />
+
+      <div onClick={() => (menuOpened ? openMenu(false) : openMenu(true))}>
+        <HamburgerMenu menuOpen={menuOpened} />
+      </div>
+
+      <Box display={['block', 'block', 'flex']} alignItems="center">
+        <Box order="2">
+          <SearchBar menuOpen={menuOpened} />
+        </Box>
+
+        <Box
+          as="ul"
+          listStyleType="none"
+          display={['block', 'block', 'flex']}
+          align="center"
+          position="relative"
+          m="0"
+          p={[4, 4, '0']}
+        >
+          {props.children}
+        </Box>
+      </Box>
+    </Box>
+  )
+
+  // print out WordPress menu items if the menu name is set in the config
+  const doWpMenu = () => (
     <StaticQuery
       query={MENU_QUERY}
       render={data => {
@@ -230,56 +282,11 @@ const Menu = ({ location }) => {
           const [menu] = edges.filter(menu => menuName === menu.node.name)
 
           return (
-            <Box
-              className="menu-wrapper"
-              position={['absolute', 'absolute', 'static']}
-              display={['block', 'block', 'flex']}
-              top="0"
-              left="0"
-              width="100%"
-              alignItems="center"
-              justifyContent="space-between"
-              zIndex="99"
-              overflow={['hidden', 'hidden', 'visible']}
-              transition={
-                menuOpened
-                  ? 'all 0.3s ease-in, background 0.5s ease-in'
-                  : 'all 0.5s ease-out, background 1s ease-out'
-              }
-              style={{
-                transitionDelay: '.1s',
-              }}
-              height={menuOpened ? '100%' : '50px'}
-              bg="headerBg"
-            >
-              <Logo />
-
-              <div
-                onClick={() => (menuOpened ? openMenu(false) : openMenu(true))}
-              >
-                <HamburgerMenu menuOpen={menuOpened} />
-              </div>
-
-              <Box display={['block', 'block', 'flex']} alignItems="center">
-                <Box order="2">
-                  <SearchBar menuOpen={menuOpened} />
-                </Box>
-
-                <Box
-                  as="ul"
-                  listStyleType="none"
-                  display={['block', 'block', 'flex']}
-                  align="center"
-                  position="relative"
-                  m="0"
-                  p={[4, 4, '0']}
-                >
-                  { menu ? menu.node.menuItems.nodes.map(menuItem => {
-                    return renderMenuItem(menuItem, wordPressUrl, true)
-                  }) : <Link to="/blog" style={{color: "#fff"}}>Blog</Link> }
-                </Box>
-              </Box>
-            </Box>
+            <MenuWrapper>
+              {menu.node.menuItems.nodes.map(menuItem => {
+                return renderMenuItem(menuItem, wordPressUrl, true)
+              })}
+            </MenuWrapper>
           )
         } else {
           return null
@@ -287,6 +294,19 @@ const Menu = ({ location }) => {
       }}
     />
   )
+
+  const doDefaultMenu = () => (
+    <MenuWrapper>
+      {/*TODO: Move these menu items to object somewhere else*/}
+      {renderMenuItem({ id: 1, label: 'Home', url: '/' })}
+      {renderMenuItem({ id: 2, label: 'Blog', url: '/blog' })}
+      {renderMenuItem({ id: 3, label: 'About', url: '/about' })}
+      {renderMenuItem({ id: 4, label: 'Contact', url: '/contact' })}
+    </MenuWrapper>
+  )
+
+  // if we have a menu name in the config, do the WordPress menu, otherwise use our default pages
+  return <>{menuName ? doWpMenu() : doDefaultMenu()}</>
 }
 
 export default Menu

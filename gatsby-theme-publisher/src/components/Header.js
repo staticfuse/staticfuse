@@ -5,7 +5,7 @@ import { Box } from "@chakra-ui/core"
 const Header = () => {
 
   return (
-    <Box bg="headerBg" p=".5rem 2rem">
+    <Box bg="headerBg" p=".5rem 2rem" minH="50px">
       <Box maxW="6xl" m="auto">
         <Box
           display={["block", "flex"]}

@@ -37,7 +37,7 @@ const Home = ({ location }) => {
           <Box
             m="auto"
             display={['block', 'flex']}
-            maxW="4xl"
+            maxW="3xl"
             justifyContent="space-between"
             align="center"
           >
@@ -83,7 +83,7 @@ const Home = ({ location }) => {
         </BackgroundImage>
       </Box>
 
-      <Box maxW="4xl" m="auto" px={2}>
+      <Box maxW="3xl" m="auto" px={2}>
         <Box
           display="grid"
           gridTemplateColumns="repeat(auto-fill, minmax(300px, 1fr))"
@@ -118,7 +118,7 @@ const Home = ({ location }) => {
       </Box>
 
       <Box className="row-wrapper" bg="gray.100" py={8} px={2}>
-        <Box maxW="4xl" m="auto">
+        <Box maxW="3xl" m="auto">
           <Box
             display={['block', 'grid']}
             gridTemplateColumns="repeat(auto-fit, minmax(150px, 1fr))"
@@ -183,7 +183,7 @@ const Home = ({ location }) => {
         display="grid"
         gridTemplateColumns="repeat(auto-fill, minmax(300px, 1fr))"
         mt={4}
-        maxW="4xl"
+        maxW="3xl"
         mx="auto"
         px={2}
       >
