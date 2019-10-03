@@ -15,9 +15,7 @@ module.exports = {
         dynamicComments: 1,
         gaTrackingId: 0,
         wordPressUrl: `https://designbyscott.wpengine.com`,
-        blogURI: '/blog',
-        menuName: ``,
-        wpPages: false
+        blogURI: '/blog'
       },
     },
   ],

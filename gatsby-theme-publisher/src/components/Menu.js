@@ -49,7 +49,7 @@ const MENU_QUERY = graphql`
 `
 
 const Menu = ({ location }) => {
-  const { menuName, wordPressUrl } = useSiteMetadata()
+  const { menuName, wordPressUrl, blogURI } = useSiteMetadata()
   const [subMenuOpen, openSubMenu] = useState(false)
   const [menuOpened, openMenu] = useState(false)
 
@@ -295,15 +295,23 @@ const Menu = ({ location }) => {
     />
   )
 
-  const doDefaultMenu = () => (
-    <MenuWrapper>
-      {/*TODO: Move these menu items to object somewhere else*/}
-      {renderMenuItem({ id: 1, label: 'Home', url: '/' })}
-      {renderMenuItem({ id: 2, label: 'Blog', url: '/blog' })}
-      {renderMenuItem({ id: 3, label: 'About', url: '/about' })}
-      {renderMenuItem({ id: 4, label: 'Contact', url: '/contact' })}
-    </MenuWrapper>
-  )
+  const doDefaultMenu = () => {
+    const menuItems = [
+      { id: 1, label: 'Blog', url: blogURI },
+      { id: 3, label: 'About', url: '/about' },
+      { id: 4, label: 'Contact', url: '/contact' }
+    ]
+    return (
+      <MenuWrapper>
+        {/* Add homepage, but not if blog is the homepage */
+          blogURI != "" || blogURI != "/" ? renderMenuItem({ id: 1, label: 'Home', url: '/' }) : ''
+        }
+        {menuItems.map( item => {
+          return renderMenuItem( item,wordPressUrl )
+        })}
+      </MenuWrapper>
+    )
+  }
 
   // if we have a menu name in the config, do the WordPress menu, otherwise use our default pages
   return <>{menuName ? doWpMenu() : doDefaultMenu()}</>
