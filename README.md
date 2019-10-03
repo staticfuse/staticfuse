@@ -4,7 +4,11 @@ The Gatsby Publisher Theme allows you to create a headless (or decoupled) WordPr
 
 ## Getting Started
 
-This repo includes the code for the theme and a demo site which is using the theme in a very basic configuration.
+This is the repository for theme development, if you want to create a site with this theme, *you should clone the [Create Gatsby Publisher repo here.](https://github.com/staticfuse/create-gatsby-theme-publisher)*
+
+You can also add this theme as a dependency to an existing project.
+
+If you do not do the steps above but instead clone this repository, you will need to use yarn workspaces to develop your theme.
 
 ### Prequisites
 
@@ -13,33 +17,42 @@ This repo includes the code for the theme and a demo site which is using the the
 
 ### Overview
 
-1.  We recommend starting by cloning [Create Gatsby Theme Publisher](https://github.com/staticfuse/create-gatsby-theme-publisher) which has the publisher theme installed and preconfigured
-2.  cd into the folder `cd my-new-site`
+1.  We recommend starting by cloning [Create Gatsby Theme Publisher](https://github.com/staticfuse/create-gatsby-theme-publisher) which has the publisher theme installed and preconfigured: `git clone https://github.com/staticfuse/create-gatsby-theme-publisher.git`
+2.  cd into the folder `cd create-gatsby-theme-publisher`
 3.  Install dependencies `yarn`
 4.  Install [WPGraphQL plugin on your WordPress site](https://github.com/wp-graphql/wp-graphql)
-5.  Configure your site options in [demo/gatsby-config.js](https://github.com/staticfuse/gatsby-theme-publisher/blob/master/demo/gatsby-config.js#L18) Explanation of the options is [below](https://github.com/staticfuse/gatsby-theme-publisher#publisher-theme-options)
+5.  Configure your site options in [gatsby-config.js](https://github.com/staticfuse/create-gatsby-theme-publisher/blob/master/gatsby-config.js) Explanation of the options is [below](https://github.com/staticfuse/gatsby-theme-publisher#publisher-theme-options)
 6.  Start the demo site `yarn start`
 7.  Add your logo and [customize the theme](https://github.com/staticfuse/gatsby-theme-publisher#theme-customization)
-8.  Publish to Netlify
+8.  [Publish to Netlify](https://github.com/staticfuse/gatsby-theme-publisher#publishing-to-netlify) or any static host.
 
 ## Adding Gatsby WordPress Theme Publisher to an existing Gatsby site
 
-1. `yarn install @staticfuse/gatsby-theme-publisher`
+1. `yarn add @staticfuse/gatsby-theme-publisher` or `npm install @staticfuse/gatsby-theme-publisher`
 2. In your `gatsby-config.js` :
 ```js
+module.exports = {
+  siteMetadata: {
+    title: 'Static Fuse',
+    description: 'Headless WordPress with Gatsby FTW.',
+    author: 'Scott and Justin',
+    twitter: '@staticfuse',
+    siteUrl: `https://staticfuse.com`,
+  },
   plugins: [
     {
       resolve: `@staticfuse/gatsby-theme-publisher`,
       options: {
-        menuName: `PRIMARY`,
+        starterPages: true,
         mailChimpEndpoint: 0,
         dynamicComments: 1,
         gaTrackingId: 0,
-        wordPressUrl: `http://data.gatsby.develop`, // The url of your WordPress install
+        wordPressUrl: `https://staticfuse.wpengine.com`, // The url of your WordPress install
         blogURI: '/blog' // Or whatever you'd prefer
       },
     },
   ],
+}
 ```
 
 ## Publisher Theme Options
@@ -52,28 +65,16 @@ In demo/gatsby-config.js, edit the siteMetadata object with your site title, url
 
 Note: `siteUrl` refers to your final website address. `wordPressUrl` in the plugin options refers to the WordPress site. For example, your WordPress site may be hosted at mybusiness.wpengine.com, but your Gatsby site will be at mybusiness.com.
 
-### Plugin Options
-
-```javascript
-  plugins: [
-    {
-      resolve: `@staticfuse/gatsby-theme-publisher`,
-      options: {
-        menuName: `Primary`,
-        // ...etc
-       },
-    },
-  ],
-```
-
 | Option | Type | Default | Description |
 | -------| ---- | ------- | ----------- |
-| menuName | string/boolean | 0 | The name of the _WordPress_ menu you'd like to use or `0` if you don't want to render a menu. |
+| starterPages | boolean | true | Some starter Gatsby templates are created for you, like Home, About, and Contact. Set to false if you don't want these pages created.
 | mailChimpEndpoint | string/boolean | 0 | [Your mailchimp endpoint](https://www.gatsbyjs.org/packages/gatsby-plugin-mailchimp/#mailchimp-endpoint). Set to `0` to disable.
 | dynamicComments | boolean | 1 | Enable or disable dynamic comments. If enabled, anyone can post a comment. |
 | gaTrackingId | string/boolean | 0 | Your google analytics UA code. Set to `0` to disable Google Analytics. |
 | wordPressUrl | string | `"https://scottbolinger.com"` | The URL of your WordPress site |
 | blogURI | string | '' | The path prefix on the blog and blog posts. No leading slash. `'/blog'` would result in `https://my-domain.com/blog/`
+| menuName | string/boolean | 0 | The name of the _WordPress_ menu you'd like to use or `0` if you don't want to render a menu. Note that Wordpress pages pulled into Gatsby will not render properly, so we do not recommend this option. |
+| wpPages | boolean | false | This theme does not import your WordPress pages by default, because they usually don't look very good. It usually works better to create pages in Gatsby.
 
 ## Theme Customization
 
