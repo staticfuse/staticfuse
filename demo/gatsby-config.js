@@ -4,17 +4,18 @@ module.exports = {
     description: 'Headless WordPress with Gatsby FTW.',
     author: 'Scott and Justin',
     twitter: '@staticfuse',
-    siteUrl: `https://scottbolinger.com`,
+    siteUrl: 'https://scottbolinger.com',
   },
   plugins: [
     {
-      resolve: `@staticfuse/gatsby-theme-publisher`,
+      resolve: '@staticfuse/gatsby-theme-publisher',
       options: {
         starterPages: true,
         mailChimpEndpoint: 0,
         dynamicComments: 1,
         gaTrackingId: 0,
-        wordPressUrl: `https://designbyscott.wpengine.com`,
+        wpPages: 0,
+        wordPressUrl: 'https://designbyscott.wpengine.com',
         blogURI: '/blog'
       },
     },

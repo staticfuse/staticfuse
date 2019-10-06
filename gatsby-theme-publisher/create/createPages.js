@@ -1,6 +1,8 @@
 const { PageTemplateFragment } = require(`../src/templates/page/data.js`)
 const pageTemplate = require.resolve(`../src/templates/page/index.js`)
-// const searchTemplate = require.resolve(`../src/templates/page/search.js`)
+const homeTemplate = require.resolve(`../src/templates/home/index.js`)
+const aboutTemplate = require.resolve(`../src/templates/about/index.js`)
+const contactTemplate = require.resolve(`../src/templates/contact/index.js`)
 
 const GET_PAGES = `
   # Define our query variables
@@ -68,18 +70,6 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
    */
   const { createPage } = actions
 
-  // const createSearchPage = () => {
-  //   createPage({
-  //     path: '/search',
-  //     component: searchTemplate,
-
-  //     // Send additional data to page component
-  //     context: {
-  //       term: '',
-  //     },
-  //   });
-  // }
-
   /**
    * Fetch pages method. This accepts variables to alter
    * the query. The variable `first` controls how many items to
@@ -133,17 +123,46 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
     })
   }
 
+  let pageSlugIndex = 2;
+  let wantedSlug = false;
+  const maybeGenerateNewSlug = (slug, allPages) => {
+    /**
+     * Store page slug for later use.
+     */
+    if (!wantedSlug) {
+      wantedSlug = slug;
+    }
+
+    /**
+     * Check to see if there is slug conflict.
+     */
+    const hasMatch = allPages.filter(page => slug === page.uri)
+
+    /**
+     * If there is, recusivley call maybeGenerateNewSlug() until there isn't.
+     */
+    if (hasMatch.length) {
+      const newSlug = `${wantedSlug}-${pageSlugIndex}`
+      pageSlugIndex++;
+      return maybeGenerateNewSlug(newSlug, allPages);
+    } else {
+      return slug;
+    }
+  }
+
   /**
    * Kick off our `fetchPages` method which will get us all
    * the pages we need to create individual pages.
    */
-  await fetchPages({ first: 10, after: null }).then(allPages => {
-    /**
-     * Map over the allPages array to create the
-     * single pages
-     */
-    allPages &&
-      allPages.map(page => {
+  const wpPages = await fetchPages({ first: 10, after: null })
+
+
+  /**
+   * Map over the allPages array to create the
+   * single pages.
+   */
+  if (wpPages && options.wpPages) {
+    wpPages.map(page => {
         /**
          * If WordPress has a page that matches the blogURI setting,
          * The blogURI should override the pages.
@@ -159,10 +178,39 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
           component: pageTemplate,
           context: page,
         })
-      })
+    })
+  }
 
-      // createSearchPage()
-  })
+  /**
+   * Build publisher starter pages if enabled.
+   */
+  if ( options.starterPages ) {
 
+    /**
+     * Make sure there are no slug confilcts.
+     */
+    const aboutPath = options.wpPages ? maybeGenerateNewSlug('about', wpPages) : 'about';
+    const contactPath = options.wpPages ? maybeGenerateNewSlug('contact', wpPages) : 'contact';
+
+    createPage({
+      path: `/${aboutPath}`,
+      component: aboutTemplate,
+    })
+    createPage({
+      path: `/${contactPath}`,
+      component: contactTemplate,
+    })
+  }
+
+  /**
+   * If the blog isn't on the home page,
+   * create a basic homepage.
+   */
+  if ( options.blogURI.length && options.blogURI != "/" ) {
+    createPage({
+      path: '/',
+      component: homeTemplate,
+    })
+  }
 
 }
