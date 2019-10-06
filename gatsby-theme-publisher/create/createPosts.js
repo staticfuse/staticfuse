@@ -5,9 +5,6 @@ const {
 
 const postTemplate = require.resolve(`../src/templates/posts/single.js`)
 const blogTemplate = require.resolve(`../src/templates/posts/archive.js`)
-const homeTemplate = require.resolve(`../src/templates/home/index.js`)
-const aboutTemplate = require.resolve(`../src/templates/about/index.js`)
-const contactTemplate = require.resolve(`../src/templates/contact/index.js`)
 
 const GET_POSTS = `
 # Define our query variables
@@ -231,26 +228,4 @@ module.exports = async ({ actions, graphql }, options) => {
       })
   })
 
-  /**
-   * If the blog isn't on the home page,
-   * create a basic homepage.
-   */
-  if ( options.blogURI.length && options.blogURI != "/" ) {
-    createPage({
-      path: '/',
-      component: homeTemplate,
-    })
-  }
-
-  if ( options.starterPages ) {
-    // TODO: check if these paths exist already before creating them
-    createPage({
-      path: '/about',
-      component: aboutTemplate,
-    })
-    createPage({
-      path: '/contact',
-      component: contactTemplate,
-    })
-  }
 }

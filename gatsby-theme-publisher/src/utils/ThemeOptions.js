@@ -7,6 +7,7 @@ const THEME_OPTIONS = {
   dynamicComments: 1,
   gaTrackingId: 0,
   blogURI: "",
+  wpPages: 0,
 }
 
 module.exports = THEME_OPTIONS
