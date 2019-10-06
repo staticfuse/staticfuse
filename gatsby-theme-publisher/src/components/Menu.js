@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link, StaticQuery, graphql } from 'gatsby'
 import { createLocalLink } from '../utils'
 import useSiteMetadata from '../hooks/use-site-metadata'
+import usePublisherMenu from '../hooks/use-publisher-menu'
 import { IconButton, Box } from '@chakra-ui/core'
 import Logo from './Logo'
 import SearchBar from './SearchBar'
@@ -49,7 +50,8 @@ const MENU_QUERY = graphql`
 `
 
 const Menu = ({ location }) => {
-  const { menuName, wordPressUrl, blogURI } = useSiteMetadata()
+  const menu = usePublisherMenu();
+  const { menuName, wordPressUrl } = useSiteMetadata()
   const [subMenuOpen, openSubMenu] = useState(false)
   const [menuOpened, openMenu] = useState(false)
 
@@ -295,23 +297,19 @@ const Menu = ({ location }) => {
     />
   )
 
-  const doDefaultMenu = () => {
-    const menuItems = [
-      { id: 1, label: 'Blog', url: blogURI },
-      { id: 3, label: 'About', url: '/about' },
-      { id: 4, label: 'Contact', url: '/contact' }
-    ]
-    return (
-      <MenuWrapper>
-        {/* Add homepage, but not if blog is the homepage */
-          blogURI != "" || blogURI != "/" ? renderMenuItem({ id: 1, label: 'Home', url: '/' }) : ''
-        }
-        {menuItems.map( item => {
-          return renderMenuItem( item,wordPressUrl )
-        })}
-      </MenuWrapper>
-    )
-  }
+  const doDefaultMenu = () => (
+    <MenuWrapper>
+      {menu.map(menuItem => {
+        console.log(menuItem);
+        const {
+          id,
+          path,
+          context,
+        } = menuItem.node
+        return renderMenuItem({id, url: path, label: context.label })
+      })}
+    </MenuWrapper>
+  )
 
   // if we have a menu name in the config, do the WordPress menu, otherwise use our default pages
   return <>{menuName ? doWpMenu() : doDefaultMenu()}</>

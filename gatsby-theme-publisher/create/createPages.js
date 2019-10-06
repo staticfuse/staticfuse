@@ -195,10 +195,18 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
     createPage({
       path: `/${aboutPath}`,
       component: aboutTemplate,
+      context: {
+        publisher: true,
+        label: 'about',
+      }
     })
     createPage({
       path: `/${contactPath}`,
       component: contactTemplate,
+      context: {
+        publisher: true,
+        label: 'contact',
+      }
     })
   }
 
@@ -210,6 +218,10 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
     createPage({
       path: '/',
       component: homeTemplate,
+      context: {
+        publisher: true,
+        label: 'home',
+      }
     })
   }
 

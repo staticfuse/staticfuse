@@ -1,7 +1,7 @@
 import React from 'react'
 import Layout from '../../components/Layout'
 import SEO from '../../components/SEO'
-import { Box, Text, Heading, Button, Icon } from '@chakra-ui/core'
+import { Box, Text, Heading, Icon } from '@chakra-ui/core'
 
 const About = ({ location }) => {
   return (
@@ -73,7 +73,7 @@ const About = ({ location }) => {
                 <Icon name="star" size="15px" color="blue.500" /> Xmus Jaxon Flaxon-Waxon
               </Heading>
               <Text color="gray.500">
-              
+
               Just poopin, you know how I be.
               </Text>
             </Box>
