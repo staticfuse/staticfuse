@@ -15,8 +15,7 @@ module.exports = {
         dynamicComments: 1,
         gaTrackingId: 0,
         wpPages: 1,
-        // wordPressUrl: 'https://designbyscott.wpengine.com',
-        wordPressUrl: 'http://data.gatsby.develop',
+        wordPressUrl: 'https://designbyscott.wpengine.com',
         blogURI: '/blog'
       },
     },
