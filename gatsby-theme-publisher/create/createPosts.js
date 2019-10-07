@@ -224,6 +224,10 @@ module.exports = async ({ actions, graphql }, options) => {
     blogPages &&
       blogPages.map(archivePage => {
         console.log(`createBlogPage ${archivePage.context.pageNumber}`)
+        if( archivePage.context.pageNumber === 1 ) {
+          archivePage.context.publisher = true
+          archivePage.context.label = archivePage.path.replace("/", "")
+        }
         createPage(archivePage)
       })
   })
