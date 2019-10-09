@@ -50,7 +50,7 @@ const MENU_QUERY = graphql`
 `
 
 const Menu = ({ location }) => {
-  const menu = usePublisherMenu();
+  const publisherMenu = usePublisherMenu()
   const { menuName, wordPressUrl } = useSiteMetadata()
   const [subMenuOpen, openSubMenu] = useState(false)
   const [menuOpened, openMenu] = useState(false)
@@ -223,58 +223,8 @@ const Menu = ({ location }) => {
     )
   }
 
-  // a reusable menu wrapper for both menus with styling
-  const MenuWrapper = props => (
-    <Box
-      className="menu-wrapper"
-      position={['absolute', 'absolute', 'static']}
-      display={['block', 'block', 'flex']}
-      top="0"
-      left="0"
-      width="100%"
-      alignItems="center"
-      justifyContent="space-between"
-      zIndex="99"
-      overflow={['hidden', 'hidden', 'visible']}
-      transition={
-        menuOpened
-          ? 'all 0.3s ease-in, background 0.5s ease-in'
-          : 'all 0.5s ease-out, background 1s ease-out'
-      }
-      style={{
-        transitionDelay: '.1s',
-      }}
-      height={menuOpened ? '100%' : '50px'}
-      bg="headerBg"
-    >
-      <Logo />
-
-      <div onClick={() => (menuOpened ? openMenu(false) : openMenu(true))}>
-        <HamburgerMenu menuOpen={menuOpened} />
-      </div>
-
-      <Box display={['block', 'block', 'flex']} alignItems="center">
-        <Box order="2">
-          <SearchBar menuOpen={menuOpened} />
-        </Box>
-
-        <Box
-          as="ul"
-          listStyleType="none"
-          display={['block', 'block', 'flex']}
-          align="center"
-          position="relative"
-          m="0"
-          p={[4, 4, '0']}
-        >
-          {props.children}
-        </Box>
-      </Box>
-    </Box>
-  )
-
   // print out WordPress menu items if the menu name is set in the config
-  const doWpMenu = () => (
+  return (
     <StaticQuery
       query={MENU_QUERY}
       render={data => {
@@ -284,11 +234,67 @@ const Menu = ({ location }) => {
           const [menu] = edges.filter(menu => menuName === menu.node.name)
 
           return (
-            <MenuWrapper>
-              {menu.node.menuItems.nodes.map(menuItem => {
-                return renderMenuItem(menuItem, wordPressUrl, true)
-              })}
-            </MenuWrapper>
+            <Box
+              className="menu-wrapper"
+              position={['absolute', 'absolute', 'static']}
+              display={['block', 'block', 'flex']}
+              top="0"
+              left="0"
+              width="100%"
+              alignItems="center"
+              justifyContent="space-between"
+              zIndex="99"
+              overflow={['hidden', 'hidden', 'visible']}
+              transition={
+                menuOpened
+                  ? 'all 0.3s ease-in, background 0.5s ease-in'
+                  : 'all 0.5s ease-out, background 1s ease-out'
+              }
+              style={{
+                transitionDelay: '.1s',
+              }}
+              height={menuOpened ? '100%' : '50px'}
+              bg="headerBg"
+            >
+              <Logo />
+
+              <div
+                onClick={() => (menuOpened ? openMenu(false) : openMenu(true))}
+              >
+                <HamburgerMenu menuOpen={menuOpened} />
+              </div>
+
+              <Box display={['block', 'block', 'flex']} alignItems="center">
+                <Box order="2">
+                  <SearchBar menuOpen={menuOpened} />
+                </Box>
+
+                <Box
+                  as="ul"
+                  listStyleType="none"
+                  display={['block', 'block', 'flex']}
+                  align="center"
+                  position="relative"
+                  m="0"
+                  p={[4, 4, '0']}
+                >
+                  {/* If we have a menuName, do the WordPress menu */
+                  menuName
+                    ? menu.node.menuItems.nodes.map(menuItem => {
+                        return renderMenuItem(menuItem, wordPressUrl, true)
+                      })
+                    : /* If no menuName, do the starter pages menu */
+                      publisherMenu.map(menuItem => {
+                        const { id, path, context } = menuItem.node
+                        return renderMenuItem({
+                          id,
+                          url: path,
+                          label: context.label,
+                        })
+                      })}
+                </Box>
+              </Box>
+            </Box>
           )
         } else {
           return null
@@ -296,22 +302,6 @@ const Menu = ({ location }) => {
       }}
     />
   )
-
-  const doDefaultMenu = () => (
-    <MenuWrapper>
-      {menu.map(menuItem => {
-        const {
-          id,
-          path,
-          context,
-        } = menuItem.node
-        return renderMenuItem({id, url: path, label: context.label })
-      })}
-    </MenuWrapper>
-  )
-
-  // if we have a menu name in the config, do the WordPress menu, otherwise use our default pages
-  return <>{menuName ? doWpMenu() : doDefaultMenu()}</>
 }
 
 export default Menu

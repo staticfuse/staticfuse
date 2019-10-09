@@ -14,8 +14,8 @@ module.exports = {
         mailChimpEndpoint: 0,
         dynamicComments: 1,
         gaTrackingId: 0,
-        wpPages: 0,
-        wordPressUrl: 'https://designbyscott.wpengine.com',
+        wpPages: 1,
+        wordPressUrl: 'https://data.staticfuse.com',
         blogURI: '/blog'
       },
     },

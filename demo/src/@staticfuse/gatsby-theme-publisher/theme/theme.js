@@ -1,4 +1,4 @@
-import theme from "../../../../gatsby-theme-publisher/src/theme/theme"
+import theme from "@staticfuse/gatsby-theme-publisher/src/theme/theme"
 
 const publisherTheme = {
   ...theme,
