@@ -300,7 +300,6 @@ const Menu = ({ location }) => {
   const doDefaultMenu = () => (
     <MenuWrapper>
       {menu.map(menuItem => {
-        console.log(menuItem);
         const {
           id,
           path,

@@ -5,10 +5,10 @@ const publisherTheme = {
   colors: {
     ...theme.colors,
     // text: "#2D3748",
-    // primary: theme.colors.blue,
+    // primary: theme.colors.blue['500'],
     // muted: "#999",
     // headings: "#2D3748",
-    // links: theme.colors.blue,
+    // links: theme.colors.blue['500'],
     // navLink: "#ffffff",
     // headerBg: "#2D3748"
   },
