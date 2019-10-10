@@ -5,7 +5,7 @@ import useSiteMetadata from '../hooks/use-site-metadata';
  *
  * @param {object} menuItem a single menu item
  */
-export const CreateLocalLink = ( menuItem ) => {
+export const CreateLocalLink = (menuItem) => {
   const { blogURI, wordPressUrl } = useSiteMetadata();
   const {url, connectedObject } = menuItem;
 
