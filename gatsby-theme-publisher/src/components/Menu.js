@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link, StaticQuery, graphql } from 'gatsby'
-import { createLocalLink } from '../utils'
+import { CreateLocalLink } from '../utils'
 import useSiteMetadata from '../hooks/use-site-metadata'
 import usePublisherMenu from '../hooks/use-publisher-menu'
 import { IconButton, Box } from '@chakra-ui/core'
@@ -68,7 +68,7 @@ const Menu = ({ location }) => {
     return false
   }
 
-  const renderLink = (menuItem, wordPressUrl) =>
+  const renderLink = (menuItem) =>
     menuItem.connectedObject &&
     menuItem.connectedObject.__typename === 'WPGraphQL_MenuItem' &&
     menuItem.url !== '/' ? (
@@ -84,13 +84,13 @@ const Menu = ({ location }) => {
           {menuItem.label}
         </Box>
       </Box>
-    ) : createLocalLink(menuItem.url, wordPressUrl) ? (
+    ) : CreateLocalLink(menuItem) ? (
       <Link
         style={{
           textDecoration: 'none',
           display: 'block',
         }}
-        to={createLocalLink(menuItem.url, wordPressUrl)}
+        to={CreateLocalLink(menuItem)}
       >
         <Box as="span" color="navLink" py={[2, 2, '0']} display="block">
           {menuItem.label}
@@ -100,7 +100,7 @@ const Menu = ({ location }) => {
       menuItem.label
     )
 
-  const renderSubMenu = (items, wordPressUrl) => (
+  const renderSubMenu = (items) => (
     <>
       <IconButton
         aria-label="open sub menu"
@@ -152,7 +152,7 @@ const Menu = ({ location }) => {
         opacity={subMenuOpen ? '1' : '0'}
       >
         {items.map(subItem => {
-          return renderMenuItem(subItem, wordPressUrl, false)
+          return renderMenuItem(subItem, false)
         })}
       </Box>
     </>
@@ -180,7 +180,7 @@ const Menu = ({ location }) => {
     }
   }
 
-  const renderMenuItem = (menuItem, wordPressUrl, border = false) => {
+  const renderMenuItem = (menuItem, border = false) => {
     return (
       <Box
         as="li"
@@ -215,9 +215,9 @@ const Menu = ({ location }) => {
         onMouseEnter={() => handleMouseEnter(menuItem)}
         onMouseLeave={() => handleMouseLeave(menuItem)}
       >
-        {renderLink(menuItem, wordPressUrl)}
+        {renderLink(menuItem)}
         {menuItem.childItems && menuItem.childItems.nodes.length
-          ? renderSubMenu(menuItem.childItems.nodes, wordPressUrl)
+          ? renderSubMenu(menuItem.childItems.nodes)
           : null}
       </Box>
     )
