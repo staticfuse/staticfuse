@@ -87,6 +87,9 @@ const Layout = props => {
           fontSize: "18px",
           fontStyle: "italic",
           opacity: ".8"
+        },
+        "code, pre": {
+          wordBreak: "break-word",
         }
       }}
     />
