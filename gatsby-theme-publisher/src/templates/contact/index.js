@@ -19,7 +19,7 @@ const Contact = ({ location }) => {
           Contact Us
         </Heading>
         <Text fontSize="md" fontWeight="500" color="gray.400">
-        It's easy to sit there and say you'd like to have more money. And I guess that's what I like about it. It's easy. Just sitting there, rocking back and forth, wanting that money. - Jack Handey
+        Send us a note and maybe we'll get back to you. Or not.
         </Text>
 
         <Stack spacing={3}>
