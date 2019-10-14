@@ -6,7 +6,7 @@ import Layout from "../../components/Layout"
 import PostEntryMeta from "../../components/PostEntryMeta"
 import PostEntryTitle from "../../components/PostEntryTitle"
 import PostEntryMedia from "../../components/PostEntryMedia"
-import EngagementBar from "../../components/EngagementBar"
+import BelowPost from "../../components/BelowPost"
 import SEO from "../../components/SEO"
 import BlogOptin from "../../components/BlogOptin"
 import CommentList from "../../components/CommentList"
@@ -49,7 +49,6 @@ const renderTerms = (categoryNodes = [], tagNodes = []) => (
 
 const Post = ({ pageContext: post }) => {
   const { mailChimpEndpoint } = useSiteMetadata()
-  console.log(typeof mailChimpEndpoint)
 
   return (
     <Layout>
@@ -60,7 +59,7 @@ const Post = ({ pageContext: post }) => {
           maxW="2xl"
           m="auto"
           mb={6}
-          mt={10}
+          mt={6}
           className="entry-header"
         >
           <PostEntryTitle
@@ -91,7 +90,7 @@ const Post = ({ pageContext: post }) => {
               : null}
           </Flex>
 
-          <EngagementBar post={post} />
+          <BelowPost post={post} />
 
           <CommentList postId={post.postId} />
 

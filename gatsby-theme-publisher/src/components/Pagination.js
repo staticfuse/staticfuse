@@ -2,7 +2,9 @@ import React from "react"
 import { Link } from "gatsby"
 import { Flex, Box, Icon } from "@chakra-ui/core"
 
-const Pagination = ({ pageNumber, hasNextPage, allPosts, itemsPerPage }) => (
+const Pagination = ({ pageNumber, hasNextPage, allPosts, itemsPerPage }) => {
+  if( pageNumber === 1 && !hasNextPage) return <></>;
+  return (
   <Box as="nav" className="pagination" role="navigation" textAlign="left" mb={2}>
     <span className="screen-reader-text">Posts navigation</span>
     <Flex align="center" className="nav-links">
@@ -41,6 +43,6 @@ const Pagination = ({ pageNumber, hasNextPage, allPosts, itemsPerPage }) => (
       )}
     </Flex>
   </Box>
-)
+)}
 
 export default Pagination

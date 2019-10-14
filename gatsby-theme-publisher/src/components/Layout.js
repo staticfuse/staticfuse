@@ -26,33 +26,41 @@ const Layout = props => {
           textDecoration: "none",
         },
         "h1, h2, h3, h4, h5": {
-          marginBottom: "1.25rem",
+          marginBottom: "1rem",
           fontWeight: "400",
           lineHeight: "1.25",
           color: publisherTheme.colors.headings,
         },
         h1: {
           fontSize: "3rem",
+          fontWeight: "500"
         },
         h2: {
-          fontSize: "2.25rem",
+          fontSize: "2.5rem",
+          fontWeight: "500"
         },
         h3: {
           fontSize: "1.875rem",
         },
         h4: {
-          fontSize: "1.5rem",
+          fontSize: "1.2rem",
+          textTransform: "uppercase"
         },
         h5: {
-          fontSize: "1.25rem",
+          fontSize: "1rem",
         },
         "ul, ol": {
           paddingLeft: "1.5rem",
+          marginLeft: "1.5rem",
           marginBottom: ".75rem",
         },
         "ul li, ol li": {
           paddingLeft: ".5rem",
           marginBottom: ".5rem",
+        },
+        "ul ul, ol ol, ul ul ul, ol ol ol": {
+          marginLeft: "0",
+          marginTop: "10px"
         },
         iframe: {
           width: "100%"
@@ -69,6 +77,9 @@ const Layout = props => {
           display: "block",
           margin: "0 auto",
         },
+        ".entry-content h2": {
+          marginTop: "4rem"
+        },
         ".aligncenter": {
           textAlign: "center",
         },
@@ -79,6 +90,14 @@ const Layout = props => {
         ".alignright": {
           float: "right",
           marginLeft: "15px",
+        },
+        ".entry-content img, hr, figure": {
+          marginBottom: "15px"
+        },
+        "figcaption": {
+          textAlign: "center",
+          fontSize: "12px",
+          color: "#999"
         },
         "blockquote": {
           paddingLeft: "15px",
@@ -95,7 +114,7 @@ const Layout = props => {
     />
     <style src={styles} type="text/css"></style>
     <Header />
-    <Box maxW={ props.fullWidth ? "100%" : "5xl" } m={ props.fullWidth ? "0" : "40px auto 0 auto" } p={ props.fullWidth ? "0" : "10px" } className="site-content">
+    <Box maxW={ props.fullWidth ? "100%" : "5xl" } m={ props.fullWidth ? "0" : "1.5rem auto 0 auto" } p={ props.fullWidth ? "0" : "10px" } className="site-content">
       {props.children}
     </Box>
     <Footer />

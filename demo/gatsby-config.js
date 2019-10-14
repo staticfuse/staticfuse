@@ -15,7 +15,6 @@ module.exports = {
         dynamicComments: 1,
         gaTrackingId: 0,
         wpPages: 1,
-        menuName: 'PRIMARY',
         wordPressUrl: 'https://data.staticfuse.com',
         blogURI: '/blog'
       },
