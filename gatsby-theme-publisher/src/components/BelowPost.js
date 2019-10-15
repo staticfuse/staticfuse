@@ -3,11 +3,11 @@ import ShareIcons from './ShareIcons';
 import NextPost from './NextPost';
 import { Box, Flex } from '@chakra-ui/core';
 
-const EngagementBar = ({ post }) => {
+const BelowPost = ({ post }) => {
 
   return (
       <Box
-        id="engagement-bar"
+        id="below-post"
         mt={8}
         borderTop='1px solid #eee'
         py={4}
@@ -20,4 +20,4 @@ const EngagementBar = ({ post }) => {
   );
 };
 
-export default EngagementBar;
+export default BelowPost;

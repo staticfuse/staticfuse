@@ -42,6 +42,9 @@ const SearchBar = ({menuOpen}) => {
           onBlur={() => setSearchOpen(false)}
           onKeyUp={handleSearch}
           placeholder="Search..."
+          _placeholder={{
+            color:"navLink"
+          }}
           bg="transparent"
           color="navLink"
           fontSize={["16px","16px","sm"]}
