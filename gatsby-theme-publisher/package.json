@@ -8,6 +8,9 @@
     "type": "git",
     "url": "https://github.com/staticfuse/gatsby-theme-publisher"
   },
+  "engines": {
+    "node": ">=10.12"
+  },
   "keywords": [
     "gatsby",
     "gatsby-theme",
