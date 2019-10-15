@@ -2,6 +2,7 @@ import React from 'react'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 import { Link } from 'gatsby'
+import useSiteMetadata from '../hooks/use-site-metadata'
 import { Box, PseudoBox, Spinner, Icon } from '@chakra-ui/core'
 
 const searchQuery = gql`
@@ -17,6 +18,8 @@ const searchQuery = gql`
 `
 
 const SearchResults = ({ searchTerm, showResults }) => {
+  const { blogURI } = useSiteMetadata();
+
   if (!searchTerm || searchTerm === '') return null
 
   return (
@@ -50,7 +53,7 @@ const SearchResults = ({ searchTerm, showResults }) => {
               display={showResults ? 'block' : 'none'}
             >
               {data.posts.nodes.map(post => (
-                <Link to={`/${post.uri}`} key={post.id}>
+                <Link to={`${blogURI}/${post.uri}`} key={post.id}>
                   <PseudoBox
                     p={3}
                     fontSize="sm"
