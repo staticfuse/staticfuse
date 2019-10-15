@@ -19,13 +19,14 @@ const searchQuery = gql`
 
 const SearchResults = ({ searchTerm, showResults }) => {
   const { blogURI } = useSiteMetadata();
-
   if (!searchTerm || searchTerm === '') return null
 
   return (
     <>
       <Query query={searchQuery} variables={{ searchTerm }}>
         {({ loading, error, data }) => {
+          const { nodes } = data.posts
+
           if (loading) {
             return (
               <Spinner
@@ -52,18 +53,29 @@ const SearchResults = ({ searchTerm, showResults }) => {
               boxShadow="0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)"
               display={showResults ? 'block' : 'none'}
             >
-              {data.posts.nodes.map(post => (
-                <Link to={`${blogURI}/${post.uri}`} key={post.id}>
-                  <PseudoBox
+              {!nodes.length ? (
+                <PseudoBox
                     p={3}
                     fontSize="sm"
                     _hover={{ bg: 'gray.100' }}
                     rounded={2}
                   >
-                    {post.title}
-                  </PseudoBox>
-                </Link>
-              ))}
+                  No Results
+                </PseudoBox>
+              ) : (
+                nodes.map(post => (
+                  <Link to={`${blogURI}/${post.uri}`} key={post.id}>
+                    <PseudoBox
+                      p={3}
+                      fontSize="sm"
+                      _hover={{ bg: 'gray.100' }}
+                      rounded={2}
+                    >
+                      {post.title}
+                    </PseudoBox>
+                  </Link>
+                ))
+              )}
             </Box>
           )
         }}

@@ -14,13 +14,9 @@ const SearchBar = ({menuOpen}) => {
 
   const handleSearch = event => {
     if (event.target.value.length >= 3) {
-      console.log(event.target.value)
       setSearchValue(event.target.value)
+      setSearchOpen(true)
     }
-  }
-
-  const searchToggle = bool => {
-    setSearchOpen(bool)
   }
 
   return (
@@ -42,7 +38,8 @@ const SearchBar = ({menuOpen}) => {
         <InputLeftElement children={<Icon name="search" color="navLink" />} />
         <Input
           type="text"
-          onFocus={() => searchToggle(true)}
+          onFocus={() => setSearchOpen(true)}
+          onBlur={() => setSearchOpen(false)}
           onKeyUp={handleSearch}
           placeholder="Search..."
           bg="transparent"
@@ -61,7 +58,7 @@ const SearchBar = ({menuOpen}) => {
                 name="close"
                 size="10px"
                 color="gray.500"
-                onClick={() => searchToggle(false)}
+                onClick={() => setSearchOpen(false)}
               />
             ) : null
           }
