@@ -4,7 +4,7 @@ module.exports = {
     description: 'Headless WordPress with Gatsby FTW.',
     author: 'Scott and Justin',
     twitter: '@staticfuse',
-    siteUrl: 'https://scottbolinger.com',
+    siteUrl: 'https://staticfuse.com',
   },
   plugins: [
     {

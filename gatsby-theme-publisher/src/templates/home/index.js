@@ -3,16 +3,11 @@ import Layout from '../../components/Layout'
 import SEO from '../../components/SEO'
 import { Box, Text, Heading, Button, Icon } from '@chakra-ui/core'
 import useSiteMetadata from '../../hooks/use-site-metadata'
-import { useStaticQuery, graphql } from 'gatsby'
+import { useStaticQuery, graphql, navigate } from 'gatsby'
 import BackgroundImage from 'gatsby-background-image'
 
 const Home = ({ location }) => {
   const { title } = useSiteMetadata()
-
-  const doSomething = e => {
-    console.log(e)
-    alert('Button clicked')
-  }
 
   const imageData = useStaticQuery(graphql`
     {
@@ -60,7 +55,7 @@ const Home = ({ location }) => {
                 in your child theme.
               </Text>
               <Button
-                onClick={doSomething}
+                onClick={() => navigate('/blog/')}
                 variantColor="blue"
                 rightIcon="arrow-forward"
                 w={['100%', 'auto']}
