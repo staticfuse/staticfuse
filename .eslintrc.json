@@ -8,6 +8,7 @@
   "rules": {
     "no-console": 0,
     "no-debugger": 0,
+    "no-underscore-dangle": 0,
     "no-param-reassign": [2, { "props": false }],
     "import/extensions": 0,
     "react/no-danger": 0,

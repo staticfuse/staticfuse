@@ -14,11 +14,11 @@ module.exports = {
         mailChimpEndpoint: 0,
         dynamicComments: 1,
         gaTrackingId: 0,
-        wpPages: 1,
-        // menuName: 'PRIMARY',
-        wordPressUrl: 'https://data.staticfuse.com',
-        blogURI: '/blog'
+        // wpPages: 1,
+        menuName: 'PRIMARY',
+        wordPressUrl: 'https://sandbox.staticfuse.com',
+        blogURI: '/blog',
       },
     },
   ],
-}
+};
