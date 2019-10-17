@@ -11,11 +11,23 @@ module.exports = {
       resolve: '@staticfuse/gatsby-theme-publisher',
       options: {
         starterPages: true,
+        // publisherMenuConfig: [
+        //   {
+        //     label: 'custom',
+        //     href: '/about',
+        //     isExternal: false,
+        //   },
+        //   {
+        //     label: 'justinwhall.com',
+        //     href: 'https://justinwhall.com',
+        //     isExternal: true,
+        //   },
+        // ],
         mailChimpEndpoint: 0,
         dynamicComments: 1,
         gaTrackingId: 0,
         // wpPages: 1,
-        menuName: 'PRIMARY',
+        // menuName: 'PRIMARY',
         wordPressUrl: 'https://sandbox.staticfuse.com',
         blogURI: '/blog',
       },

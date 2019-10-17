@@ -115,14 +115,13 @@ const Menu = () => {
                   menuName
                     ? menu.node.menuItems.nodes.map((menuItem) => <MenuItem key={menuItem.id} menuItem={menuItem} />)
                     : publisherMenu.map((menuItem) => { // If no menuName, do the starter pages menu
-                      const { id, path, context } = menuItem.node;
+                      const { label, href } = menuItem;
                       return (
                         <MenuItem
-                          key={id}
+                          key={label}
                           menuItem={{
-                            id,
-                            url: path,
-                            label: context.label,
+                            url: href,
+                            label,
                           }}
                         />
                       );

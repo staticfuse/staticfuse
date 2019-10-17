@@ -49,7 +49,7 @@ const MenuItem = ({ menuItem, menuOpened = false, border = false }) => {
       className="menu-item"
       mb="0"
       mx={['0', '0', 2]}
-      key={menuItem.id}
+      key={menuItem.label}
       position="relative"
       display={['block', 'block', 'flex']}
       borderBottom={[
