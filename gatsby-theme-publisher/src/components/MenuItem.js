@@ -5,8 +5,6 @@ import MenuLink from './MenuLink';
 import MenuSub from './MenuSub';
 
 const MenuItem = ({ menuItem, menuOpened = false, border = false }) => {
-  console.log(menuItem);
-
   const [subMenuOpen, openSubMenu] = useState(false);
 
   const isMobile = () => {
