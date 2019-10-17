@@ -3,6 +3,10 @@ import addToMailchimp from 'gatsby-plugin-mailchimp'
 import { Box, Input, Button, Heading } from '@chakra-ui/core'
 
 export default class IndexPage extends React.Component {
+    constructor(props) {
+        super()
+    }
+
     state = {
         name: null,
         email: null,
@@ -36,6 +40,8 @@ export default class IndexPage extends React.Component {
     }
 
     render() {
+        const title = ( this.props.title ? this.props.title : "Get More Great Stuff Like This" );
+        const description = ( this.props.description ? this.props.description : "Enter your email below. You know the drill." );
         return (
             <Box className="optin-box"
             mb={8}
@@ -48,9 +54,9 @@ export default class IndexPage extends React.Component {
                 m='auto'
                 textAlign='center'>
 
-                    <Heading as="h3" mb={1}>Get More Great Stuff Like This</Heading>
+                    <Heading as="h3" mb={1}>{ title }</Heading>
 
-                    <p style={{color:'#777'}}>Enter your email below. You know the drill.</p>
+                    <p style={{color:'#777'}}>{ description }</p>
 
                     <Box as="form" display={["block","flex"]} onSubmit={this._handleSubmit}>
 
@@ -67,7 +73,7 @@ export default class IndexPage extends React.Component {
 
                         <Box w={["100%", "25%"]} p={2}>
                             
-                            <Button display='block' width='100%' variantColor="primary" type="submit" value="Subscribe">Submit</Button>
+                            <Button display='block' width='100%' bg="buttonBg" color="buttonText" type="submit" value="Subscribe">Submit</Button>
 
                         </Box>
                         

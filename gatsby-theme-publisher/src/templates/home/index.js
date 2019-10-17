@@ -1,10 +1,13 @@
 import React from 'react'
 import Layout from '../../components/Layout'
 import SEO from '../../components/SEO'
-import { Box, Text, Heading, Button, Icon } from '@chakra-ui/core'
+import { Box, Text, Heading, Button, Icon, Image } from '@chakra-ui/core'
 import useSiteMetadata from '../../hooks/use-site-metadata'
 import { useStaticQuery, graphql, navigate } from 'gatsby'
 import BackgroundImage from 'gatsby-background-image'
+import PostGrid from '../../components/PostGrid'
+import SiteLogo from '../../images/site-logo.png'
+import BlogOptin from '../../components/BlogOptin'
 
 const Home = ({ location }) => {
   const { title } = useSiteMetadata()
@@ -27,32 +30,44 @@ const Home = ({ location }) => {
       <Box bg="gray.800" borderBottom="1px solid #ccc" mb={4}>
         <BackgroundImage
           fluid={imageData.file.childImageSharp.fluid}
-          style={{ padding: '4rem .5rem', backgroundPosition: 'top right' }}
+          style={{ padding: '.5rem', backgroundPosition: 'right' }}
         >
           <Box
             m="auto"
-            display={['block', 'flex']}
-            maxW="3xl"
+            display={['block', 'block', 'flex']}
+            maxW="4xl"
             justifyContent="space-between"
-            align="center"
+            alignItems="center"
           >
-            <Box w={['100%', '65%']} color="#fff" mb={[6, '0']}>
+            <Box
+              w={['100%', '60%', '45%']}
+              float={['none', 'none', 'right']}
+              p={2}
+              m="auto"
+              order={['1', '1', '2']}
+            >
+              <Image
+                src={SiteLogo}
+                display="block"
+                alt="Site logo"
+                opacity=".8"
+                maxH="250px"
+                m="auto"
+              />
+            </Box>
+
+            <Box w={['100%', '100%', '55%']} color="#fff" mb={[6, 6, '0']}>
               <Heading
                 as="h1"
                 fontWeight="600"
-                fontSize="4rem"
-                color="#fff"
+                fontSize="3.2rem"
+                color="primary"
                 lineHeight="1.1"
               >
                 {title}
               </Heading>
-              <Text color="gray.100" fontSize="md" mb={8} fontWeight="500">
-                Welcome to Static Fuse, you'll like it here. To customize this
-                template, create a new file at{' '}
-                <Text as="span" fontSize="sm" color="blue.200">
-                  src/templates/home/index.js
-                </Text>{' '}
-                in your child theme.
+              <Text color="gray.500" fontSize="md" mb={8} fontWeight="500">
+                Welcome to Static Fuse, you'll like it here.
               </Text>
               <Button
                 onClick={() => navigate('/blog/')}
@@ -66,6 +81,7 @@ const Home = ({ location }) => {
               </Button>
               <Button
                 variantColor="gray"
+                color="gray.400"
                 ml={['0', 4]}
                 w={['100%', 'auto']}
                 variant="outline"
@@ -78,7 +94,7 @@ const Home = ({ location }) => {
         </BackgroundImage>
       </Box>
 
-      <Box maxW="3xl" m="auto" px={2}>
+      <Box maxW="4xl" m="auto" px={2}>
         <Box
           display="grid"
           gridTemplateColumns="repeat(auto-fill, minmax(300px, 1fr))"
@@ -113,7 +129,7 @@ const Home = ({ location }) => {
       </Box>
 
       <Box className="row-wrapper" bg="#e4f5fe" py={8} px={2}>
-        <Box maxW="3xl" m="auto">
+        <Box maxW="4xl" m="auto">
           <Box
             display={['block', 'grid']}
             gridTemplateColumns="repeat(auto-fit, minmax(150px, 1fr))"
@@ -174,47 +190,15 @@ const Home = ({ location }) => {
         </Box>
       </Box>
 
-      <Box
-        display="grid"
-        gridTemplateColumns="repeat(auto-fill, minmax(300px, 1fr))"
-        mt={4}
-        maxW="3xl"
-        mx="auto"
-        px={2}
-      >
-        <Box display="flex" my={8}>
-          <Icon name="phone" color="gray.300" size="50px" mr={4} />
-          <div>
-            <Heading
-              as="h4"
-              size="xs"
-              mb={1}
-              fontWeight="500"
-              color="blue.500"
-              textTransform="uppercase"
-            >
-              Contact Us Today
-            </Heading>
-            <Text color="gray.500">Or don't. I'm kinda busy anyways.</Text>
-          </div>
-        </Box>
+      <Box maxW="4xl" mx="auto" my={8}>
+        <Heading as="h4" color="gray.200" fontSize="lg">
+          Latest posts
+        </Heading>
+        <PostGrid limit="3" noPadding />
+      </Box>
 
-        <Box display="flex" my={8}>
-          <Icon name="arrow-right" color="gray.300" size="50px" mr={4} />
-          <div>
-            <Heading
-              as="h4"
-              size="xs"
-              mb={1}
-              fontWeight="500"
-              color="blue.500"
-              textTransform="uppercase"
-            >
-              Get Started
-            </Heading>
-            <Text color="gray.500">Let's take this to the next level.</Text>
-          </div>
-        </Box>
+      <Box maxW="4xl" m="auto" textAlign="center">
+        <BlogOptin title="Get more great stuff like this" description="Enter your email to join my newsletter." />
       </Box>
     </Layout>
   )

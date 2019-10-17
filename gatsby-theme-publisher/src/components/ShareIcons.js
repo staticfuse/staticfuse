@@ -26,14 +26,14 @@ const ShareIcons = ({ post }) => {
         {shareServices &&
           shareServices.map(share => (
             <Box
+              key={share.name}
               as="button"
               marginRight={2}
               rounded="md"
               p={2}
               className="share-icon"
-              border="1px solid"
-              borderColor="primary"
-              color="primary"
+              bg="buttonBg"
+              color="buttonText"
               fontSize="xs"
               onClick={ () => window.open(share.url ) }
               target="_blank"
