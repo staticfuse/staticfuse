@@ -1,5 +1,5 @@
-import React from 'react'
-import { Box, Flex } from '@chakra-ui/core'
+import React from 'react';
+import { Box, Flex } from '@chakra-ui/core';
 
 const ShareIcons = ({ post }) => {
   const shareServices = [
@@ -12,20 +12,21 @@ const ShareIcons = ({ post }) => {
       name: 'Facebook',
       url: `https://www.facebook.com/sharer/sharer.php?u=${
         post.link
-      }&amp;title=${post.title}&amp;picture=%20${post.featuredImage &&
-        post.featuredImage.sourceUrl}`,
+      }&amp;title=${post.title}&amp;picture=%20${post.featuredImage
+        && post.featuredImage.sourceUrl}`,
       icon: '',
     },
-  ]
+  ];
   return (
     <div>
       <Box as="p" fontSize="sm" color="muted" mb={1}>
         Share
       </Box>
       <Flex justify="start">
-        {shareServices &&
-          shareServices.map(share => (
+        {shareServices
+          && shareServices.map((share) => (
             <Box
+              key={share.name}
               as="button"
               marginRight={2}
               rounded="md"
@@ -35,7 +36,7 @@ const ShareIcons = ({ post }) => {
               borderColor="primary"
               color="primary"
               fontSize="xs"
-              onClick={ () => window.open(share.url ) }
+              onClick={() => window.open(share.url)}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -44,7 +45,7 @@ const ShareIcons = ({ post }) => {
           ))}
       </Flex>
     </div>
-  )
-}
+  );
+};
 
-export default ShareIcons
+export default ShareIcons;
