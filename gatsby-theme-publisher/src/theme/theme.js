@@ -12,7 +12,8 @@ const publisherTheme = {
     navLink: "#f5ee08",
     headerBg: "#1eb4f3",
     buttonBg: "#1eb4f3",
-    buttonText: "#eee"
+    buttonText: "#eee",
+    optinText: "#555"
   },
 }
 

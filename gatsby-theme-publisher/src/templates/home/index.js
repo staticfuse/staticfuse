@@ -71,7 +71,8 @@ const Home = ({ location }) => {
               </Text>
               <Button
                 onClick={() => navigate('/blog/')}
-                variantColor="blue"
+                bg="buttonBg"
+                color="buttonText"
                 rightIcon="arrow-forward"
                 w={['100%', 'auto']}
                 mb={[2, '0']}
@@ -144,7 +145,7 @@ const Home = ({ location }) => {
                 fontWeight="400"
                 color="gray.600"
               >
-                <Icon name="star" size="15px" color="blue.500" /> Thing One
+                Thing One
               </Heading>
               <Text color="gray.500">
                 We are always improving upon our stellar reputation. It isn't
@@ -161,7 +162,7 @@ const Home = ({ location }) => {
                 fontWeight="400"
                 color="gray.600"
               >
-                <Icon name="email" size="15px" color="blue.500" /> Thing Two
+                Thing Two
               </Heading>
               <Text color="gray.500">
                 You can always contact us if you need anything. We don't check
@@ -178,7 +179,7 @@ const Home = ({ location }) => {
                 fontWeight="400"
                 color="gray.600"
               >
-                <Icon name="bell" size="15px" color="blue.500" /> Thing Three
+                Thing Three
               </Heading>
               <Text color="gray.500">
                 This box has a bell icon because I didn't try very hard to make
@@ -191,13 +192,13 @@ const Home = ({ location }) => {
       </Box>
 
       <Box maxW="4xl" mx="auto" my={8}>
-        <Heading as="h4" color="gray.200" fontSize="lg">
+        <Heading as="h4" color="gray.400" fontSize="lg">
           Latest posts
         </Heading>
         <PostGrid limit="3" noPadding />
       </Box>
 
-      <Box maxW="4xl" m="auto" textAlign="center">
+      <Box maxW="4xl" m="auto" textAlign="center" bg="gray.100" rounded="lg" p={6} mb={6}>
         <BlogOptin title="Get more great stuff like this" description="Enter your email to join my newsletter." />
       </Box>
     </Layout>
