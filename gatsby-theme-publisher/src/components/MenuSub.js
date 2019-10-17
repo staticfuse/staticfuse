@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, IconButton } from '@chakra-ui/core';
+// eslint-disable-next-line import/no-cycle
 import MenuItem from './MenuItem';
 
 const MenuSub = ({ subItems, subMenuOpen, openSubMenu }) => {

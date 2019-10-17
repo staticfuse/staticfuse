@@ -90,6 +90,9 @@ const Menu = () => {
 
               <div
                 onClick={() => (menuOpened ? openMenu(false) : openMenu(true))}
+                onKeyDown={() => (menuOpened ? openMenu(false) : openMenu(true))}
+                role="button"
+                tabIndex={0}
               >
                 <HamburgerMenu menuOpen={menuOpened} />
               </div>
