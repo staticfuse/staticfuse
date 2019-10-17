@@ -1,9 +1,9 @@
 import React from "react"
-import { Link, useStaticQuery, graphql } from "gatsby"
+import { useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
 import { Box } from "@chakra-ui/core"
 
-const Logo = ({ data }) => {
+const Logo = props => {
   const imageData = useStaticQuery(graphql`
     {
       file(absolutePath: {regex: "/^((?!node_modules).)*$/"}, name: {eq: "site-logo"}) {
@@ -24,11 +24,10 @@ const Logo = ({ data }) => {
       }
     }
   `)
+
   return (
-    <Box position={["absolute", "absolute", "static"]} left="0" right="0" m={["auto", "auto","0"]} w="50px">
-      <Link
-        to="/"
-        className="h-10 overflow-hidden block"
+    <Box className="site-logo" position={["absolute", "absolute", "static"]} left="0" right="0" m={["auto", "auto","0"]} w="50px">
+      <div
         style={{
           overflow: "hidden",
           height: "50px",
@@ -36,13 +35,10 @@ const Logo = ({ data }) => {
           display: "block",
           padding: "1px"
         }}
-        rel="home"
-        itemProp="url"
       >
         <Img
           fixed={imageData.file.childImageSharp.fixed}
           alt="Site Logo"
-          className="site-logo"
           itemProp="logo"
           style={{
             display: "block",
@@ -50,7 +46,7 @@ const Logo = ({ data }) => {
             height: "100%",
           }}
         />
-      </Link>
+      </div>
     </Box>
   )
 }

@@ -68,7 +68,7 @@ const Menu = ({ location }) => {
     return false
   }
 
-  const renderLink = (menuItem) =>
+  const renderLink = menuItem =>
     menuItem.connectedObject &&
     menuItem.connectedObject.__typename === 'WPGraphQL_MenuItem' &&
     menuItem.url !== '/' ? (
@@ -100,7 +100,7 @@ const Menu = ({ location }) => {
       menuItem.label
     )
 
-  const renderSubMenu = (items) => (
+  const renderSubMenu = items => (
     <>
       <IconButton
         aria-label="open sub menu"
@@ -256,7 +256,9 @@ const Menu = ({ location }) => {
               height={menuOpened ? '100%' : '50px'}
               bg="headerBg"
             >
-              <Logo />
+              <Link to="/" rel="home" itemProp="url">
+                <Logo />
+              </Link>
 
               <div
                 onClick={() => (menuOpened ? openMenu(false) : openMenu(true))}
