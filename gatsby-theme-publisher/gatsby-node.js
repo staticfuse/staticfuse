@@ -16,9 +16,6 @@ exports.createPages = async ({ actions, graphql, reporter }, options) => {
     ...options,
   };
 
-  console.log(mergedOptions);
-
-
   await createPosts({ actions, graphql }, mergedOptions);
   await createCategories({ actions, graphql });
   await createTags({ actions, graphql });
@@ -52,9 +49,32 @@ exports.createResolvers = ({
         },
       },
     },
+    SiteSiteMetadataPublisherMenuConfig: {
+      hasSubMenu: {
+        type: 'Boolean!',
+        resolve(source) {
+          if (
+            source.label,
+            source.href,
+            source.subMenu
+          ) {
+            return true;
+          }
+          return false;
+        },
+      },
+      subMenu: {
+        type: 'SiteSiteMetadataPublisherMenuConfigSubMenu',
+        resolve(source) {
+          if (!source.subMenu) {
+            return null;
+          }
+          return source;
+        },
+      },
+    },
   });
 };
-
 
 exports.onPreBootstrap = async ({ reporter }) => {
   if (fs.existsSync('src/images')) return;

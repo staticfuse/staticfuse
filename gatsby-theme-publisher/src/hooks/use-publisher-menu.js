@@ -9,6 +9,12 @@ export default () => {
             href
             isExternal
             label
+            hasSubMenu
+            subMenu {
+              href
+              isExternal
+              label
+            }
           }
         }
       }
