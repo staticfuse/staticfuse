@@ -18,7 +18,7 @@ const PostEntryTitle = ({ post, location, titleClass }) => {
           }}
         ></Heading>
       ) : (
-        <Heading className={titleClass} mb={4} fontWeight="500">
+        <Heading className={titleClass} mb={4} fontWeight="500" fontSize={ location === "grid" ? "lg" : "" }>
           <Link
             to={`${blogURI}/${post.uri}/`}
             dangerouslySetInnerHTML={{

@@ -77,6 +77,9 @@ const Layout = props => {
           display: "block",
           margin: "0 auto",
         },
+        ".entry-content img, .entry-content figure, .entry-content picture": {
+          maxWidth: "100%"
+        },
         ".entry-content h2": {
           marginTop: "4rem"
         },

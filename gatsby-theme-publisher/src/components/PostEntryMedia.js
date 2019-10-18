@@ -22,16 +22,17 @@ const PostEntryMedia = ({ post, location, classes = "" }) => {
     mb={4}
     width="100%"
     maxW="5xl"
+    maxH="500px"
+    overflow="hidden"
   >
     <WithLink location={location} post={post} uri={`${blogURI}/${post.uri}/`}>
       <div
-        className="entry-media__figure-wrapper mt-6 mb-10"
+        className="entry-media__figure-wrapper"
         style={{ maxWidth: 1736 }}
       >
         {/* {JSON.stringify(post, null, 2)} */}
         <Img
           fluid={post.featuredImage.imageFile.childImageSharp.fluid}
-          className="shadow-2xl"
           alt={post.title}
         />
       </div>

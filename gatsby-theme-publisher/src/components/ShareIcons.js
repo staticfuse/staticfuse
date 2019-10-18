@@ -32,9 +32,8 @@ const ShareIcons = ({ post }) => {
               rounded="md"
               p={2}
               className="share-icon"
-              border="1px solid"
-              borderColor="primary"
-              color="primary"
+              bg="buttonBg"
+              color="buttonText"
               fontSize="xs"
               onClick={() => window.open(share.url)}
               target="_blank"

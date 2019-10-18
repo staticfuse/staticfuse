@@ -33,6 +33,7 @@ const PostEntry = ({ post, classes = '' }) => {
 
           <Text
             className="entry-content"
+            overflow="hidden"
             dangerouslySetInnerHTML={{
               __html: excerpt,
             }}

@@ -6,6 +6,7 @@ import useSiteMetadata from '../hooks/use-site-metadata';
 const Pagination = ({ pageNumber, hasNextPage }) => {
   const { blogURI } = useSiteMetadata();
   if (pageNumber === 1 && !hasNextPage) return null;
+
   return (
     <Box as="nav" className="pagination" role="navigation" textAlign="left" mb={2}>
       <span className="screen-reader-text">Posts navigation</span>

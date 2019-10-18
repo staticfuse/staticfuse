@@ -1,6 +1,20 @@
 # Gatsby WordPress Publisher Theme
 
-The Gatsby Publisher Theme allows you to create a headless (or decoupled) WordPress site. This theme will display all of your pages and posts in a static front-end built on React and Gatsby.
+![Gatsby Theme Publisher Screenshot](https://data.staticfuse.com/wp-content/uploads/2019/10/publisher-hero.jpg)
+
+The Gatsby Publisher Theme allows you to create a headless (or decoupled) WordPress site.
+
+## Features
+
+The Publisher theme can create a static site from any WordPress content, including posts, pages, categories, tags, and users. Other features include:
+
+- Dynamic comments with Apollo
+- Site search
+- SEO
+- Mobile first design
+- Mailchimp opt-in form
+- Reusable components from [chakra-ui](https://chakra-ui.com)
+- Easy themeing with the styled system theme spec
 
 ## Getting Started
 

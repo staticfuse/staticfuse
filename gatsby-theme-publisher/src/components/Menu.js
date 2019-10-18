@@ -86,7 +86,9 @@ const Menu = () => {
               height={menuOpened ? '100%' : '50px'}
               bg="headerBg"
             >
-              <Logo />
+              <Link to="/" rel="home" itemProp="url">
+                <Logo />
+              </Link>
 
               <div
                 onClick={() => (menuOpened ? openMenu(false) : openMenu(true))}

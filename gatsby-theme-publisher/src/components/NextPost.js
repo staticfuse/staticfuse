@@ -16,18 +16,17 @@ const POSTS_QUERY = graphql`
             sourceUrl
             imageFile {
               childImageSharp {
-                fluid(maxWidth: 1024) {
+                fixed(height: 75) {
                   base64
+                  tracedSVG
                   aspectRatio
+                  width
+                  height
                   src
                   srcSet
                   srcWebp
                   srcSetWebp
-                  sizes
-                  originalImg
                   originalName
-                  presentationWidth
-                  presentationHeight
                 }
               }
             }
@@ -68,11 +67,12 @@ const NextPost = ({ post }) => {
                   overflow: 'hidden',
                   marginRight: '10px',
                   height: 'auto',
+                  maxHeight: '75px',
                   width: '100px',
                 }}
               >
                 <Img
-                  fluid={nextPost.featuredImage.imageFile.childImageSharp.fluid}
+                  fluid={nextPost.featuredImage.imageFile.childImageSharp.fixed}
                   alt={nextPost.title}
                   className="next-post-featured-image"
                 />
