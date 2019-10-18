@@ -1,11 +1,11 @@
-const path = require(`path`)
-const themeOptions = require("./src/utils/ThemeOptions")
+const path = require('path');
+const themeOptions = require('./src/utils/ThemeOptions');
 
-module.exports = options => {
+module.exports = (options) => {
   const mergedOptions = {
     ...themeOptions,
     ...options,
-  }
+  };
 
   const config = {
     siteMetadata: {
@@ -13,35 +13,35 @@ module.exports = options => {
     },
     plugins: [
       {
-        resolve: `gatsby-source-graphql`,
+        resolve: 'gatsby-source-graphql',
         options: {
           // This type will contain remote schema Query type
-          typeName: `WPGraphQL`,
+          typeName: 'WPGraphQL',
           // This is field under which it's accessible
-          fieldName: `wpgraphql`,
+          fieldName: 'wpgraphql',
           // Url to query from
-          url: mergedOptions.wordPressUrl + `/graphql`,
+          url: `${mergedOptions.wordPressUrl}/graphql`,
         },
       },
       {
-        resolve: `gatsby-source-filesystem`,
+        resolve: 'gatsby-source-filesystem',
         options: {
-          name: `images`,
-          path: path.join(__dirname, `src`, `images`),
+          name: 'images',
+          path: path.join(__dirname, 'src', 'images'),
         },
       },
       {
-        resolve: `gatsby-source-filesystem`,
+        resolve: 'gatsby-source-filesystem',
         options: {
-          name: `images`,
-          path: `./src/images`,
+          name: 'images',
+          path: './src/images',
         },
       },
-      `gatsby-plugin-sharp`,
-      `gatsby-transformer-sharp`,
-      `gatsby-plugin-sitemap`,
+      'gatsby-plugin-sharp',
+      'gatsby-transformer-sharp',
+      'gatsby-plugin-sitemap',
     ],
-  }
+  };
 
   /**
    * Conditionally add plugins based on theme config
@@ -49,21 +49,21 @@ module.exports = options => {
    */
   if (mergedOptions.mailChimpEndpoint) {
     config.plugins.push({
-      resolve: "gatsby-plugin-mailchimp",
+      resolve: 'gatsby-plugin-mailchimp',
       options: {
         endpoint: mergedOptions.mailChimpEndpoint,
       },
-    })
+    });
   }
 
   if (mergedOptions.gaTrackingId) {
     config.plugins.push({
-      resolve: `gatsby-plugin-google-analytics`,
+      resolve: 'gatsby-plugin-google-analytics',
       options: {
         trackingId: mergedOptions.gaTrackingId,
       },
-    })
+    });
   }
 
-  return config
-}
+  return config;
+};

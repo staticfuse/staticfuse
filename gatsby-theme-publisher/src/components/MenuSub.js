@@ -55,7 +55,7 @@ const MenuSub = ({ subItems, subMenuOpen, openSubMenu }) => (
       opacity={subMenuOpen ? '1' : '0'}
     >
       {subItems.map((subItem) => (
-        <MenuItem key={subItem.id} menuItem={subItem} menuOpened={false} />
+        <MenuItem key={subItem.label} menuItem={subItem} menuOpened={false} />
       ))}
     </Box>
   </>
