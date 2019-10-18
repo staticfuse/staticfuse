@@ -22,7 +22,7 @@ const MenuLink = ({ menuItem }) => {
    * If it's a custom link, we treat it a little different.
    * Else if we can create a local link, lets do it.
    */
-  if (isCustom) {
+  if (isCustom || menuItem.isExternal) {
     link = (
       <Box
         as="a"
