@@ -1,17 +1,17 @@
-import React from "react"
-import moment from "moment/moment"
-import { Link } from "gatsby"
-import { Avatar, Tag, Box } from "@chakra-ui/core"
+import React from 'react'
+import moment from 'moment/moment'
+import { Link } from 'gatsby'
+import { Avatar, Tag, Box, Text } from '@chakra-ui/core'
 
-const PostEntryMeta = ({ post, location = "" }) => (
+const PostEntryMeta = ({ post, location = '' }) => (
   <Box
     className="entry-meta"
     overflow="hidden"
     marginBottom="25px"
     marginTop="25px"
   >
-    <div className="tags" style={{ float:'right' }}>
-      {post.categories && location === "blog"
+    <div className="tags" style={{ float: 'right' }}>
+      {post.categories && location === 'blog'
         ? post.categories.nodes.map(category => (
             <Tag
               key={category.id}
@@ -28,29 +28,35 @@ const PostEntryMeta = ({ post, location = "" }) => (
     </div>
 
     <Box as="div" color="gray.600" fontSize="sm" pt={1} className="author-meta">
-      <Avatar
-        src={post.author.avatar ? post.author.avatar.url : ""}
-        alt="Author avatar"
-        style={{
-          float: 'left',
-          marginRight: '10px'
-        }}
-      />
-      <p className="author-name" style={{marginBottom:"0"}}>
-        <Link
-          to={`/author/${post.author.slug}`}
+      {post.author ? (
+        <Avatar
+          src={post.author.avatar ? post.author.avatar.url : ''}
+          alt="Author avatar"
           style={{
-            color: "#999",
+            float: 'left',
+            marginRight: '10px',
           }}
-        >
-          {`  ${post.author.name}`}
-        </Link>
-      </p>
+        />
+      ) : null}
+
+      {post.author ? (
+        <Text className="author-name" mb="0">
+          <Link
+            to={`/author/${post.author.slug}`}
+            style={{
+              color: '#999',
+            }}
+          >
+            {`  ${post.author.name}`}
+          </Link>
+        </Text>
+      ) : null}
+
       <p className="post-date">
         <Link
           to={`/${post.uri}`}
           style={{
-            color: "#999",
+            color: '#999',
           }}
         >
           <time className="entry-date" dateTime={post.date}>

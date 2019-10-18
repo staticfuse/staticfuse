@@ -14,9 +14,9 @@ module.exports = {
         mailChimpEndpoint: 0,
         dynamicComments: 1,
         gaTrackingId: 0,
-        wpPages: 1,
+        wpPages: 0,
         // menuName: 'PRIMARY',
-        wordPressUrl: 'https://data.staticfuse.com',
+        wordPressUrl: 'https://publishertheme.staticfuse.com',
         blogURI: '/blog'
       },
     },

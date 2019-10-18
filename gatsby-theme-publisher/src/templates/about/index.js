@@ -61,7 +61,7 @@ const About = ({ location }) => {
           >
             {people
               ? people.map(person => (
-                  <PseudoBox rounded="lg" overflow="hidden" borderWidth="1px" position="relative" mb={[4,2]} textAlign="center">
+                  <PseudoBox key={person.name} rounded="lg" overflow="hidden" borderWidth="1px" position="relative" mb={[4,2]} textAlign="center">
                     <Image
                       src={person.img}
                       alt="Nick Cage"

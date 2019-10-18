@@ -11,6 +11,8 @@ const publisherTheme = {
     links: "#1eb4f3",
     navLink: "#f5ee08",
     headerBg: "#1eb4f3",
+    footerBg: theme.colors.gray['900'],
+    footerText: theme.colors.gray['400'],
     buttonBg: "#1eb4f3",
     buttonText: "#eee",
     optinText: "#555"

@@ -6,7 +6,7 @@ const Header = () => {
 
   return (
     <Box bg="headerBg" p=".5rem 2rem" minH="50px">
-      <Box maxW="6xl" m="auto">
+      <Box maxW="4xl" m="auto">
         <Box
           display={["block", "flex"]}
           alignItems="center"

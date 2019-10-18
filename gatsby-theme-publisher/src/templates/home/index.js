@@ -1,7 +1,7 @@
 import React from 'react'
 import Layout from '../../components/Layout'
 import SEO from '../../components/SEO'
-import { Box, Text, Heading, Button, Icon, Image } from '@chakra-ui/core'
+import { Box, Text, Heading, Button, Image } from '@chakra-ui/core'
 import useSiteMetadata from '../../hooks/use-site-metadata'
 import { useStaticQuery, graphql, navigate } from 'gatsby'
 import BackgroundImage from 'gatsby-background-image'
@@ -191,7 +191,7 @@ const Home = ({ location }) => {
         </Box>
       </Box>
 
-      <Box maxW="4xl" mx="auto" my={8}>
+      <Box maxW="4xl" mx="auto" my={8} px={2}>
         <Heading as="h4" color="gray.400" fontSize="lg">
           Latest posts
         </Heading>
