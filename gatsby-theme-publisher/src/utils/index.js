@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import useSiteMetadata from '../hooks/use-site-metadata';
 
 /**
@@ -7,10 +8,10 @@ import useSiteMetadata from '../hooks/use-site-metadata';
  */
 export const CreateLocalLink = (menuItem) => {
   const { blogURI, wordPressUrl } = useSiteMetadata();
-  const {url, connectedObject } = menuItem;
+  const { url, connectedObject } = menuItem;
 
-  if (`#` === url) {
-    return null
+  if (url === '#') {
+    return null;
   }
   /**
    * Alway want to pull of our API URL.
@@ -25,4 +26,4 @@ export const CreateLocalLink = (menuItem) => {
   }
 
   return newUri;
-}
+};

@@ -1,19 +1,24 @@
-import { graphql, useStaticQuery } from "gatsby"
+import { graphql, useStaticQuery } from 'gatsby';
+
 export default () => {
   const data = useStaticQuery(graphql`
     {
-      allSitePage(filter: {context: {publisher: {eq: true}}}) {
-        edges {
-          node {
-            id
-            path
-            context {
+      publisherMenu {
+        nodes {
+          isExternal
+          label
+          url
+          childItems {
+            nodes {
+              isExternal
               label
+              url
             }
           }
         }
       }
     }
-  `)
-  return data.allSitePage.edges
-}
+  `);
+
+  return data.publisherMenu.nodes;
+};
