@@ -55,26 +55,27 @@ exports.createResolvers = ({
         resolve(source) {
           if (
             source.label,
-            source.href,
-            source.subMenu
+            source.url,
+            source.childItems
           ) {
             return true;
           }
           return false;
         },
       },
-      subMenu: {
-        type: 'SiteSiteMetadataPublisherMenuConfigSubMenu',
+      childItems: {
+        type: '[SiteSiteMetadataPublisherMenuConfigChildItems]',
         resolve(source) {
-          if (!source.subMenu) {
-            return null;
+          if (!source.childItems) {
+            return [];
           }
-          return source;
+          return source.childItems;
         },
       },
     },
   });
 };
+
 
 exports.onPreBootstrap = async ({ reporter }) => {
   if (fs.existsSync('src/images')) return;

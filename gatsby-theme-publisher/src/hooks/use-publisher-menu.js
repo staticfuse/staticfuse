@@ -6,12 +6,12 @@ export default () => {
       site {
         siteMetadata {
           publisherMenuConfig {
-            href
+            url
             isExternal
             label
             hasSubMenu
-            subMenu {
-              href
+            childItems {
+              url
               isExternal
               label
             }
@@ -21,5 +21,17 @@ export default () => {
     }
   `);
 
-  return data.site.siteMetadata.publisherMenuConfig;
+  const { publisherMenuConfig } = data.site.siteMetadata;
+
+  /**
+   * Normalize object shape to match that of the WP menu.
+   */
+  const menu = publisherMenuConfig.map((menuItem) => {
+    const newMenuItem = { ...menuItem };
+    const childItems = menuItem.childItems ? menuItem.childItems : [];
+    newMenuItem.childItems = { nodes: childItems };
+    return newMenuItem;
+  });
+
+  return menu;
 };

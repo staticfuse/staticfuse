@@ -4,6 +4,8 @@ import { Box } from '@chakra-ui/core';
 import { CreateLocalLink } from '../utils';
 
 const MenuLink = ({ menuItem }) => {
+  // console.log(MenuLink);
+
   /**
   * Is the item a "custom" menu item?
   */

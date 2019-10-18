@@ -14,35 +14,42 @@ module.exports = {
         publisherMenuConfig: [
           {
             label: 'home',
-            href: '/',
+            url: '/',
             isExternal: false,
           },
           {
             label: 'blog',
-            href: '/blog',
+            url: '/blog',
             isExternal: false,
           },
           {
             label: 'justinwhall.com',
-            href: 'https://justinwhall.com',
+            url: 'https://justinwhall.com',
             isExternal: true,
           },
           {
             label: 'top menu',
-            href: '/contact',
+            url: '/contact',
             isExternal: false,
-            subMenu: {
-              label: 'sub menu that links to blog',
-              href: '/blog',
-              isExternal: false,
-            },
+            childItems: [
+              {
+                label: 'sub menu that links to blog',
+                url: '/blog',
+                isExternal: false,
+              },
+              {
+                label: 'Another sub item menu',
+                url: '/blog',
+                isExternal: false,
+              },
+            ],
           },
         ],
         mailChimpEndpoint: 0,
         dynamicComments: 1,
         gaTrackingId: 0,
         // wpPages: 1,
-        // menuName: 'PRIMARY',
+        menuName: 'PRIMARY',
         wordPressUrl: 'https://sandbox.staticfuse.com',
         blogURI: '/blog',
       },

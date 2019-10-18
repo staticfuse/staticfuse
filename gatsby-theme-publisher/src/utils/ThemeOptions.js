@@ -6,22 +6,22 @@ const THEME_OPTIONS = {
   publisherMenuConfig: [
     {
       label: 'home',
-      href: '/',
+      url: '/',
       isExternal: false,
     },
     {
       label: 'about',
-      href: '/about',
+      url: '/about',
       isExternal: false,
     },
     {
       label: 'blog',
-      href: '/blog',
+      url: '/blog',
       isExternal: false,
     },
     {
       label: 'contact',
-      href: '/contact',
+      url: '/contact',
       isExternal: false,
     },
   ],

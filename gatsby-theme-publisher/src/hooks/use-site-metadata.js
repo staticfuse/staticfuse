@@ -14,11 +14,6 @@ export default () => {
           menuName
           mailChimpEndpoint
           blogURI
-          publisherMenuConfig {
-            href
-            isExternal
-            label
-          }
         }
       }
     }

@@ -114,18 +114,7 @@ const Menu = () => {
                   {/* If we have a menuName, do the WordPress menu */
                   menuName
                     ? menu.node.menuItems.nodes.map((menuItem) => <MenuItem key={menuItem.id} menuItem={menuItem} />)
-                    : publisherMenu.map((menuItem) => { // If no menuName, do the starter pages menu
-                      const { label, href } = menuItem;
-                      return (
-                        <MenuItem
-                          key={label}
-                          menuItem={{
-                            url: href,
-                            label,
-                          }}
-                        />
-                      );
-                    })
+                    : publisherMenu.map((menuItem) => <MenuItem key={menuItem.label} menuItem={menuItem} />)
                   }
                 </Box>
               </Box>
