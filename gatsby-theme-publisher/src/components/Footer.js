@@ -1,30 +1,112 @@
-import React from "react"
-import useSiteMetadata from "../hooks/use-site-metadata"
-import { Box, Button } from "@chakra-ui/core"
+import React from 'react'
+import useSiteMetadata from '../hooks/use-site-metadata'
+import { Box, Button, Heading, Text, Stack } from '@chakra-ui/core'
+import { Link, useStaticQuery, graphql } from 'gatsby'
+import Logo from './Logo'
 
 const Footer = () => {
   const { author, twitter } = useSiteMetadata()
+  const data = useStaticQuery(graphql`
+    {
+      allSitePage(filter: { path: { regex: "/category/" } }) {
+        nodes {
+          path
+          context {
+            categoryId
+            name
+          }
+        }
+      }
+    }
+  `)
+
+  const categories = data.allSitePage.nodes
   return (
-    <Box as="footer" bg="gray.900" p={8} w="100%" className="site-footer">
-      <Box maxW="6xl" m="auto" overflow="hidden" color="muted" fontSize="sm">
-        <p style={{ float: "left" }}>© 2019 {author} | Built with <a href="https://www.gatsbyjs.org" target="_blank" rel="noopener noreferrer">Gatsby</a></p>
-        <p style={{ float: "right", display: "flex" }}>
-          <Button
-            onClick={() => window.open(`https://twitter.com/${twitter}`)}
-            leftIcon="at-sign"
-            variant="outline"
-            outline="none"
-            color="gray.300"
-            size="xs"
-            fontSize="xs"
-            _hover={{
-              bg:"blue.500",
-              color: "white"
-            }}
+    <Box as="footer" bg="footerBg" p={8} w="100%" className="site-footer">
+      <Box
+        display="flex"
+        maxW="4xl"
+        m="auto"
+        overflow="hidden"
+        color="muted"
+        fontSize="sm"
+        justifyContent="space-between"
+      >
+        {categories && categories.length ? (
+          <Box w="50%">
+            <Heading as="h4" fontSize="xl" color="headings">
+              Categories
+            </Heading>
+            <Box
+              display="grid"
+              gridTemplateColumns="repeat(auto-fill, minmax(100px, 1fr))"
+              gridColumnGap="20px"
+              gridRowGap="5px"
+            >
+              {categories.map(item => (
+                <Box
+                  key={item.context.categoryId}
+                  fontWeight="500"
+                  fontSize="base"
+                  color="footerText"
+                  py={1}
+                >
+                  <Link to={item.path}>{item.context.name}</Link>
+                </Box>
+              ))}
+            </Box>
+          </Box>
+        ) : null}
+
+        <Box w="25%">
+          <Heading as="h4" fontSize="xl" color="headings">
+            Get in touch
+          </Heading>
+          <Stack spacing={2} color="footerText">
+            <Box>
+              <Logo />
+            </Box>
+            <Box>
+              <Button
+                onClick={() => window.open(`https://twitter.com/${twitter}`)}
+                leftIcon="at-sign"
+                variant="outline"
+                outline="none"
+                color="gray.300"
+                size="xs"
+                fontSize="xs"
+                _hover={{
+                  bg: 'blue.500',
+                  color: 'white',
+                }}
+              >
+                Twitter
+              </Button>
+            </Box>
+            <Box>21 Elm St, Transylvania 92673</Box>
+            <Box>(555) 867-5309</Box>
+          </Stack>
+        </Box>
+      </Box>
+
+      <Box
+        borderTop="1px solid rgba(255,255,255,.2)"
+        py={4}
+        maxW="4xl"
+        m="auto"
+        mt={4}
+        textAlign="center"
+      >
+        <Text color="footerText" fontSize="sm" opacity=".7">
+          © 2019 {author} | Built with{' '}
+          <a
+            href="https://www.gatsbyjs.org"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            Twitter
-          </Button>
-        </p>
+            Gatsby
+          </a>
+        </Text>
       </Box>
     </Box>
   )
