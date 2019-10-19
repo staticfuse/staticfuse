@@ -6,6 +6,8 @@ const {
 const postTemplate = require.resolve('../src/templates/posts/single.js');
 const blogTemplate = require.resolve('../src/templates/posts/archive.js');
 
+const { log } = require('./utils.js');
+
 const GET_POSTS = `
 # Define our query variables
 query GET_POSTS($first:Int $after:String) {
@@ -116,93 +118,91 @@ module.exports = async ({ actions, graphql }, options) => {
    */
   const blogURI = options.blogURI.replace(/^\//, '');
 
-  const fetchPosts = async (variables) =>
+  /**
+   * Fetch posts using the GET_POSTS query and the variables passed in.
+   */
+  const fetchPosts = async (variables) => graphql(GET_POSTS, variables).then(({ data }) => {
     /**
-     * Fetch posts using the GET_POSTS query and the variables passed in.
-     */
-    await graphql(GET_POSTS, variables).then(({ data }) => {
-      /**
        * Extract the data from the GraphQL query results
        */
-      const {
-        wpgraphql: {
-          posts: {
-            nodes,
-            pageInfo: { hasNextPage, endCursor },
-          },
+    const {
+      wpgraphql: {
+        posts: {
+          nodes,
+          pageInfo: { hasNextPage, endCursor },
         },
-      } = data;
+      },
+    } = data;
 
-      /**
+    /**
        * Define the path for the paginated blog page.
        * This is the url the page will live at
        * @type {string}
        */
-      const blogPagePath = !variables.after
-        ? `${blogURI}/`
-        : `${blogURI}/page/${pageNumber + 1}`;
+    const blogPagePath = !variables.after
+      ? `${blogURI}/`
+      : `${blogURI}/page/${pageNumber + 1}`;
 
-      /**
-       * The IDs of the posts which were got from GraphQL.
-       */
-      const nodeIds = nodes.map((node) => node.postId);
-
-      /**
-       * Add config for the blogPage to the blogPage array
-       * for creating later
-       *
-       * @type {{path: string, component: string, context: {nodes: *, pageNumber: number, hasNextPage: *}}}
-       */
-      blogPages[pageNumber] = {
-        path: blogPagePath,
-        component: blogTemplate,
-        context: {
-          nodes,
-          pageNumber: pageNumber + 1,
-          hasNextPage,
-          itemsPerPage,
-          allPosts,
-        },
-      };
-      /**
+    /**
+     * Add config for the blogPage to the blogPage array
+     * for creating later
+     *
+     * @type {{
+    * path: string,
+    * component: string,
+    * context: {nodes: *, pageNumber: number, hasNextPage: *}
+     * }}
+     */
+    blogPages[pageNumber] = {
+      path: blogPagePath,
+      component: blogTemplate,
+      context: {
+        nodes,
+        pageNumber: pageNumber + 1,
+        hasNextPage,
+        itemsPerPage,
+        allPosts,
+      },
+    };
+    /**
        * Map over the posts for later creation
        */
-      nodes
+    nodes
         && nodes.map((post) => {
           allPosts.push(post);
         });
 
-      /**
+    /**
        * If there's another page, fetch more
        * so we can have all the data we need.
        */
-      if (hasNextPage) {
-        pageNumber++;
-        console.log(`fetch page ${pageNumber} of posts...`);
-        return fetchPosts({ first: itemsPerPage, after: endCursor });
-      }
+    if (hasNextPage) {
+      pageNumber++;
+      log('fetch page', '#02f56b', `${pageNumber} of posts...`);
+      return fetchPosts({ first: itemsPerPage, after: endCursor });
+    }
 
-      /**
+    /**
        * Once we're done, return all the posts
        * so we can create the necessary pages with
        * all the data on hand.
        */
-      return allPosts;
-    })
-  ;
+    return allPosts;
+  });
 
   /**
    * Kick off our `fetchPosts` method which will get us all
    * the posts we need to create individual post pages
    * and paginated blogroll archive pages.
    */
-  await fetchPosts({ first: itemsPerPage, after: null }).then((allPosts) => {
+  await fetchPosts({ first: itemsPerPage, after: null }).then((posts) => {
     /**
-     * Map over the allPosts array to create the
+     * Map over the posts array to create the
      * single-post pages
      */
-    allPosts
-      && allPosts.map((post) => {
+    // eslint-disable-next-line no-unused-expressions
+    posts
+      && posts.map((post) => {
         /**
          * Build post path based of theme blogURI setting.
          */
@@ -215,20 +215,23 @@ module.exports = async ({ actions, graphql }, options) => {
           component: postTemplate,
           context: post,
         });
+        log('created post', '#02f56b', `${path}`);
       });
+    log('POSTS TOTAL', '#008a8f', `${posts.length}}`, true);
 
     /**
      * Map over the `blogPages` array to create the
      * paginated blogroll pages
      */
+    // eslint-disable-next-line no-unused-expressions
     blogPages
       && blogPages.map((archivePage) => {
-        console.log(`createBlogPage ${archivePage.context.pageNumber}`);
         if (archivePage.context.pageNumber === 1) {
           archivePage.context.publisher = true;
           archivePage.context.label = archivePage.path.replace('/', '');
         }
         createPage(archivePage);
+        log('created blog archive page', '#02f56b', `${archivePage.context.pageNumber}`);
       });
   });
 };

@@ -1,3 +1,4 @@
+const { log } = require('./utils');
 const { BlogPreviewFragment } = require('../src/templates/posts/data.js');
 
 const categoryTemplate = require.resolve(
@@ -51,7 +52,6 @@ module.exports = async ({ actions, graphql }) => {
 
   await fetchCategories({ first: 100, after: null }).then((categories) => {
     categories.map((category) => {
-      console.log(`create category: ${category.slug}`);
       createPage({
         path: `/category/${category.slug}`,
         component: categoryTemplate,
@@ -59,7 +59,9 @@ module.exports = async ({ actions, graphql }) => {
           ...category,
         },
       });
+      log('created category', '#02f56b', `$${category.slug}`);
     });
+    log('CATEGORY TOTAL', '#d200d9', `${categories.length}`, true);
     return true;
   });
 };

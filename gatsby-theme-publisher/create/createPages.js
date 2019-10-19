@@ -1,8 +1,11 @@
-const { PageTemplateFragment } = require(`../src/templates/page/data.js`)
-const pageTemplate = require.resolve(`../src/templates/page/index.js`)
-const homeTemplate = require.resolve(`../src/templates/home/index.js`)
-const aboutTemplate = require.resolve(`../src/templates/about/index.js`)
-const contactTemplate = require.resolve(`../src/templates/contact/index.js`)
+const { log } = require('./utils');
+
+const { PageTemplateFragment } = require('../src/templates/page/data.js');
+
+const pageTemplate = require.resolve('../src/templates/page/index.js');
+const homeTemplate = require.resolve('../src/templates/home/index.js');
+const aboutTemplate = require.resolve('../src/templates/about/index.js');
+const contactTemplate = require.resolve('../src/templates/contact/index.js');
 
 const GET_PAGES = `
   # Define our query variables
@@ -39,7 +42,7 @@ const GET_PAGES = `
   }
   # Here we make use of the imported fragments which are referenced above
   ${PageTemplateFragment}
-`
+`;
 
 /**
  * Array to store allpagess. We make paginated requests
@@ -48,14 +51,14 @@ const GET_PAGES = `
  *
  * @type {Array}
  */
-const allPages = []
+const allPages = [];
 
 /**
  * We track the page number so we can output the page number to the console.
  *
  * @type {number}
  */
-let pageNumber = 0
+let pageNumber = 0;
 
 /**
  * This is the export which Gatbsy will use to process.
@@ -68,7 +71,7 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
    * This is the method from Gatsby that we're going
    * to use to create pages in our static site.
    */
-  const { createPage } = actions
+  const { createPage } = actions;
 
   /**
    * Fetch pages method. This accepts variables to alter
@@ -79,11 +82,11 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
    * @param variables
    * @returns {Promise<*>}
    */
-  const fetchPages = async variables => {
+  const fetchPages = async (variables) =>
     /**
      * Fetch pages using the GET_PAGES query and the variables passed in.
      */
-    return await graphql(GET_PAGES, variables).then(({ data }) => {
+    await graphql(GET_PAGES, variables).then(({ data }) => {
       /**
        * Extract the data from the GraphQL query results
        */
@@ -94,24 +97,24 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
             pageInfo: { hasNextPage, endCursor },
           },
         },
-      } = data
+      } = data;
 
       /**
        * Map over the pages for later creation
        */
-      nodes &&
-        nodes.map(pages => {
-          allPages.push(pages)
-        })
+      nodes
+        && nodes.map((pages) => {
+          allPages.push(pages);
+        });
 
       /**
        * If there's another page, fetch more
        * so we can have all the data we need.
        */
       if (hasNextPage) {
-        pageNumber++
-        reporter.info(`fetch page ${pageNumber} of pages...`)
-        return fetchPages({ first: 10, after: endCursor })
+        pageNumber++;
+        reporter.info(`fetch page ${pageNumber} of pages...`);
+        return fetchPages({ first: 10, after: endCursor });
       }
 
       /**
@@ -119,10 +122,8 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
        * so we can create the necessary pages with
        * all the data on hand.
        */
-      return allPages
-    })
-  }
-
+      return allPages;
+    });
   let pageSlugIndex = 2;
   let wantedSlug = false;
   const maybeGenerateNewSlug = (slug, allPages) => {
@@ -136,25 +137,24 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
     /**
      * Check to see if there is slug conflict.
      */
-    const hasMatch = allPages.filter(page => slug === page.uri)
+    const hasMatch = allPages.filter((page) => slug === page.uri);
 
     /**
      * If there is, recusivley call maybeGenerateNewSlug() until there isn't.
      */
     if (hasMatch.length) {
-      const newSlug = `${wantedSlug}-${pageSlugIndex}`
+      const newSlug = `${wantedSlug}-${pageSlugIndex}`;
       pageSlugIndex++;
       return maybeGenerateNewSlug(newSlug, allPages);
-    } else {
-      return slug;
     }
-  }
+    return slug;
+  };
 
   /**
    * Kick off our `fetchPages` method which will get us all
    * the pages we need to create individual pages.
    */
-  const wpPages = await fetchPages({ first: 10, after: null })
+  const wpPages = await fetchPages({ first: 10, after: null });
 
 
   /**
@@ -162,30 +162,30 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
    * single pages.
    */
   if (wpPages && options.wpPages) {
-    wpPages.map(page => {
-        /**
+    wpPages.map((page) => {
+      /**
          * If WordPress has a page that matches the blogURI setting,
          * The blogURI should override the pages.
          */
-        if (page.uri === options.blogURI.replace('/', '')) {
-          reporter.warn(`Page slug matches your blogURI setting. Page with the slug "${page.uri}" will not be created.`);
-          return;
-        }
+      if (page.uri === options.blogURI.replace('/', '')) {
+        reporter.warn(`Page slug matches your blogURI setting. Page with the slug "${page.uri}" will not be created.`);
+        return;
+      }
 
-        reporter.success(`created page: ${page.uri}`)
-        createPage({
-          path: `/${page.uri}/`,
-          component: pageTemplate,
-          context: page,
-        })
-    })
+      createPage({
+        path: `/${page.uri}/`,
+        component: pageTemplate,
+        context: page,
+      });
+      log('created page', '#d98900', `${page.uri}`);
+    });
+    log('PAGES TOTAL', '#d98900', `${wpPages.length}`, true);
   }
 
   /**
    * Build publisher starter pages if enabled.
    */
-  if ( options.starterPages ) {
-
+  if (options.starterPages) {
     /**
      * Make sure there are no slug confilcts.
      */
@@ -198,31 +198,33 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
       context: {
         publisher: true,
         label: 'About',
-      }
-    })
+      },
+    });
+    log('created publisher theme page', '#02f56b', 'about');
+
     createPage({
       path: `/${contactPath}`,
       component: contactTemplate,
       context: {
         publisher: true,
         label: 'Contact',
-      }
-    })
+      },
+    });
+    log('created publisher theme page', '#02f56b', 'home');
   }
 
   /**
    * If the blog isn't on the home page,
    * create a basic homepage.
    */
-  if ( options.blogURI.length && options.blogURI != "/" ) {
+  if (options.blogURI.length && options.blogURI !== '/') {
     createPage({
       path: '/',
       component: homeTemplate,
       context: {
         publisher: true,
         label: 'Home',
-      }
-    })
+      },
+    });
   }
-
-}
+};

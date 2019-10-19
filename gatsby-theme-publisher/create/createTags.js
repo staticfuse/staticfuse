@@ -1,10 +1,9 @@
+const { log } = require('./utils');
 const { BlogPreviewFragment } = require('../src/templates/posts/data.js');
 
 const tagTemplate = require.resolve('../src/templates/tags/archive.js');
 
 module.exports = async ({ actions, graphql }) => {
-  console.log('calling tags function');
-
   const GET_TAGS = `
     query GET_TAGS($first: Int, $after: String) {
       wpgraphql {
@@ -51,12 +50,13 @@ module.exports = async ({ actions, graphql }) => {
 
   await fetchTags({ first: 100, after: null }).then((tags) => {
     tags.map((tag) => {
-      console.log(`create tag: ${tag.slug}`);
       createPage({
         path: `/tag/${tag.slug}`,
         component: tagTemplate,
         context: tag,
       });
+      log('created tag', '#02f56b', `${tag.slug}`);
     });
+    log('TAG TOTAL', '#a36700', `${tags.length}`, true);
   });
 };
