@@ -13,32 +13,32 @@ module.exports = {
         starterPages: true,
         // publisherMenuConfig: [
         //   {
-        //     label: 'home',
+        //     label: 'Home',
         //     url: '/',
         //     isExternal: false,
         //   },
         //   {
-        //     label: 'blog',
+        //     label: 'Blog',
         //     url: '/blog',
         //     isExternal: false,
         //   },
         //   {
-        //     label: 'justinwhall.com',
+        //     label: 'External Site',
         //     url: 'https://justinwhall.com',
         //     isExternal: true,
         //   },
         //   {
-        //     label: 'top menu',
+        //     label: 'Dropdown Menu',
         //     url: '/contact',
         //     isExternal: false,
         //     childItems: [
         //       {
-        //         label: 'sub menu that links to blog',
+        //         label: 'Item 1',
         //         url: '/blog',
         //         isExternal: false,
         //       },
         //       {
-        //         label: 'Another sub item menu',
+        //         label: 'Item 2',
         //         url: '/blog',
         //         isExternal: false,
         //       },

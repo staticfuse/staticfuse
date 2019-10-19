@@ -197,7 +197,7 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
       component: aboutTemplate,
       context: {
         publisher: true,
-        label: 'about',
+        label: 'About',
       }
     })
     createPage({
@@ -205,7 +205,7 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
       component: contactTemplate,
       context: {
         publisher: true,
-        label: 'contact',
+        label: 'Contact',
       }
     })
   }
@@ -220,7 +220,7 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
       component: homeTemplate,
       context: {
         publisher: true,
-        label: 'home',
+        label: 'Home',
       }
     })
   }

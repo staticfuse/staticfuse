@@ -5,25 +5,25 @@ const THEME_OPTIONS = {
   menuName: 0,
   publisherMenuConfig: [
     {
-      label: 'home',
+      label: 'Home',
       url: '/',
       isExternal: false,
       childItems: [],
     },
     {
-      label: 'about',
+      label: 'About',
       url: '/about',
       isExternal: false,
       childItems: [],
     },
     {
-      label: 'blog',
+      label: 'Blog',
       url: '/blog',
       isExternal: false,
       childItems: [],
     },
     {
-      label: 'contact',
+      label: 'Contact',
       url: '/contact',
       isExternal: false,
       childItems: [],
