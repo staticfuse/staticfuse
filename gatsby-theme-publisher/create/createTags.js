@@ -1,31 +1,24 @@
-const { BlogPreviewFragment } = require('../src/templates/posts/data.js');
-
 const tagTemplate = require.resolve('../src/templates/tags/archive.js');
 
 module.exports = async ({ actions, graphql }) => {
+  console.log('calling tags function');
+
   const GET_TAGS = `
-    query GET_TAGS($first: Int) {
+    query GET_TAGS($first: Int, $after: String) {
       wpgraphql {
-        tags(first: $first) {
+        tags(first: $first, after: $after) {
           pageInfo {
             hasNextPage
             endCursor
           }
           nodes {
             id
-            name
             tagId
             slug
-            posts {
-              nodes {
-                ...BlogPreviewFragment
-              }
-            }
           }
         }
       }
     }
-    ${BlogPreviewFragment}
   `;
   const { createPage } = actions;
   const allTags = [];
@@ -41,6 +34,7 @@ module.exports = async ({ actions, graphql }) => {
     nodes.map((tag) => {
       allTags.push(tag);
     });
+
     if (hasNextPage) {
       return fetchTags({ first: 100, after: endCursor });
     }
