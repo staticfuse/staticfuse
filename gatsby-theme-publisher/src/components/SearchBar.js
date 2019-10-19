@@ -30,7 +30,7 @@ const SearchBar = ({menuOpen}) => {
         m={2}
         transition="transform 0.5s cubic-bezier(0.4, 0.01, 0.165, 0.99), opacity 0.6s cubic-bezier(0.4, 0.01, 0.165, 0.99), -webkit-transform 0.5s cubic-bezier(0.4, 0.01, 0.165, 0.99)"
         transform={ [menuOpen ? "scale(1) translateY(0px)" : "scale(.95) translateY(-10px)", menuOpen ? "scale(1) translateY(0px)" : "scale(.95) translateY(-10px)", "scale(1) translateY(0px)" ]}
-        zIndex="1"
+        zIndex="2"
         style={{
           transitionDelay:".1s"
         }}
