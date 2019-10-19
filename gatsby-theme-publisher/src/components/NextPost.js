@@ -72,7 +72,7 @@ const NextPost = ({ post }) => {
                 }}
               >
                 <Img
-                  fluid={nextPost.featuredImage.imageFile.childImageSharp.fixed}
+                  fixed={nextPost.featuredImage.imageFile.childImageSharp.fixed}
                   alt={nextPost.title}
                   className="next-post-featured-image"
                 />
