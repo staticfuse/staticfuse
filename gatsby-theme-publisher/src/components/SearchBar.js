@@ -39,7 +39,7 @@ const SearchBar = ({menuOpen}) => {
         <Input
           type="text"
           onFocus={() => setSearchOpen(true)}
-          onBlur={() => setSearchOpen(false)}
+          // onBlur={() => setSearchOpen(false)}
           onKeyUp={handleSearch}
           placeholder="Search..."
           _placeholder={{
@@ -60,7 +60,7 @@ const SearchBar = ({menuOpen}) => {
               <Icon
                 name="close"
                 size="10px"
-                color="gray.500"
+                color="navLink"
                 onClick={() => setSearchOpen(false)}
               />
             ) : null
