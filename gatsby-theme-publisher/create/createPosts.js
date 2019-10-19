@@ -217,7 +217,7 @@ module.exports = async ({ actions, graphql }, options) => {
         });
         log('created post', '#02f56b', `${path}`);
       });
-    log('POSTS TOTAL', '#008a8f', `${posts.length}}`, true);
+    log('POSTS TOTAL', '#008a8f', `${posts.length}`, true);
 
     /**
      * Map over the `blogPages` array to create the
