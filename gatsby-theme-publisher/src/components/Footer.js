@@ -2,7 +2,6 @@ import React from 'react'
 import useSiteMetadata from '../hooks/use-site-metadata'
 import { Box, Button, Heading, Text, Stack } from '@chakra-ui/core'
 import { Link, useStaticQuery, graphql } from 'gatsby'
-import Logo from './Logo'
 
 const Footer = () => {
   const { author, twitter } = useSiteMetadata()
@@ -63,9 +62,6 @@ const Footer = () => {
             Get in touch
           </Heading>
           <Stack spacing={2} color="footerText">
-            <Box>
-              <Logo />
-            </Box>
             <Box>
               <Button
                 onClick={() => window.open(`https://twitter.com/${twitter}`)}

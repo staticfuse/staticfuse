@@ -40,12 +40,12 @@ export default class IndexPage extends React.Component {
   }
 
   render() {
-    const title = this.props.title
+    const title = this.props.title || this.props.title === ''
       ? this.props.title
-      : ''
-    const description = this.props.description
+      : 'Subscribe'
+    const description = this.props.description || this.props.description === ''
       ? this.props.description
-      : ''
+      : 'Get more great content like this, enter your email below.'
     return (
       <Box className="optin-box">
         <Box m="auto" textAlign="center">

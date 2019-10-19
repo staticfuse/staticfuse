@@ -15,7 +15,8 @@ const publisherTheme = {
     footerText: theme.colors.gray['400'],
     buttonBg: "#1eb4f3",
     buttonText: "#eee",
-    optinText: "#555"
+    optinText: "#555",
+    optinBg: "#EDF2F7"
   },
 }
 

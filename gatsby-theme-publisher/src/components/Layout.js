@@ -112,6 +112,16 @@ const Layout = props => {
         },
         "code, pre": {
           wordBreak: "break-word",
+        },
+        "code, .wp-block-code": {
+          backgroundColor: "#333",
+          color: "#eee",
+          overflow: "scroll",
+          borderRadius: "3px",
+          padding: "10px",
+          fontFamily: "Menlo, Monaco, Consolas, 'Courier New', monospace",
+          display: "block",
+          marginBottom: "15px"
         }
       }}
     />
