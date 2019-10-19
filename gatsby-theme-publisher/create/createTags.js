@@ -1,3 +1,5 @@
+const { BlogPreviewFragment } = require('../src/templates/posts/data.js');
+
 const tagTemplate = require.resolve('../src/templates/tags/archive.js');
 
 module.exports = async ({ actions, graphql }) => {
@@ -15,10 +17,16 @@ module.exports = async ({ actions, graphql }) => {
             id
             tagId
             slug
+            posts {
+              nodes {
+                ...BlogPreviewFragment
+              }
+            }
           }
         }
       }
     }
+    ${BlogPreviewFragment}
   `;
   const { createPage } = actions;
   const allTags = [];

@@ -209,7 +209,7 @@ module.exports = async ({ actions, graphql }, options) => {
         const path = options.blogURI.length
           ? `${blogURI}/${post.uri}/`
           : `/${post.uri}/`;
-        // console.log(`create post: ${path}`);
+
         createPage({
           path,
           component: postTemplate,
@@ -223,7 +223,7 @@ module.exports = async ({ actions, graphql }, options) => {
      */
     blogPages
       && blogPages.map((archivePage) => {
-        // console.log(`createBlogPage ${archivePage.context.pageNumber}`);
+        console.log(`createBlogPage ${archivePage.context.pageNumber}`);
         if (archivePage.context.pageNumber === 1) {
           archivePage.context.publisher = true;
           archivePage.context.label = archivePage.path.replace('/', '');
