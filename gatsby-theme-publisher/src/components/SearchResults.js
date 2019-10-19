@@ -1,9 +1,11 @@
-import React from 'react'
-import gql from 'graphql-tag'
-import { Query } from 'react-apollo'
-import { Link } from 'gatsby'
-import useSiteMetadata from '../hooks/use-site-metadata'
-import { Box, PseudoBox, Spinner, Icon } from '@chakra-ui/core'
+import React from 'react';
+import gql from 'graphql-tag';
+import { Query } from 'react-apollo';
+import { Link } from 'gatsby';
+import {
+  Box, PseudoBox, Spinner, Icon,
+} from '@chakra-ui/core';
+import useSiteMetadata from '../hooks/use-site-metadata';
 
 const searchQuery = gql`
   query($searchTerm: String!) {
@@ -15,17 +17,17 @@ const searchQuery = gql`
       }
     }
   }
-`
+`;
 
 const SearchResults = ({ searchTerm, showResults }) => {
   const { blogURI } = useSiteMetadata();
-  if (!searchTerm || searchTerm === '') return null
+  if (!searchTerm || searchTerm === '') return null;
 
   return (
     <>
       <Query query={searchQuery} variables={{ searchTerm }}>
         {({ loading, error, data }) => {
-          const { nodes } = data.posts
+          const { nodes } = data.posts;
 
           if (loading) {
             return (
@@ -36,9 +38,9 @@ const SearchResults = ({ searchTerm, showResults }) => {
                 top="10px"
                 color="gray.500"
               />
-            )
+            );
           }
-          if (error) return <Icon name="warning-2" color="orange.500" />
+          if (error) return <Icon name="warning-2" color="orange.500" />;
 
           return (
             <Box
@@ -55,15 +57,15 @@ const SearchResults = ({ searchTerm, showResults }) => {
             >
               {!nodes.length ? (
                 <PseudoBox
-                    p={3}
-                    fontSize="sm"
-                    _hover={{ bg: 'gray.100' }}
-                    rounded={2}
-                  >
+                  p={3}
+                  fontSize="sm"
+                  _hover={{ bg: 'gray.100' }}
+                  rounded={2}
+                >
                   No Results
                 </PseudoBox>
               ) : (
-                nodes.map(post => (
+                nodes.map((post) => (
                   <Link to={`${blogURI}/${post.uri}`} key={post.id}>
                     <PseudoBox
                       p={3}
@@ -77,11 +79,11 @@ const SearchResults = ({ searchTerm, showResults }) => {
                 ))
               )}
             </Box>
-          )
+          );
         }}
       </Query>
     </>
-  )
-}
+  );
+};
 
-export default SearchResults
+export default SearchResults;

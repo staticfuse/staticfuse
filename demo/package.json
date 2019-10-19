@@ -5,7 +5,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "develop": "gatsby develop",
+    "develop": "rm -rf .cache && gatsby develop",
     "start": "npm run develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
