@@ -15,8 +15,8 @@
   "dependencies": {
     "@staticfuse/gatsby-theme-publisher": "*",
     "classnames": "^2.2.6",
-    "gatsby": "^2.13.82",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0"
+    "gatsby": "^2.16.5",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2"
   }
 }

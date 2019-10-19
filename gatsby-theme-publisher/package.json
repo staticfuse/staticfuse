@@ -17,14 +17,14 @@
     "gatsby-plugin"
   ],
   "devDependencies": {
-    "gatsby": "^2.15.34",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0"
+    "gatsby": "^2.15.5",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2"
   },
   "peerDependencies": {
-    "gatsby": "^2.15.34",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0"
+    "gatsby": "^2.15.5",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2"
   },
   "dependencies": {
     "@chakra-ui/core": "^0.3.2",
@@ -34,14 +34,14 @@
     "apollo-link-context": "^1.0.19",
     "emotion-theming": "^10.0.17",
     "gatsby-background-image": "^0.8.12",
-    "gatsby-image": "^2.2.20",
-    "gatsby-plugin-google-analytics": "^2.1.7",
+    "gatsby-image": "^2.2.29",
+    "gatsby-plugin-google-analytics": "^2.1.23",
     "gatsby-plugin-mailchimp": "^5.1.2",
     "gatsby-plugin-postcss": "^2.1.6",
-    "gatsby-plugin-sharp": "^2.2.25",
+    "gatsby-plugin-sharp": "^2.2.32",
     "gatsby-plugin-sitemap": "^2.2.6",
-    "gatsby-source-filesystem": "^2.1.9",
-    "gatsby-source-graphql": "^2.1.11",
+    "gatsby-source-filesystem": "^2.1.33",
+    "gatsby-source-graphql": "^2.1.20",
     "gatsby-transformer-sharp": "^2.2.16",
     "graphql-tag": "^2.10.1",
     "isomorphic-fetch": "^2.2.1",

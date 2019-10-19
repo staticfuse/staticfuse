@@ -23,7 +23,6 @@ exports.createPages = async ({ actions, graphql, reporter }, options) => {
   await createPages({ actions, graphql, reporter }, mergedOptions);
 };
 
-// Pull featured images into the project statically to serve them with gatsby-image
 exports.createResolvers = ({
   actions,
   cache,
@@ -34,6 +33,9 @@ exports.createResolvers = ({
 }) => {
   const { createNode } = actions;
   createResolvers({
+    /**
+     * Create local Gatsby images so we can run operations on them.
+     */
     WPGraphQL_MediaItem: {
       imageFile: {
         type: 'File',
@@ -50,6 +52,9 @@ exports.createResolvers = ({
       },
     },
     Query: {
+      /**
+       * Resolve the Publisher menu to the theme setting menu config.
+       */
       publisherMenu: {
         type: 'PublisherMenu',
         resolve(source, args, context, info) {
@@ -77,7 +82,10 @@ exports.createResolvers = ({
   });
 };
 
-exports.sourceNodes = ({ actions, schema }) => {
+/**
+ * Create our PublisherMenuItem type.
+ */
+exports.createSchemaCustomization = ({ actions, schema }) => {
   const { createTypes } = actions;
   createTypes([
     schema.buildObjectType({
