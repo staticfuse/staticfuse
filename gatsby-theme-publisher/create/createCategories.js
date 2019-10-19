@@ -1,3 +1,5 @@
+const { BlogPreviewFragment } = require('../src/templates/posts/data.js');
+
 const categoryTemplate = require.resolve(
   '../src/templates/categories/archive.js',
 );
@@ -16,10 +18,16 @@ module.exports = async ({ actions, graphql }) => {
             name
             categoryId
             slug
+            posts {
+              nodes {
+                ...BlogPreviewFragment
+              }
+            }
           }
         }
       }
     }
+    ${BlogPreviewFragment}
   `;
   const { createPage } = actions;
   const allCategories = [];
