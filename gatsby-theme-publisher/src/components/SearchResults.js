@@ -27,8 +27,6 @@ const SearchResults = ({ searchTerm, showResults }) => {
     <>
       <Query query={searchQuery} variables={{ searchTerm }}>
         {({ loading, error, data }) => {
-          const { nodes } = data.posts;
-
           if (loading) {
             return (
               <Spinner
@@ -41,6 +39,7 @@ const SearchResults = ({ searchTerm, showResults }) => {
             );
           }
           if (error) return <Icon name="warning-2" color="orange.500" />;
+          const { nodes } = data.posts;
 
           return (
             <Box
