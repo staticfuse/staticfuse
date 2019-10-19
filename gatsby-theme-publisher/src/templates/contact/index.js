@@ -18,20 +18,24 @@ const Contact = ({ location }) => {
         >
           Contact Us
         </Heading>
-        <Text fontSize="md" fontWeight="500" color="gray.400">
-        Send us a note and maybe we'll get back to you. Or not.
-        </Text>
+        <Text color="gray.400" fontWeight="500" fontSize="md">This form will automatically submit to Netlify forms.</Text>
 
-        <Stack spacing={3}>
-          <Input
-            placeholder="Name"
-          />
-          <Input
-            placeholder="Email"
-          />
-          <Textarea placeholder="Message" />
-          <Button variantColor="blue">Submit</Button>
-        </Stack>
+        <form
+          name="contact"
+          method="post"
+          action="/contact"
+          data-netlify="true"
+          data-netlify-honeypot="bot-field"
+        >
+          <Stack spacing={3}>
+            <input type="hidden" name="form-name" value="contact" />
+            <input style={{ display: "none" }} name="bot-field" />
+            <Input placeholder="Name" name="name" />
+            <Input placeholder="Email" name="email" />
+            <Textarea placeholder="Message" name="message" />
+            <Button variantColor="blue" type="submit">Submit</Button>
+          </Stack>
+        </form>
       </Box>
     </Layout>
   )
