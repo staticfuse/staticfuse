@@ -81,6 +81,7 @@ Note: `siteUrl` refers to your final website address. `wordPressUrl` in the plug
 | blogURI | string | '' | The path prefix on the blog and blog posts. No leading slash. `'/blog'` would result in `https://my-domain.com/blog/` |
 | starterPages | boolean | true | Create a home, about, and contact page in Gatsby. |
 | menuName | string/boolean | 0 | The name of the _WordPress_ menu you'd like to use or `0` if you don't want to render a menu. |
+| publisherMenuConfig | array | [] | Optional array based way to configure the menu. More info [here](https://github.com/staticfuse/gatsby-theme-publisher#publisher-menu). |
 
 ## Theme Customization
 
@@ -107,6 +108,85 @@ to any color, such as...
 `headerBg: "#bada55"`
 
 For more options, please see [here](https://chakra-ui.com/theme)
+
+### Publisher Menu
+
+There are two ways to configure the publisher.
+
+#### _1) publisherMenuConfig option (array config)_
+
+This is the default behavior. Theme setting `starterPages` is set to true. Publisher theme will output "Home", "About" & "Contact" with zero config. In the event you wanted to override this, you can add your config to the `publisherMenuConfig` theme option. For instance, if you wanted to add a link to `/portfolio` and child item to "Contact" you'd do the following:
+
+```javascript
+  {
+    resolve: '@staticfuse/gatsby-theme-publisher',
+    options: {
+      publisherMenuConfig: [
+        {
+          label: 'Home',
+          url: '/',
+          isExternal: false,
+        },
+        {
+          label: 'Blog',
+          url: '/blog',
+          isExternal: false,
+        },
+        {
+          label: 'Portfolio',
+          url: '/portfolio',
+          isExternal: false,
+        },
+        {
+          label: 'Contact',
+          url: '/contact',
+          isExternal: false,
+          childItems: [
+            {
+              label: 'I live in the dropdown',
+              url: '/some-url',
+              isExternal: false,
+            },
+          ],
+        },
+      ],
+      // More options if so desired...
+    }
+  }
+```
+
+Keep in mind it's up to you to link to a valid page. If you do `url: '/some-bad-url'`, your site will 404.
+
+*What is `isExternal: false`?*
+
+This tells the Publisher theme and Gatsby wether to navigate to a link client site using Gatsby `<Link/>` or use a `<a>`.
+
+_Client_
+
+```javascript
+{
+  label: 'Blog',
+  url: '/blog',
+  isExternal: false,
+},
+```
+
+_Full page reload_
+
+```javascript
+{
+  label: 'StaticFuse',
+  url: 'https://staticfuse.com',
+  isExternal: true,
+},
+```
+
+#### _2) Use a WordPress menu_
+
+You can manage your menu within the your WordPress site as well. To do so, change Publisher theme setting to: `menuName: 'your menu name'`. For example, the setting for the example (image) below would be: `menuName: 'PRIMARY'`
+![Gatsby Theme Publisher Screenshot](https://publishertheme.staticfuse.com/wp-content/uploads/2019/10/menuss.png)
+
+*Known limitation:* For _both_ menu managment options, `childItems` are currently only supported _one_ level deep.
 
 ### Customize Templates
 
