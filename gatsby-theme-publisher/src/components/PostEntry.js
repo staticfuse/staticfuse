@@ -1,24 +1,25 @@
 import React from 'react';
+import { Box } from '@chakra-ui/core';
 import PostEntryTitle from './PostEntryTitle';
 import PostEntryMeta from './PostEntryMeta';
 import PostEntryMedia from './PostEntryMedia';
-import useSiteMetadata from "../hooks/use-site-metadata"
-import { Box, Text } from '@chakra-ui/core';
+import useSiteMetadata from '../hooks/use-site-metadata';
 
 const PostEntry = ({ post, classes = '' }) => {
-
-  const { wordPressUrl } = useSiteMetadata()
+  const { wordPressUrl } = useSiteMetadata();
 
   const excerpt = post.excerpt
     ? post.excerpt.replace(wordPressUrl, '')
-    : `${post.content &&
-        post.content
+    : `${post.content
+        && post.content
           .split(' ')
           .slice(0, 30)
           .join(' ')} ...`;
+  console.log(excerpt);
+
 
   return (
-    <Box my={4} overflow='hidden'>
+    <Box my={4} overflow="hidden">
       <div className="post-wrapper">
         <div className="post-inner">
           <header className="entry-header">
@@ -31,7 +32,7 @@ const PostEntry = ({ post, classes = '' }) => {
 
           {post.featuredImage && <PostEntryMedia post={post} location="blog" />}
 
-          <Text
+          <Box
             className="entry-content"
             overflow="hidden"
             dangerouslySetInnerHTML={{
@@ -41,7 +42,7 @@ const PostEntry = ({ post, classes = '' }) => {
         </div>
         <PostEntryMeta post={post} location="blog" />
       </div>
-      </Box>
+    </Box>
   );
 };
 

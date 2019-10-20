@@ -4,6 +4,7 @@
   "scripts": {
     "dev": "yarn workspace demo develop",
     "start": "yarn workspace demo start",
+    "serve": "yarn workspace demo serve",
     "build": "yarn workspace demo build",
     "clean": "rm -rf demo/.cache && rm -rf && find . -name \"node_modules\" -exec rm -rf '{}' +"
   },

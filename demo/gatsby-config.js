@@ -50,7 +50,7 @@ module.exports = {
         gaTrackingId: 0,
         wpPages: 0,
         // menuName: 'PRIMARY',
-        wordPressUrl: 'https://publishertheme.staticfuse.com',
+        wordPressUrl: 'https://data.staticfuse.com',
         blogURI: '/blog',
       },
     },
