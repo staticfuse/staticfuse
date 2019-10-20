@@ -160,8 +160,9 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
   /**
    * Map over the allPages array to create the
    * single pages.
+   * We create these if we have a menu from WP or the wpPages option is set to true.
    */
-  if (wpPages && options.wpPages) {
+  if (wpPages && options.wpPages || options.menuName ) {
     wpPages.map((page) => {
       /**
          * If WordPress has a page that matches the blogURI setting,
