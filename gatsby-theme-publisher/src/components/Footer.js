@@ -33,7 +33,7 @@ const Footer = () => {
       >
         {categories && categories.length ? (
           <Box w="50%">
-            <Heading as="h4" fontSize="xl" color="headings">
+            <Heading as="h4" fontSize="xl" color="footerText">
               Categories
             </Heading>
             <Box
@@ -58,7 +58,7 @@ const Footer = () => {
         ) : null}
 
         <Box w="25%">
-          <Heading as="h4" fontSize="xl" color="headings">
+          <Heading as="h4" fontSize="xl" color="footerText">
             Get in touch
           </Heading>
           <Stack spacing={2} color="footerText">
@@ -79,8 +79,6 @@ const Footer = () => {
                 Twitter
               </Button>
             </Box>
-            <Box>21 Elm St, Transylvania 92673</Box>
-            <Box>(555) 867-5309</Box>
           </Stack>
         </Box>
       </Box>
@@ -96,11 +94,11 @@ const Footer = () => {
         <Text color="footerText" fontSize="sm" opacity=".7">
           © 2019 {author} | Built with{' '}
           <a
-            href="https://www.gatsbyjs.org"
+            href="https://staticfuse.com/"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Gatsby
+            Gatsby and WordPress
           </a>
         </Text>
       </Box>
