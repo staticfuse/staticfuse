@@ -15,8 +15,6 @@ const PostEntry = ({ post, classes = '' }) => {
           .split(' ')
           .slice(0, 30)
           .join(' ')} ...`;
-  console.log(excerpt);
-
 
   return (
     <Box my={4} overflow="hidden">
