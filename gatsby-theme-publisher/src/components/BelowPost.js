@@ -32,9 +32,8 @@ const BelowPost = ({ post }) => {
 
   return (
     <Box as="footer" className="entry-footer" maxW="2xl" m="auto">
-      <Box px={4} py={6} rounded="lg" bg="optinBg">
-        {!!mailChimpEndpoint && <BlogOptin />}
-      </Box>
+      
+        {!!mailChimpEndpoint && <Box px={4} py={6} rounded="lg" bg="optinBg"><BlogOptin /></Box> }
 
       <Flex
         className="entry-footer__taxonomy"
