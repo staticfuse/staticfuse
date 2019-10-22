@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import { Flex, Box, Icon } from '@chakra-ui/core';
-import useSiteMetadata from '../hooks/use-site-metadata';
+import usePublisherOptions from '../hooks/use-publisher-options';
 
 const Pagination = ({ pageNumber, hasNextPage }) => {
-  const { blogURI } = useSiteMetadata();
+  const { blogURI } = usePublisherOptions();
   if (pageNumber === 1 && !hasNextPage) return null;
 
   return (

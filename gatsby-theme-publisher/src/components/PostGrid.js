@@ -1,14 +1,14 @@
-import React from 'react'
-import { useStaticQuery, graphql, Link } from 'gatsby'
-import { Box, Text } from '@chakra-ui/core'
+import React from 'react';
+import { useStaticQuery, graphql, Link } from 'gatsby';
+import { Box, Text } from '@chakra-ui/core';
+import BackgroundImage from 'gatsby-background-image'
 import PostEntryTitle from './PostEntryTitle'
 import PostEntryMeta from './PostEntryMeta'
-import BackgroundImage from 'gatsby-background-image'
-import useSiteMetadata from '../hooks/use-site-metadata'
-import Logo from './Logo'
+import usePublisherOptions from '../hooks/use-publisher-options';
+import Logo from './Logo';
 
-const PostGrid = props => {
-  const { blogURI } = useSiteMetadata()
+const PostGrid = (props) => {
+  const { blogURI } = usePublisherOptions();
 
   const data = useStaticQuery(graphql`
     {
@@ -53,17 +53,15 @@ const PostGrid = props => {
         }
       }
     }
-  `)
+  `);
 
   // remove link because it doesn't have the right url
-  const filterExcerpt = excerpt => {
-    return excerpt.replace(/<a\b[^>]*>(.*?)<\/a>/i,"");
-  }
+  const filterExcerpt = (excerpt) => excerpt.replace(/<a\b[^>]*>(.*?)<\/a>/i,"");
 
-  let width = props.width || '250px'
-  let limit = props.limit || 10
+  const width = props.width || '250px';
+  const limit = props.limit || 10;
 
-  const posts = data.wpgraphql.posts.nodes.slice(0, limit)
+  const posts = data.wpgraphql.posts.nodes.slice(0, limit);
 
   return (
     <Box
@@ -75,19 +73,19 @@ const PostGrid = props => {
     >
       {posts && posts.length
         ? posts.map((post, index) => (
-            <Box key={post.postId} gridColumn={ props.featured && index === 0 ? "1 / -1" : "" }>
-            { !props.noImage ? 
-              <Link className="post-thumbnail" to={`${blogURI}/${post.uri}/`}>
+          <Box key={post.postId} gridColumn={props.featured && index === 0 ? '1 / -1' : ''}>
+              { !props.noImage
+              ? <Link className="post-thumbnail" to={`${blogURI}/${post.uri}/`}>
                 {post.featuredImage ? (
                   <BackgroundImage
                     fluid={post.featuredImage.imageFile.childImageSharp.fluid}
                     style={{
-                      height: props.featured && index === 0 ? "350px" : "200px",
-                      width: props.featured && index === 0  && window.innerWidth > 768 ? "50%" : "100%",
+                      height: props.featured && index === 0 ? '350px' : '200px',
+                      width: props.featured && index === 0 && window.innerWidth > 768 ? '50%' : '100%',
                       marginBottom: '1.5rem',
                       backgroundColor: '#eee',
-                      float: props.featured && index === 0 ? "left" : "none",
-                      marginRight: props.featured && index === 0 ? "20px" : "0"
+                      float: props.featured && index === 0 ? 'left' : 'none',
+                      marginRight: props.featured && index === 0 ? '20px' : '0',
                     }}
                   />
                 ) : (
@@ -110,28 +108,28 @@ const PostGrid = props => {
               <header className="entry-header">
                 <PostEntryTitle
                   post={post}
-                  location={ props.featured && index === 0 ? "blog" : "grid" }
+                  location={props.featured && index === 0 ? 'blog' : 'grid'}
                   titleClass="entry-title"
                 />
               </header>
 
-              {props.excerpt || ( props.featured && index === 0 ) ? (
+              {props.excerpt || (props.featured && index === 0) ? (
                 <Text
                   className="entry-content"
                   dangerouslySetInnerHTML={{
-                    __html: filterExcerpt( post.excerpt ),
+                    __html: filterExcerpt(post.excerpt),
                   }}
                 />
               ) : null}
 
-              {props.meta || ( props.featured && index === 0 ) ? (
+              {props.meta || (props.featured && index === 0) ? (
                 <PostEntryMeta post={post} location="grid" />
               ) : null}
             </Box>
-          ))
+        ))
         : null}
     </Box>
-  )
-}
+  );
+};
 
-export default PostGrid
+export default PostGrid;

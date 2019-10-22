@@ -1,10 +1,10 @@
-import React from 'react'
-import useSiteMetadata from '../hooks/use-site-metadata'
+import React from 'react';
 import { Box, Button, Heading, Text, Stack } from '@chakra-ui/core'
 import { Link, useStaticQuery, graphql } from 'gatsby'
+import usePublisherOptions from '../hooks/use-publisher-options'
 
 const Footer = () => {
-  const { author, twitter } = useSiteMetadata()
+  const { author, twitter } = usePublisherOptions();
   const data = useStaticQuery(graphql`
     {
       allSitePage(filter: { path: { regex: "/category/" } }) {
@@ -17,9 +17,9 @@ const Footer = () => {
         }
       }
     }
-  `)
+  `);
 
-  const categories = data.allSitePage.nodes
+  const categories = data.allSitePage.nodes;
   return (
     <Box as="footer" bg="footerBg" p={8} w="100%" className="site-footer">
       <Box
@@ -42,7 +42,7 @@ const Footer = () => {
               gridColumnGap="20px"
               gridRowGap="5px"
             >
-              {categories.map(item => (
+              {categories.map((item) => (
                 <Box
                   key={item.context.categoryId}
                   fontWeight="500"
@@ -92,7 +92,12 @@ const Footer = () => {
         textAlign="center"
       >
         <Text color="footerText" fontSize="sm" opacity=".7">
-          © 2019 {author} | Built with{' '}
+          © 2019 
+{' '}
+{author}
+{' '}
+| Built with
+{' '}
           <a
             href="https://staticfuse.com/"
             target="_blank"
@@ -103,7 +108,7 @@ const Footer = () => {
         </Text>
       </Box>
     </Box>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

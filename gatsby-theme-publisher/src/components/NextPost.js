@@ -1,8 +1,8 @@
-import React from 'react'
-import { Link, graphql, StaticQuery } from 'gatsby'
-import { Icon, Box, Flex } from '@chakra-ui/core'
-import Img from 'gatsby-image'
-import useSiteMetadata from '../hooks/use-site-metadata'
+import React from 'react';
+import { Link, graphql, StaticQuery } from 'gatsby';
+import { Icon, Box, Flex } from '@chakra-ui/core';
+import Img from 'gatsby-image';
+import usePublisherOptions from '../hooks/use-publisher-options';
 
 const POSTS_QUERY = graphql`
   query GET_POSTS {
@@ -35,21 +35,21 @@ const POSTS_QUERY = graphql`
       }
     }
   }
-`
+`;
 
 const findNextPost = (post, data) => {
-  const posts = data.wpgraphql.posts.nodes
-  const currentPostIndex = posts.findIndex(item => item.id === post.id)
-  return posts[currentPostIndex + 1]
-}
+  const posts = data.wpgraphql.posts.nodes;
+  const currentPostIndex = posts.findIndex((item) => item.id === post.id);
+  return posts[currentPostIndex + 1];
+};
 
 const NextPost = ({ post }) => {
-  const { blogURI } = useSiteMetadata()
+  const { blogURI } = usePublisherOptions();
   return (
     <StaticQuery
       query={POSTS_QUERY}
-      render={data => {
-        const nextPost = findNextPost(post, data)
+      render={(data) => {
+        const nextPost = findNextPost(post, data);
 
         return (
           <Flex
@@ -104,10 +104,10 @@ const NextPost = ({ post }) => {
               )}
             </div>
           </Flex>
-        )
+        );
       }}
     />
-  )
-}
+  );
+};
 
-export default NextPost
+export default NextPost;

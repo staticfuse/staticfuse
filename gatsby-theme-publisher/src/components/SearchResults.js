@@ -5,7 +5,7 @@ import { Link } from 'gatsby';
 import {
   Box, PseudoBox, Spinner, Icon,
 } from '@chakra-ui/core';
-import useSiteMetadata from '../hooks/use-site-metadata';
+import usePublisherOptions from '../hooks/use-publisher-options';
 
 const searchQuery = gql`
   query($searchTerm: String!) {
@@ -20,7 +20,7 @@ const searchQuery = gql`
 `;
 
 const SearchResults = ({ searchTerm, showResults }) => {
-  const { blogURI } = useSiteMetadata();
+  const { blogURI } = usePublisherOptions();
   if (!searchTerm || searchTerm === '') return null;
 
   return (

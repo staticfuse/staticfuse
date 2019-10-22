@@ -3,10 +3,10 @@ import { Box } from '@chakra-ui/core';
 import PostEntryTitle from './PostEntryTitle';
 import PostEntryMeta from './PostEntryMeta';
 import PostEntryMedia from './PostEntryMedia';
-import useSiteMetadata from '../hooks/use-site-metadata';
+import usePublisherOptions from '../hooks/use-publisher-options';
 
 const PostEntry = ({ post, classes = '' }) => {
-  const { wordPressUrl } = useSiteMetadata();
+  const { wordPressUrl } = usePublisherOptions();
 
   const excerpt = post.excerpt
     ? post.excerpt.replace(wordPressUrl, '')

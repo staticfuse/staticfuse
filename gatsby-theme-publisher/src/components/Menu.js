@@ -1,12 +1,11 @@
-import React, { useState } from 'react'
-import { StaticQuery, graphql, Link } from 'gatsby'
-import { Box } from '@chakra-ui/core'
-import useSiteMetadata from '../hooks/use-site-metadata'
-import usePublisherMenu from '../hooks/use-publisher-menu'
-import Logo from './Logo'
-import SearchBar from './SearchBar'
-import HamburgerMenu from './HamburgerMenu'
-import MenuItem from './MenuItem'
+import React, { useState } from 'react';
+import { StaticQuery, graphql, Link } from 'gatsby';
+import { Box } from '@chakra-ui/core';
+import usePublisherOptions from '../hooks/use-publisher-options';
+import Logo from './Logo';
+import SearchBar from './SearchBar';
+import HamburgerMenu from './HamburgerMenu';
+import MenuItem from './MenuItem';
 
 /**
  * Get all menues with children.
@@ -47,21 +46,20 @@ const MENU_QUERY = graphql`
       }
     }
   }
-`
+`;
 
 const Menu = () => {
-  const publisherMenu = usePublisherMenu()
-  const { menuName } = useSiteMetadata()
-  const [menuOpened, openMenu] = useState(false)
+  const { menuName, publisherMenuConfig } = usePublisherOptions();
+  const [menuOpened, openMenu] = useState(false);
 
   return (
     <StaticQuery
       query={MENU_QUERY}
-      render={data => {
+      render={(data) => {
         if (data.wpgraphql.menus) {
-          const { edges } = data.wpgraphql.menus
+          const { edges } = data.wpgraphql.menus;
           // Check to see if the menuName theme setting matches a menu.
-          const [menu] = edges.filter(m => menuName === m.node.name)
+          const [menu] = edges.filter((m) => menuName === m.node.name);
 
           return (
             <Box
@@ -92,9 +90,7 @@ const Menu = () => {
 
               <div
                 onClick={() => (menuOpened ? openMenu(false) : openMenu(true))}
-                onKeyDown={() =>
-                  menuOpened ? openMenu(false) : openMenu(true)
-                }
+                onKeyDown={() => (menuOpened ? openMenu(false) : openMenu(true))}
                 role="button"
                 tabIndex={0}
               >
@@ -132,21 +128,22 @@ const Menu = () => {
                 >
                   {/* If we have a menuName, do the WordPress menu */
                   menuName
-                    ? menu.node.menuItems.nodes.map(menuItem => (
-                        <MenuItem key={menuItem.id} menuItem={menuItem} />
-                      ))
-                    : publisherMenu.map(menuItem => (
-                        <MenuItem key={menuItem.label} menuItem={menuItem} />
-                      ))}
+                    ? menu.node.menuItems.nodes.map((menuItem) => (
+                      <MenuItem key={menuItem.id} menuItem={menuItem} />
+                    ))
+                    : publisherMenuConfig.nodes.map((menuItem) => (
+                      <MenuItem key={menuItem.label} menuItem={menuItem} />
+                    ))
+                  }
                 </Box>
               </Box>
             </Box>
-          )
+          );
         }
-        return null
+        return null;
       }}
     />
-  )
-}
+  );
+};
 
-export default Menu
+export default Menu;

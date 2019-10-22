@@ -1,5 +1,4 @@
-/* eslint-disable import/prefer-default-export */
-import useSiteMetadata from '../hooks/use-site-metadata';
+import usePublisherOptions from '../hooks/use-publisher-options';
 
 /**
  * Parses a menu item object and returns Gatsby-fied URI.
@@ -7,7 +6,7 @@ import useSiteMetadata from '../hooks/use-site-metadata';
  * @param {object} menuItem a single menu item
  */
 export const CreateLocalLink = (menuItem) => {
-  const { blogURI, wordPressUrl } = useSiteMetadata();
+  const { blogURI, wordPressUrl } = usePublisherOptions();
   const { url, connectedObject } = menuItem;
 
   if (url === '#') {
@@ -26,4 +25,21 @@ export const CreateLocalLink = (menuItem) => {
   }
 
   return newUri;
+};
+
+
+export const formatPublisherMenu = (menu) => {
+  /**
+   * Normalize object shape to match that of the WP menu.
+   */
+  const newMenu = menu.map((menuItem) => {
+    const newMenuItem = { ...menuItem };
+    const childItems = menuItem.childItems ? menuItem.childItems : [];
+    newMenuItem.childItems = { nodes: childItems };
+    return newMenuItem;
+  });
+
+  return {
+    nodes: newMenu,
+  };
 };

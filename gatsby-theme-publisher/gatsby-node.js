@@ -51,59 +51,7 @@ exports.createResolvers = ({
         },
       },
     },
-    Query: {
-      /**
-       * Resolve the Publisher menu to the theme setting menu config.
-       */
-      publisherMenu: {
-        type: 'PublisherMenu',
-        resolve(source, args, context, info) {
-          const site = context.nodeModel.getAllNodes({
-            type: 'Site',
-          });
-          const menu = site[0].siteMetadata.publisherMenuConfig;
-
-          /**
-           * Normalize object shape to match that of the WP menu.
-           */
-          const newMenu = menu.map((menuItem) => {
-            const newMenuItem = { ...menuItem };
-            const childItems = menuItem.childItems ? menuItem.childItems : [];
-            newMenuItem.childItems = { nodes: childItems };
-            return newMenuItem;
-          });
-
-          return {
-            nodes: newMenu,
-          };
-        },
-      },
-    },
   });
-};
-
-/**
- * Create our PublisherMenuItem type.
- */
-exports.createSchemaCustomization = ({ actions, schema }) => {
-  const { createTypes } = actions;
-  createTypes([
-    schema.buildObjectType({
-      name: 'PublisherMenuItem',
-      fields: {
-        url: 'String!',
-        label: 'String!',
-        isExternal: 'Boolean!',
-        childItems: 'PublisherMenu',
-      },
-    }),
-    schema.buildObjectType({
-      name: 'PublisherMenu',
-      fields: {
-        nodes: '[PublisherMenuItem]',
-      },
-    }),
-  ]);
 };
 
 exports.onPreBootstrap = async ({ reporter }) => {

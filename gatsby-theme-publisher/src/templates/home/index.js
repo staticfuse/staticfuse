@@ -1,16 +1,16 @@
-import React from 'react'
+import React from 'react';
+import { Box, Text, Heading, Button, Image } from '@chakra-ui/core'
 import Layout from '../../components/Layout'
 import SEO from '../../components/SEO'
-import { Box, Text, Heading, Button, Image } from '@chakra-ui/core'
-import useSiteMetadata from '../../hooks/use-site-metadata'
-import { useStaticQuery, graphql, navigate } from 'gatsby'
-import BackgroundImage from 'gatsby-background-image'
-import PostGrid from '../../components/PostGrid'
-import SiteLogo from '../../images/site-logo.png'
-import BlogOptin from '../../components/BlogOptin'
+import usePublisherOptions from '../../hooks/use-publisher-options';
+import { useStaticQuery, graphql, navigate } from 'gatsby';
+import BackgroundImage from 'gatsby-background-image';
+import PostGrid from '../../components/PostGrid';
+import SiteLogo from '../../images/site-logo.png';
+import BlogOptin from '../../components/BlogOptin';
 
 const Home = ({ location }) => {
-  const { title } = useSiteMetadata()
+  const { title } = usePublisherOptions();
 
   const imageData = useStaticQuery(graphql`
     {
@@ -22,7 +22,7 @@ const Home = ({ location }) => {
         }
       }
     }
-  `)
+  `);
   return (
     <Layout location={{ location }} fullWidth="true">
       <SEO title="Home" />
@@ -125,7 +125,7 @@ const Home = ({ location }) => {
             frameborder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen
-          ></Box>
+           />
         </Box>
       </Box>
 
@@ -202,7 +202,7 @@ const Home = ({ location }) => {
         <BlogOptin title="Get more great stuff like this" description="Enter your email to join my newsletter." />
       </Box>
     </Layout>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
