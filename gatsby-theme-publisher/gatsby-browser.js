@@ -28,5 +28,5 @@ export const wrapRootElement = ({ element }, themeOptions) => {
     return <ApolloProvider client={client}>{app}</ApolloProvider>;
   }
 
-  return <>{app}</>;
+  return app;
 };
