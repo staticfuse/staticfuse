@@ -1,10 +1,13 @@
 import React from 'react';
-import { Box, Button, Heading, Text, Stack } from '@chakra-ui/core'
-import { Link, useStaticQuery, graphql } from 'gatsby'
-import usePublisherOptions from '../hooks/use-publisher-options'
+import {
+  Box, Button, Heading, Text, Stack,
+} from '@chakra-ui/core';
+import { Link, useStaticQuery, graphql } from 'gatsby';
+import useSiteMetadata from '../hooks/use-site-metadata';
 
 const Footer = () => {
-  const { author, twitter } = usePublisherOptions();
+  const { author, twitter } = useSiteMetadata();
+
   const data = useStaticQuery(graphql`
     {
       allSitePage(filter: { path: { regex: "/category/" } }) {
@@ -92,12 +95,12 @@ const Footer = () => {
         textAlign="center"
       >
         <Text color="footerText" fontSize="sm" opacity=".7">
-          © 2019 
-{' '}
-{author}
-{' '}
+          © 2019
+          {' '}
+          {author}
+          {' '}
 | Built with
-{' '}
+          {' '}
           <a
             href="https://staticfuse.com/"
             target="_blank"
