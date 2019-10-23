@@ -18,15 +18,12 @@ export const wrapRootElement = ({ element }, themeOptions) => {
   mergedOptions.publisherMenuConfig = formatPublisherMenu(mergedOptions.publisherMenuConfig);
 
   const client = createClient(themeOptions.wordPressUrl);
-  const app = (
-    <PublisherOptions.Provider value={mergedOptions}>
-      {element}
-    </PublisherOptions.Provider>
+
+  return (
+    <ApolloProvider client={client}>
+      <PublisherOptions.Provider value={mergedOptions}>
+        {element}
+      </PublisherOptions.Provider>
+    </ApolloProvider>
   );
-
-  if (themeOptions.dynamicComments) {
-    return <ApolloProvider client={client}>{app}</ApolloProvider>;
-  }
-
-  return app;
 };
