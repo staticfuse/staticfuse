@@ -1,16 +1,18 @@
 import React from 'react';
-import { Box, Text, Heading, Button, Image } from '@chakra-ui/core'
-import Layout from '../../components/Layout'
-import SEO from '../../components/SEO'
-import usePublisherOptions from '../../hooks/use-publisher-options';
+import {
+  Box, Text, Heading, Button, Image,
+} from '@chakra-ui/core';
 import { useStaticQuery, graphql, navigate } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
+import Layout from '../../components/Layout';
+import SEO from '../../components/SEO';
 import PostGrid from '../../components/PostGrid';
 import SiteLogo from '../../images/site-logo.png';
 import BlogOptin from '../../components/BlogOptin';
+import useSiteMetadata from '../../hooks/use-site-metadata';
 
 const Home = ({ location }) => {
-  const { title } = usePublisherOptions();
+  const { title } = useSiteMetadata();
 
   const imageData = useStaticQuery(graphql`
     {
@@ -125,7 +127,7 @@ const Home = ({ location }) => {
             frameborder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen
-           />
+          />
         </Box>
       </Box>
 
