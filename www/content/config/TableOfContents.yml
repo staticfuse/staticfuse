@@ -1,0 +1,19 @@
+- label: Getting Started
+  path: /docs/getting-started
+  isHeader: false
+
+- label: 'Adding to existing project'
+  path: '/docs/adding-to-existing-project'
+  isHeader: false
+
+- label: Section Three (just a header)
+  path: /docs/getting-started
+  isHeader: true
+  childItems:
+    - label: child link one
+      path: /docs/section-three-article-one
+      isHeader: false
+    - label: child link two
+      path: /docs/section-three-article-two
+      isHeader: false
+

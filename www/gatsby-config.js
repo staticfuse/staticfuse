@@ -8,6 +8,12 @@ module.exports = {
   },
   plugins: [
     {
+      resolve: '@staticfuse/gatsby-theme-docs',
+      options: {
+        dirPath: `${__dirname}/content`,
+      },
+    },
+    {
       resolve: '@staticfuse/gatsby-theme-publisher',
       options: {
         starterPages: true,
@@ -50,7 +56,7 @@ module.exports = {
         gaTrackingId: 0,
         wpPages: 0,
         menuName: 0,
-        wordPressUrl: 'https://publishertheme.staticfuse.com',
+        wordPressUrl: 'https://data.staticfuse.com',
         blogURI: '/blog',
       },
     },
