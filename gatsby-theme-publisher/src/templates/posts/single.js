@@ -8,22 +8,22 @@ import SEO from '../../components/SEO'
 import { Box } from '@chakra-ui/core'
 
 const syntaxHighlighter = content => {
+  if (!content) {
+    return {
+      __html: '',
+    }
+  }
+
   var regex = /\[javascript\]|\[php\]|\[html\]|\[css\]/g
 
   var regex2 = /\[\/javascript\]|\[\/php\]|\[\/html\]|\[\/css\]/gi
 
   return {
-    __html: content
-      .replace(
-        regex,
-        '<code>'
-      )
-      .replace(regex2, '</code>'),
+    __html: content.replace(regex, '<code>').replace(regex2, '</code>'),
   }
 }
 
 const Post = ({ pageContext: post }) => {
-
   return (
     <Layout>
       <SEO title={`${post.title}`} />
@@ -56,7 +56,6 @@ const Post = ({ pageContext: post }) => {
         />
 
         <BelowPost post={post} />
-
       </div>
     </Layout>
   )

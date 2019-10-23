@@ -122,6 +122,9 @@ const Layout = props => {
           fontFamily: "Menlo, Monaco, Consolas, 'Courier New', monospace",
           display: "block",
           marginBottom: "15px"
+        },
+        "audio": {
+          width: "100%"
         }
       }}
     />
