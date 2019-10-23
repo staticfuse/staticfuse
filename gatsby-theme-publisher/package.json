@@ -1,6 +1,6 @@
 {
   "name": "@staticfuse/gatsby-theme-publisher",
-  "version": "0.10.6",
+  "version": "0.10.7",
   "main": "index.js",
   "license": "MIT",
   "author": "StaticFuse",
@@ -12,7 +12,7 @@
     "fsevents": "^2.1.1"
   },
   "engines": {
-    "node": ">=10.13"
+    "node": ">=10.16"
   },
   "keywords": [
     "gatsby",
