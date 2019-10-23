@@ -1,20 +1,17 @@
 {
-  "name": "gatsby-publisher-theme-workspace",
+  "name": "staticfuse-workspace",
   "private": true,
   "scripts": {
-    "dev": "yarn workspace demo develop",
-    "start": "yarn workspace demo start",
-    "serve": "yarn workspace demo serve",
-    "build": "yarn workspace demo build",
-    "clean": "rm -rf demo/.cache && rm -rf && find . -name \"node_modules\" -exec rm -rf '{}' +"
+    "dev": "yarn workspace www develop",
+    "start": "yarn workspace www start",
+    "serve": "yarn workspace www serve",
+    "build": "yarn workspace www build",
+    "clean": "rm -rf www/.cache && rm -rf && find . -name \"node_modules\" -exec rm -rf '{}' +"
   },
   "workspaces": [
-    "gatsby-theme-publisher",
-    "demo"
+    "packages/*",
+    "www"
   ],
-  "dependencies": {
-    "@staticfuse/gatsby-theme-publisher": "*"
-  },
   "devDependencies": {
     "babel-eslint": "^10.0.3",
     "eslint": "^6.5.1",
