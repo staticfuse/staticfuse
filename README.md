@@ -6,7 +6,9 @@ The Gatsby Publisher Theme allows you to create a headless (or decoupled) WordPr
 
 ## Getting Started
 
-This repo includes the code for the theme and a demo site which is using the theme in a very basic configuration.
+This repo is for theme development, we do not recommend cloning this repository. Instead, use the [Create Gatsby Theme Publisher repository](https://github.com/staticfuse/create-gatsby-theme-publisher), and [visit our website for a full tutorial on headless WordPress with Gatsby.](https://staticfuse.com/blog/how-to-build-headless-wordpress-sites-with-gatsby/)
+
+You can also add this theme to an existing project with `yarn add @staticfuse/gatsby-theme-publisher`
 
 ### Prequisites
 
@@ -20,24 +22,24 @@ This repo includes the code for the theme and a demo site which is using the the
 3.  Install dependencies `yarn`
 4.  Install [WPGraphQL plugin on your WordPress site](https://github.com/wp-graphql/wp-graphql)
 5.  Configure your site options in [demo/gatsby-config.js](https://github.com/staticfuse/gatsby-theme-publisher/blob/master/demo/gatsby-config.js#L18) Explanation of the options is [below](https://github.com/staticfuse/gatsby-theme-publisher#publisher-theme-options)
-6.  Start the demo site `yarn start`
+6.  If using create-gatsby-theme-publisher, use `gatsby develop` to start the server
 7.  Add your logo and [customize the theme](https://github.com/staticfuse/gatsby-theme-publisher#theme-customization)
-8.  Publish to Netlify
+8.  Publish to Netlify or any host.
 
 ## Adding Gatsby WordPress Theme Publisher to an existing Gatsby site
 
-1. `yarn install @staticfuse/gatsby-theme-publisher`
+1. `yarn add @staticfuse/gatsby-theme-publisher`
 2. In your `gatsby-config.js` :
 ```js
   plugins: [
     {
       resolve: `@staticfuse/gatsby-theme-publisher`,
       options: {
-        menuName: `PRIMARY`,
+        starterPages: true,
         mailChimpEndpoint: 0,
         dynamicComments: 1,
         gaTrackingId: 0,
-        wordPressUrl: `http://data.gatsby.develop`, // The url of your WordPress install
+        wordPressUrl: `https://publishertheme.staticfuse.com`, // The url of your WordPress install
         blogURI: '/blog' // Or whatever you'd prefer
       },
     },
@@ -66,6 +68,7 @@ Note: `siteUrl` refers to your final website address. `wordPressUrl` in the plug
         gaTrackingId: 0,
         wordPressUrl: 'https://data.staticfuse.com',
         blogURI: '/blog',
+        mailChimpEndpoint: 0,
         // ...etc
        },
     },
@@ -107,11 +110,19 @@ to any color, such as...
 
 `headerBg: "#bada55"`
 
-For more options, please see [here](https://chakra-ui.com/theme)
+You can also use predefined color values, such as... 
+
+`buttonBg: theme.colors.blue['500]`
+
+or
+
+`buttonText: theme.colors.orange['300']`
+
+You can see those colors and more options [here](https://chakra-ui.com/theme).
 
 ### Publisher Menu
 
-There are two ways to configure the publisher.
+There are two ways to configure the menu.
 
 #### _1) publisherMenuConfig option (array config)_
 
@@ -155,7 +166,7 @@ This is the default behavior. Theme setting `starterPages` is set to true. Publi
   }
 ```
 
-Keep in mind it's up to you to link to a valid page. If you do `url: '/some-bad-url'`, your site will 404.
+Keep in mind it's up to you to link to a valid page. In the example above, you would need to add a Gatsby page at your-theme/src/pages/portfolio, otherwise when you visit `/portfolio'`, your site will 404.
 
 *What is `isExternal: false`?*
 
@@ -186,6 +197,10 @@ _Full page reload_
 You can manage your menu within the your WordPress site as well. To do so, change Publisher theme setting to: `menuName: 'your menu name'`. For example, the setting for the example (image) below would be: `menuName: 'PRIMARY'`
 ![Gatsby Theme Publisher Screenshot](https://publishertheme.staticfuse.com/wp-content/uploads/2019/10/menuss.png)
 
+If you set a menu name, Publisher will automatically import your WordPress pages. If no menu name is set, no WordPress pages will be imported. You can override this behavior with the `wpPages` configuration option.
+
+Many WordPress pages will not render properly in Gatsby, so we generally do not recommend this option. It is better to build your pages in Gatsby, and use posts from WordPress.
+
 *Known limitation:* For _both_ menu managment options, `childItems` are currently only supported _one_ level deep.
 
 ### Customize Templates
@@ -203,7 +218,7 @@ Next, add your theme project files to a Github repository.
 Login to Netlify and you will see a `New site from git` button at the top right corner of the screen. Click on it and authorize Netlify to use your account. Choose your website repository and it will take you to deploy settings with the below options.
 
 - Branch to deploy: You can specify a branch to monitor. When you push to that particular branch, only then will Netlify build and deploy the site. The default is master.
-- Build Command: You can specify the command you want Netlify to run when you push to the above branch. The default is `yarn build`.
+- Build Command: You can specify the command you want Netlify to run when you push to the above branch. The default is `gatsby build`.
 - Publish directory: You can specify which folder Netlify should use to host the website. eg. public, dist, build. The default is `public`.
 - Advanced build settings: If the site needs environment variables to build, you can specify them by clicking on Show advanced and then the New Variable button.
 
