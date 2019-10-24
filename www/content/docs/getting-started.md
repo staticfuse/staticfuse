@@ -15,7 +15,10 @@ If you do not do the steps above but instead clone this repository, you will nee
 
 ### Overview
 
-1.  We recommend starting by cloning [Create Gatsby Theme Publisher](https://github.com/staticfuse/create-gatsby-theme-publisher) which has the publisher theme installed and preconfigured: `git clone https://github.com/staticfuse/create-gatsby-theme-publisher.git`
+1.  We recommend starting by cloning [Create Gatsby Theme Publisher](https://github.com/staticfuse/create-gatsby-theme-publisher) which has the publisher theme installed and preconfigured:
+```
+git clone https://github.com/staticfuse/create-gatsby-theme-publisher.git
+```
 2.  cd into the folder `cd create-gatsby-theme-publisher`
 3.  Install dependencies `yarn`
 4.  Install [WPGraphQL plugin on your WordPress site](https://github.com/wp-graphql/wp-graphql)

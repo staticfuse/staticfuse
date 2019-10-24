@@ -17,40 +17,33 @@ module.exports = {
       resolve: '@staticfuse/gatsby-theme-publisher',
       options: {
         starterPages: true,
-        // publisherMenuConfig: [
-        //   {
-        //     label: 'Home',
-        //     url: '/',
-        //     isExternal: false,
-        //   },
-        //   {
-        //     label: 'Blog',
-        //     url: '/blog',
-        //     isExternal: false,
-        //   },
-        //   {
-        //     label: 'External Site',
-        //     url: 'https://justinwhall.com',
-        //     isExternal: true,
-        //   },
-        //   {
-        //     label: 'Dropdown Menu',
-        //     url: '/contact',
-        //     isExternal: false,
-        //     childItems: [
-        //       {
-        //         label: 'Item 1',
-        //         url: '/blog',
-        //         isExternal: false,
-        //       },
-        //       {
-        //         label: 'Item 2',
-        //         url: '/blog',
-        //         isExternal: false,
-        //       },
-        //     ],
-        //   },
-        // ],
+        publisherMenuConfig: [
+          {
+            label: 'home',
+            url: '/',
+            isExternal: false,
+          },
+          {
+            label: 'about',
+            url: '/about',
+            isExternal: false,
+          },
+          {
+            label: 'blog',
+            url: '/blog',
+            isExternal: false,
+          },
+          {
+            label: 'docs',
+            url: '/docs/getting-started',
+            isExternal: false,
+          },
+          {
+            label: 'contact',
+            url: '/contact',
+            isExternal: false,
+          },
+        ],
         mailChimpEndpoint: 0,
         dynamicComments: 1,
         gaTrackingId: 0,

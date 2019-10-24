@@ -23,16 +23,10 @@ const Toc = () => {
   const { nodes } = data.allStatcFuseTableOfContents;
 
   return nodes.map((doc) => {
-    const linkOrHeader = doc.isHeader ? <div style={{ background: 'black', color: 'white' }} className="doc-section-header">{doc.label}</div> : <Link to={doc.path}>{doc.label}</Link>;
-
-    const styles = {
-      background: '#e2e2e2e2',
-      padding: '10px',
-      margin: '10px 0',
-    };
+    const linkOrHeader = doc.isHeader ? <div className="doc-section-header">{doc.label}</div> : <Link to={doc.path}>{doc.label}</Link>;
 
     return (
-      <div className="doc-section" key={doc.id} style={styles}>
+      <div className="doc-section" key={doc.id}>
         {linkOrHeader}
         {doc.childItems
           && doc.childItems.map((childDoc) => (
