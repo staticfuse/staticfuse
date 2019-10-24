@@ -10,7 +10,7 @@ const Footer = () => {
 
   const data = useStaticQuery(graphql`
     {
-      allSitePage(filter: { path: { regex: "/category/" } }) {
+      allSitePage(filter: { path: { regex: "/\/category\//" } }) {
         nodes {
           path
           context {
@@ -23,6 +23,7 @@ const Footer = () => {
   `);
 
   const categories = data.allSitePage.nodes;
+
   return (
     <Box as="footer" bg="footerBg" p={8} w="100%" className="site-footer">
       <Box
