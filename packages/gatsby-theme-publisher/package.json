@@ -17,7 +17,8 @@
   "keywords": [
     "gatsby",
     "gatsby-theme",
-    "gatsby-plugin"
+    "gatsby-plugin",
+    "wordpress"
   ],
   "devDependencies": {
     "gatsby": "^2.15.5",
