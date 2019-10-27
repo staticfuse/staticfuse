@@ -4,29 +4,31 @@
 
 The Gatsby Publisher Theme allows you to create a headless (or decoupled) WordPress site. This theme will display all of your pages and posts in a static front-end built on React and Gatsby.
 
-## Getting Started
+## Overview
 
-This repo is for theme development, we do not recommend cloning this repository. Instead, use the [Create Gatsby Theme Publisher repository](https://github.com/staticfuse/create-gatsby-theme-publisher), and [visit our website for a full tutorial on headless WordPress with Gatsby.](https://staticfuse.com/blog/how-to-build-headless-wordpress-sites-with-gatsby/)
-
-You can also add this theme to an existing project with `yarn add @staticfuse/gatsby-theme-publisher`
+This repo is for theme development, we do not recommend cloning this repository. Instead, use the [Create Gatsby Theme Publisher repository](https://github.com/staticfuse/create-gatsby-theme-publisher), instructions are below. You can also [visit our website for a full tutorial on headless WordPress with Gatsby.](https://staticfuse.com/blog/how-to-build-headless-wordpress-sites-with-gatsby/)
 
 ### Prequisites
 
 - [Node and NPM](https://www.gatsbyjs.org/tutorial/part-zero/#-install-nodejs-and-npm)
 - [Yarn](https://yarnpkg.com/lang/en/docs/install/)
 
-### Overview
+## Installation
 
-1.  We recommend starting by cloning [Create Gatsby Theme Publisher](https://github.com/staticfuse/create-gatsby-theme-publisher) which has the publisher theme installed and preconfigured
-2.  cd into the folder `cd my-new-site`
+We recommend starting by cloning [Create Gatsby Theme Publisher](https://github.com/staticfuse/create-gatsby-theme-publisher) which has the publisher theme installed and preconfigured.
+
+1.  `git clone https://github.com/staticfuse/create-gatsby-theme-publisher`
+2.  cd into the folder `cd create-gatsby-theme-publisher`
 3.  Install dependencies `yarn`
 4.  Install [WPGraphQL plugin on your WordPress site](https://github.com/wp-graphql/wp-graphql)
-5.  Configure your site options in [demo/gatsby-config.js](https://github.com/staticfuse/gatsby-theme-publisher/blob/master/demo/gatsby-config.js#L18) Explanation of the options is [below](https://github.com/staticfuse/gatsby-theme-publisher#publisher-theme-options)
-6.  If using create-gatsby-theme-publisher, use `gatsby develop` to start the server
+5.  Configure your site options in [gatsby-config.js](https://github.com/staticfuse/gatsby-theme-publisher/blob/master/demo/gatsby-config.js#L18) Explanation of the options is [below](https://github.com/staticfuse/gatsby-theme-publisher#publisher-theme-options)
+6.  `gatsby develop` to start the local server
 7.  Add your logo and [customize the theme](https://github.com/staticfuse/gatsby-theme-publisher#theme-customization)
 8.  Publish to Netlify or any host.
 
-## Adding Gatsby WordPress Theme Publisher to an existing Gatsby site
+### Adding Gatsby WordPress Theme Publisher to an existing Gatsby site
+
+You can also add this theme to an existing Gatsby site.
 
 1. `yarn add @staticfuse/gatsby-theme-publisher`
 2. In your `gatsby-config.js` :
@@ -40,7 +42,7 @@ You can also add this theme to an existing project with `yarn add @staticfuse/ga
         dynamicComments: 1,
         gaTrackingId: 0,
         wordPressUrl: `https://publishertheme.staticfuse.com`, // The url of your WordPress install
-        blogURI: '/blog' // Or whatever you'd prefer
+        blogURI: '/blog' // Your posts page, change to whatever you'd prefer
       },
     },
   ],
