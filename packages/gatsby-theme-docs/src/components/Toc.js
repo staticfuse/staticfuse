@@ -15,7 +15,6 @@ const Toc = ({ currentSlug }) => {
         id
         isHeader
         childItems {
-          id
           label
           path
         }
