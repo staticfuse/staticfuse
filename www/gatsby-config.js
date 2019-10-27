@@ -9,9 +9,6 @@ module.exports = {
   plugins: [
     {
       resolve: '@staticfuse/gatsby-theme-docs',
-      options: {
-        dirPath: `${__dirname}/content`,
-      },
     },
     {
       resolve: '@staticfuse/gatsby-theme-publisher',

@@ -1,17 +1,21 @@
 import React from 'react';
-import { graphql, useStaticQuery, Link } from 'gatsby';
+import { graphql, useStaticQuery } from 'gatsby';
+import SectionHeader from './SectionHeader';
+import SectionLink from './SectionLink';
+import SectionSubLink from './SectionSubLink';
+import StyledToc from './StyledToc';
 
-const Toc = () => {
+const Toc = ({ currentSlug }) => {
   const data = useStaticQuery(graphql`
   query TableOfContents {
-    allStatcFuseTableOfContents {
+    allStaticFuseDocToc {
       nodes {
-        id
         label
-        isHeader
         path
+        id
+        isHeader
         childItems {
-          isHeader
+          id
           label
           path
         }
@@ -20,10 +24,28 @@ const Toc = () => {
   }
 `);
 
-  const { nodes } = data.allStatcFuseTableOfContents;
+  const getSlug = (path) => {
+    let slug = path.replace('/docs/', '');
+    slug = slug.replace(/\//g, '');
+    return slug;
+  };
 
-  return nodes.map((doc) => {
-    const linkOrHeader = doc.isHeader ? <div className="doc-section-header">{doc.label}</div> : <Link to={doc.path}>{doc.label}</Link>;
+  const slugNoSlashes = getSlug(currentSlug);
+  const { nodes } = data.allStaticFuseDocToc;
+
+  const sections = nodes.map((doc) => {
+    const isActive = slugNoSlashes === getSlug(doc.path) ? 'is-active' : '';
+
+    const linkOrHeader = doc.isHeader ? (
+      <SectionHeader label={doc.label} />
+    ) : (
+      <SectionLink
+        label={doc.label}
+        path={doc.path}
+        currentSlug={currentSlug}
+        isActive={isActive}
+      />
+    );
 
     return (
       <div className="doc-section" key={doc.id}>
@@ -31,11 +53,22 @@ const Toc = () => {
         {doc.childItems
           && doc.childItems.map((childDoc) => (
             <div key={childDoc.label + doc.isHeader} className="sub-doc">
-              <Link to={childDoc.path}>{childDoc.label}</Link>
+              <SectionSubLink
+                path={childDoc.path}
+                label={childDoc.label}
+                currentSlug={currentSlug}
+                isActive={slugNoSlashes === getSlug(childDoc.path) ? 'is-active' : ''}
+              />
             </div>
           ))}
       </div>
     );
   });
+
+  return (
+    <StyledToc>
+      {sections}
+    </StyledToc>
+  );
 };
 export default Toc;

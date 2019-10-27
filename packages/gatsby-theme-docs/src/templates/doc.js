@@ -4,6 +4,7 @@ import { Global } from '@emotion/core';
 import { Box, Grid } from '@chakra-ui/core';
 import Toc from '../components/Toc';
 import DocsLayout from '../layouts/DocLayout';
+import TitleHeader from '../components/TitleHeader';
 
 const Doc = (props) => {
   const post = props.data.markdownRemark;
@@ -20,17 +21,19 @@ const Doc = (props) => {
           },
         }}
       />
-      <Box>
-        <Grid templateColumns="300px auto" gap={6}>
-          <Box w="100%" h="100%">
-            <Toc />
-          </Box>
-          <Box w="100%" h="auto">
-            <h1>{post.frontmatter.title}</h1>
-            <section dangerouslySetInnerHTML={{ __html: post.html }} />
-          </Box>
-        </Grid>
-      </Box>
+
+      <Grid templateColumns="270px auto" gap={6}>
+        <Box>
+          <TitleHeader />
+          <Toc currentSlug={props.pageContext.slug} />
+        </Box>
+
+        <Box h="auto" overflow="hidden">
+          <h1>{post.frontmatter.title}</h1>
+          <Box dangerouslySetInnerHTML={{ __html: post.html }} />
+        </Box>
+      </Grid>
+
     </DocsLayout>
   );
 };

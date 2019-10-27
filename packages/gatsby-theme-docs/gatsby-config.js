@@ -8,14 +8,14 @@ module.exports = (options) => {
       {
         resolve: 'gatsby-source-filesystem',
         options: {
-          path: `${options.dirPath}/docs`,
+          path: 'content/docs',
           name: 'docs',
         },
       },
       {
         resolve: 'gatsby-source-filesystem',
         options: {
-          path: `${options.dirPath}/assets`,
+          path: 'content/assets',
           name: 'assets',
         },
       },
@@ -43,15 +43,12 @@ module.exports = (options) => {
       },
       {
         resolve: 'gatsby-transformer-yaml',
-        options: {
-          typeName: ({ node }) => `statcFuse${node.name}`,
-        },
       },
       'gatsby-transformer-yaml',
       {
         resolve: 'gatsby-source-filesystem',
         options: {
-          path: `${options.dirPath}/config`,
+          path: 'config',
         },
       },
       'gatsby-transformer-sharp',
