@@ -1,7 +1,9 @@
-import React, { Component } from "react"
-import gql from "graphql-tag"
-import { Mutation } from "react-apollo"
-import { Textarea, Input, Button, Box } from "@chakra-ui/core"
+import React, { Component } from 'react';
+import gql from 'graphql-tag';
+import { Mutation } from 'react-apollo';
+import {
+  Textarea, Input, Button, Box,
+} from '@chakra-ui/core';
 
 const commentSubmitQuery = gql`
   mutation(
@@ -22,40 +24,43 @@ const commentSubmitQuery = gql`
       success
     }
   }
-`
+`;
 
 class CommentForm extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       commentStatus: false,
       post: props.postID,
-      comment: "",
-      author: "",
-      email: "",
-      url: "",
-    }
+      comment: '',
+      author: '',
+      email: '',
+      url: '',
+    };
 
-    this.handleInputChange = this.handleInputChange.bind(this)
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   handleInputChange(event) {
-    const target = event.target
-    const value = target.type === "checkbox" ? target.checked : target.value
-    const name = target.name
+    const { target } = event;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const { name } = target;
 
     this.setState({
       [name]: value,
-    })
+    });
   }
 
   renderCommentNotes() {
     return (
       <Box as="p" className="comment-notes" color="gray.600" fontSize="sm">
-        <span id="email-notes">Your email address will not be published.</span>{" "}
-        Required fields are marked <span className="required">*</span>
+        <span id="email-notes">Your email address will not be published.</span>
+        {' '}
+        Required fields are marked
+        {' '}
+        <span className="required">*</span>
       </Box>
-    )
+    );
   }
 
   renderCommentBodyField() {
@@ -83,7 +88,7 @@ class CommentForm extends Component {
           onChange={this.handleInputChange}
         />
       </div>
-    )
+    );
   }
 
   renderCommentAuthorField() {
@@ -98,7 +103,9 @@ class CommentForm extends Component {
           htmlFor="author"
           className="form-label"
         >
-          Name <span className="required">*</span>
+          Name
+          {' '}
+          <span className="required">*</span>
         </Box>
         <Input
           id="author"
@@ -112,7 +119,7 @@ class CommentForm extends Component {
           onChange={this.handleInputChange}
         />
       </div>
-    )
+    );
   }
 
   renderCommentEmailField() {
@@ -127,7 +134,9 @@ class CommentForm extends Component {
           htmlFor="email"
           className="form-label"
         >
-          Email <span className="required">*</span>
+          Email
+          {' '}
+          <span className="required">*</span>
         </Box>
         <Input
           id="email"
@@ -142,7 +151,7 @@ class CommentForm extends Component {
           onChange={this.handleInputChange}
         />
       </div>
-    )
+    );
   }
 
   renderCommentWebsiteField() {
@@ -170,14 +179,14 @@ class CommentForm extends Component {
           onChange={this.handleInputChange}
         />
       </div>
-    )
+    );
   }
 
   renderCommentSubmitButton() {
     return (
       <Box as="p" mt={4} className="form-submit">
         <Button
-          variantColor="primary"
+          variantColor="blue"
           name="submit"
           type="submit"
           id="submit"
@@ -186,19 +195,19 @@ class CommentForm extends Component {
           Post Comment
         </Button>
       </Box>
-    )
+    );
   }
 
   render() {
     switch (this.state.commentStatus) {
-      case "success":
-        return <p>Your comment has been successfully submitted.</p>
-      case "loading":
-        return <p>Please wait. Your comment is being submitted.</p>
-      case "error":
+      case 'success':
+        return <p>Your comment has been successfully submitted.</p>;
+      case 'loading':
+        return <p>Please wait. Your comment is being submitted.</p>;
+      case 'error':
         return (
           <p>There was an error in your submission. Please try again later.</p>
-        )
+        );
       default:
         return (
           <div className="comment-form-flex">
@@ -209,7 +218,7 @@ class CommentForm extends Component {
                     rel="nofollow"
                     id="cancel-comment-reply-link"
                     href="#respond"
-                    style={{ display: "none" }}
+                    style={{ display: 'none' }}
                   >
                     Cancel reply
                   </a>
@@ -218,19 +227,19 @@ class CommentForm extends Component {
               <Mutation
                 mutation={commentSubmitQuery}
                 onCompleted={() => {
-                  this.setState({ commentStatus: "success" })
+                  this.setState({ commentStatus: 'success' });
                 }}
                 onError={() => {
-                  this.setState({ commentStatus: "error" })
+                  this.setState({ commentStatus: 'error' });
                 }}
               >
-                {addComment => (
+                {(addComment) => (
                   <div>
                     <h4>Leave a comment</h4>
                     <form
-                      onSubmit={event => {
-                        event.preventDefault()
-                        this.setState({ commentStatus: "loading" })
+                      onSubmit={(event) => {
+                        event.preventDefault();
+                        this.setState({ commentStatus: 'loading' });
                         addComment({
                           variables: {
                             author: this.state.author,
@@ -238,7 +247,7 @@ class CommentForm extends Component {
                             content: this.state.comment,
                             authorEmail: this.state.email,
                           },
-                        })
+                        });
                       }}
                       id="commentform"
                       className="comment-form"
@@ -257,9 +266,9 @@ class CommentForm extends Component {
               </Mutation>
             </div>
           </div>
-        )
+        );
     }
   }
 }
 
-export default CommentForm
+export default CommentForm;
