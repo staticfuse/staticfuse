@@ -19,9 +19,9 @@ This repo includes the code for the theme and a demo site which is using the the
 2.  cd into the folder `cd my-new-site`
 3.  Install dependencies `yarn`
 4.  Install [WPGraphQL plugin on your WordPress site](https://github.com/wp-graphql/wp-graphql)
-5.  Configure your site options in [demo/gatsby-config.js](https://github.com/staticfuse/gatsby-theme-publisher/blob/master/demo/gatsby-config.js#L18) Explanation of the options is [below](https://github.com/staticfuse/gatsby-theme-publisher#publisher-theme-options)
+5.  Configure your site options in [demo/gatsby-config.js](https://github.com/staticfuse/staticfuse/blob/master/www/gatsby-config.js) Explanation of the options is [below](#publisher-theme-options)
 6.  Start the demo site `yarn start`
-7.  Add your logo and [customize the theme](https://github.com/staticfuse/gatsby-theme-publisher#theme-customization)
+7.  Add your logo and [customize the theme](#theme-customization)
 8.  Publish to Netlify
 
 ## Adding Gatsby WordPress Theme Publisher to an existing Gatsby site
@@ -46,7 +46,7 @@ This repo includes the code for the theme and a demo site which is using the the
 
 ## Publisher Theme Options
 
-The following options can be configured in [your site's gatsby-config.js](https://github.com/staticfuse/gatsby-theme-publisher/blob/master/demo/gatsby-config.js#L12)
+The following options can be configured in [your site's gatsby-config.js](https://github.com/staticfuse/staticfuse/blob/master/www/gatsby-config.js)
 
 ### Site Metadata
 
@@ -81,23 +81,23 @@ Note: `siteUrl` refers to your final website address. `wordPressUrl` in the plug
 | blogURI | string | '' | The path prefix on the blog and blog posts. No leading slash. `'/blog'` would result in `https://my-domain.com/blog/` |
 | starterPages | boolean | true | Create a home, about, and contact page in Gatsby. |
 | menuName | string/boolean | 0 | The name of the _WordPress_ menu you'd like to use or `0` if you don't want to render a menu. |
-| publisherMenuConfig | array | [] | Optional array based way to configure the menu. More info [here](https://github.com/staticfuse/gatsby-theme-publisher#publisher-menu). |
+| publisherMenuConfig | array | [] | Optional array based way to configure the menu. More info [here](#publisher-menu). |
 
 ## Theme Customization
 
-You can customize the colors, add or remove pages, and edit template files. All theme customization should happen in the /demo folder. If you are familiar with WordPress, this is like a "child theme."
+You can customize the colors, add or remove pages, and edit template files. All theme customization should happen in your theme folder, where you cloned create-gatsby-theme-publisher. If you are familiar with WordPress, this is like a "child theme."
 
 Any changes you make in the main gatsby-theme-publisher folder will be overwritten by theme updates.
 
 ### Logo
 
-To add your logo, add demo/src/images/site-logo.png.
+To add your logo, add your-theme/src/images/site-logo.png.
 
-You will need to add a folder called images to the demo/src directory, and add your logo file inside with the name site-logo.png. You can make further modifications in the demo/src/components/Logo.js file.
+You will need to add a folder called images to the your-theme/src directory, and add your logo file inside with the name site-logo.png. You can make further modifications in the your-theme/src/components/Logo.js file.
 
 ### Customize Theme Colors
 
-Open demo/src/gatsby-theme-publisher/theme/theme.js
+Open your-theme/src/gatsby-theme-publisher/theme/theme.js
 
 The theme color defaults are commented out, you can uncommment them and change the value. For example, to change the header background color, change...
 
