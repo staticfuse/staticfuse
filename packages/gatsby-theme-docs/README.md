@@ -17,7 +17,7 @@ The plugin will create the following directories & files the next time you boots
 ```javascript
 ./config/TOC.yml // Docs menu config
 ./content/assets/ // Optionally use to store assets when writing markdown
-./content/docs/getting-started.md // Starter markdown doc. Place additional docs as children here.
+./content/docs/getting-started.md // Starter markdown doc. Place additional docs as sublings here.
 ```
 
 # Configuring the "aside" docs menu
