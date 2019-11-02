@@ -19,14 +19,6 @@ module.exports = async ({ actions, graphql }) => {
             name
             categoryId
             slug
-            children {
-              nodes {
-                id
-                name
-                categoryId
-                slug
-              }
-            }
             posts {
               nodes {
                 ...BlogPreviewFragment
@@ -59,7 +51,7 @@ module.exports = async ({ actions, graphql }) => {
   });
 
   await fetchCategories({ first: 100, after: null }).then((categories) => {
-    const createCategoryPage = (category) => {
+    categories.map((category) => {
       createPage({
         path: `/category/${category.slug}`,
         component: categoryTemplate,
@@ -67,20 +59,9 @@ module.exports = async ({ actions, graphql }) => {
           ...category,
         },
       });
-
       log('created category', '#02f56b', `$${category.slug}`);
-    };
-
-    categories.forEach((category) => {
-      const subCategories = category.children.nodes;
-
-      createCategoryPage(category);
-
-      if (subCategories.length) {
-        subCategories.forEach(createCategoryPage);
-      }
     });
-
     log('CATEGORY TOTAL', '#d200d9', `${categories.length}`, true);
+    return true;
   });
 };
