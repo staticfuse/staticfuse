@@ -30,14 +30,6 @@ const PostTemplateFragment = `
         name
         slug
         id
-        children {
-          nodes {
-            id
-            name
-            categoryId
-            slug
-          }
-        }
       }
     }
     tags {
