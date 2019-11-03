@@ -49,8 +49,12 @@ const MENU_QUERY = graphql`
 `;
 
 const Menu = () => {
-  const { menuName, publisherMenuConfig } = usePublisherOptions();
+  const { menuName, publisherMenuConfig, starterPages } = usePublisherOptions();
   const [menuOpened, openMenu] = useState(false);
+
+  const publisherMenu = starterPages && publisherMenuConfig.nodes.map(((menuItem) => (
+    <MenuItem key={menuItem.label} menuItem={menuItem} />
+  )));
 
   return (
     <StaticQuery
@@ -130,10 +134,7 @@ const Menu = () => {
                   menuName
                     ? menu.node.menuItems.nodes.map((menuItem) => (
                       <MenuItem key={menuItem.id} menuItem={menuItem} />
-                    ))
-                    : publisherMenuConfig.nodes.map((menuItem) => (
-                      <MenuItem key={menuItem.label} menuItem={menuItem} />
-                    ))
+                    )) : publisherMenu
                   }
                 </Box>
               </Box>
