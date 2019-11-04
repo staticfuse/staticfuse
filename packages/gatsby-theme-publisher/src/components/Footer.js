@@ -54,7 +54,7 @@ const Footer = () => {
                   color="footerText"
                   py={1}
                 >
-                  <Link to={item.path}>{item.context.name}</Link>
+                  <Link to={item.path} dangerouslySetInnerHTML={{ __html: item.context.name }} />
                 </Box>
               ))}
             </Box>
